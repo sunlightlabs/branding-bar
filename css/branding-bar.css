@@ -1,0 +1,248 @@
+html {
+  height: 100%;
+  min-height: 100%;
+}
+body {
+  height: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.cf:after {
+    clear: both;
+}
+
+.wrap{
+  position: relative;
+  height: 100%;
+  top: 0;
+  -webkit-transition: all 150ms ease-in-out;  
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 150ms ease-in-out;  
+}
+
+.wrap.active{
+  top: -250px;
+}
+
+.container {
+  width: 960px;
+  margin: 30px auto;
+}
+
+.branding-bar {
+  position: relative;
+  width: 100%;
+  font-size: 12px;
+  line-height: 20px;
+  top: 0;
+  background: #ddd;
+  font-family: helvetica, arial, sans-serif;
+  color: #eee;
+  height: 250px;
+  overflow: hidden;
+  background: #4e5256 url('/img/branding_bar-background-base.jpg');
+  background: url('/img/branding_bar-background-texture.png') top center repeat-x, url('/img/branding_bar-background-base.jpg');
+  box-shadow: inset 0px -5px 15px -5px rgba(0,0,0,.4);
+}
+
+.default-bar {
+  height: 45px;
+}
+
+.links {
+  font-family: 'Georgia';
+  font-style: italic;
+  float: left;
+  font-size: 11px;
+  color: #999;
+  line-height: 45px;
+  cursor: pointer;
+}
+  
+.links a:hover {
+  color: #000;
+}
+  
+.tools-list {
+  list-style-type: none;
+  line-height:150%;
+  float: left;
+  padding: 0;
+  margin: 0;
+  margin-top: 15px;
+  margin-left: 80px;
+  width: 100px;
+}
+.tools-list:first-of-type {
+    margin-left: 0;
+}
+.tools-list li {
+  margin-bottom: 20px;
+}
+.tools-list a {color: #eee;}
+
+.tools-featured {
+  list-style-type: none;
+  line-height:150%;
+  float: left;
+  padding: 0;
+  margin: 0;  
+  margin-top: 15px;
+}
+.tools-featured:first-of-type {
+    margin-left: 0;
+}
+.tools-featured li {
+    margin: 0;
+    float: left;
+    width: 230px;
+    margin-left: 30px;
+}
+
+.tools-featured li:first-of-type {
+    margin-left: 0;
+}
+
+.bb-about {
+  width: 370px;
+  height: 190px;
+  float: left;
+  padding-right: 50px;
+  border-right: 1px dashed #888;
+}
+.bb-tools {
+    width: 490px;
+    margin-left: 49px;    
+    float: left;
+}
+.bb-hidden {
+    display: none;
+}
+.bb-heading {
+    display: block;
+    font-size: 13px;
+    text-transform: uppercase;
+    font-weight: normal;
+    color: #fcd74b;
+}
+a {
+    color: #fcd74b;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #fcd74b;
+    padding-bottom: 2px;
+    border-bottom: 1px dotted #fcd74b;
+}
+button.close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 20px;
+    line-height: 1;
+    opacity: .7;
+    filter: alpha(opacity=70);
+    color: #fff;
+    font-weight: 300;
+    padding: 10px;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    -webkit-appearance: none;
+}
+button.close:hover {
+    opacity: .9;
+    filter: alpha(opacity=90);
+}
+.bb-email-input {
+    border: none;
+    padding: 8px 10px;
+    margin: 0px;
+    margin-right: 1px;
+    width: 220px;
+    height: 30px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    color: #444;
+}
+.bb-email-input.zip {
+    width: 70px;
+}
+
+button.bb-email-sumbit {
+    border: none;
+    vertical-align: top;
+    padding: 6px 10px 3px;
+    padding: 0;
+    height: 30px;
+    text-transform: uppercase;
+    margin: 0;
+    background: #fcd74b;
+    width: 70px;
+    cursor: pointer;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;    
+    font: inherit;
+    font-size: 11px;
+    color: #444;
+}
+.bb-email-sumbit:hover {
+    background: #e5c345;    
+}
+.bb-email-sumbit::-moz-focus-inner {
+    padding: 0;
+    border: 0
+}
+::-webkit-input-placeholder { /* WebKit browsers */
+    font-family: georgia, times, serif; font-style: italic; color: #bbb;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    font-family: georgia, times, serif; font-style: italic; color: #bbb;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    font-family: georgia, times, serif; font-style: italic; color: #bbb;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    font-family: georgia, times, serif; font-style: italic; color: #bbb;
+}
+
+a.tools-logo img {
+    outline: 0;
+    border: 0;
+}
+a.tools-logo {
+    display: block;
+}
+
+a.tools-logo:hover {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.bb-description {
+    margin: 15px 0;
+    padding: 0;
+    line-height: 20px;
+}
+
+.bb-email .bb-heading {
+    margin-top: 10px;
+}
+.bb-email .bb-email-form {
+    margin-top: 15px;
+}
