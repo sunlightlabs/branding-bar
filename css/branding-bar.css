@@ -22,11 +22,11 @@ body {
   position: relative;
   height: 100%;
   top: 0;
-  -webkit-transition: all 150ms ease-in-out;  
+  -webkit-transition: all 150ms ease-in-out;
   -moz-transition: all 0.3s ease-out;
   -ms-transition: all 0.3s ease-out;
   -o-transition: all 0.3s ease-out;
-  transition: all 150ms ease-in-out;  
+  transition: all 150ms ease-in-out;
 }
 
 .wrap.active{
@@ -38,20 +38,26 @@ body {
   margin: 30px auto;
 }
 
-.branding-bar {
+#branding-bar {
   position: relative;
   width: 100%;
   font-size: 12px;
   line-height: 20px;
   top: 0;
   background: #ddd;
-  font-family: helvetica, arial, sans-serif;
+  font-family: "franklin-gothic-urw", helvetica, arial, sans-serif;
   color: #eee;
   height: 250px;
   overflow: hidden;
   background: #4e5256 url('/img/branding_bar-background-base.jpg');
   background: url('/img/branding_bar-background-texture.png') top center repeat-x, url('/img/branding_bar-background-base.jpg');
   box-shadow: inset 0px -5px 15px -5px rgba(0,0,0,.4);
+  -moz-transition: top 200ms ease-out;
+  -webkit-transition: top 200ms ease-out;
+  transition: top 200ms ease-out;
+}
+#branding-bar.is-active {
+  top: -250px;
 }
 
 .default-bar {
@@ -67,18 +73,18 @@ body {
   line-height: 45px;
   cursor: pointer;
 }
-  
+
 .links a:hover {
   color: #000;
 }
-  
+
 .tools-list {
   list-style-type: none;
   line-height:150%;
   float: left;
   padding: 0;
   margin: 0;
-  margin-top: 15px;
+  margin-top: 25px;
   margin-left: 80px;
   width: 100px;
 }
@@ -95,8 +101,8 @@ body {
   line-height:150%;
   float: left;
   padding: 0;
-  margin: 0;  
-  margin-top: 15px;
+  margin: 0;
+  margin-top: 25px;
 }
 .tools-featured:first-of-type {
     margin-left: 0;
@@ -121,7 +127,7 @@ body {
 }
 .bb-tools {
     width: 490px;
-    margin-left: 49px;    
+    margin-left: 49px;
     float: left;
 }
 .bb-hidden {
@@ -153,7 +159,6 @@ button.close {
     opacity: .7;
     filter: alpha(opacity=70);
     color: #fff;
-    font-weight: 300;
     padding: 10px;
     cursor: pointer;
     background: transparent;
@@ -179,11 +184,10 @@ button.close:hover {
     width: 70px;
 }
 
-button.bb-email-sumbit {
+button.bb-email-sumbit, button.bb-email-sumbit:active {
     border: none;
     vertical-align: top;
-    padding: 6px 10px 3px;
-    padding: 0;
+    padding: 6px 0;
     height: 30px;
     text-transform: uppercase;
     margin: 0;
@@ -196,28 +200,28 @@ button.bb-email-sumbit {
     -moz-user-select: none;
     -ms-user-select: none;
     -o-user-select: none;
-    user-select: none;    
+    user-select: none;
     font: inherit;
     font-size: 11px;
     color: #444;
 }
 .bb-email-sumbit:hover {
-    background: #e5c345;    
+    background: #e5c345;
 }
 .bb-email-sumbit::-moz-focus-inner {
     padding: 0;
     border: 0
 }
-::-webkit-input-placeholder { /* WebKit browsers */
+.bb-email-input::-webkit-input-placeholder { /* WebKit browsers */
     font-family: georgia, times, serif; font-style: italic; color: #bbb;
 }
-:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+.bb-email-input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
     font-family: georgia, times, serif; font-style: italic; color: #bbb;
 }
-::-moz-placeholder { /* Mozilla Firefox 19+ */
+.bb-email-input::-moz-placeholder { /* Mozilla Firefox 19+ */
     font-family: georgia, times, serif; font-style: italic; color: #bbb;
 }
-:-ms-input-placeholder { /* Internet Explorer 10+ */
+.bb-email-input:-ms-input-placeholder { /* Internet Explorer 10+ */
     font-family: georgia, times, serif; font-style: italic; color: #bbb;
 }
 
@@ -225,24 +229,27 @@ a.tools-logo img {
     outline: 0;
     border: 0;
 }
+
 a.tools-logo {
     display: block;
-}
-
-a.tools-logo:hover {
     border-bottom: none;
     padding-bottom: 0;
 }
 
+a.tools-logo:hover {
+    opacity: .8;
+    filter: alpha(opacity=80);
+}
+
 .bb-description {
-    margin: 15px 0;
+    margin: 25px 0;
     padding: 0;
     line-height: 20px;
 }
 
 .bb-email .bb-heading {
-    margin-top: 10px;
+    margin-top: 20px;
 }
 .bb-email .bb-email-form {
-    margin-top: 15px;
+    margin-top: 10px;
 }
