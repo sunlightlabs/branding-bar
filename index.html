@@ -1,74 +1,98 @@
 <!DOCTYPE html>
-<!-- <script type="text/javascript" src="//use.typekit.net/xev8qlf.js"></script> -->
+<script type="text/javascript" src="//use.typekit.net/xev8qlf.js"></script>
 <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 <link rel="stylesheet" href="css/branding-bar.css">
+<link rel="stylesheet" href="css/sunlighticons.css">
 
-<div id="branding-bar" class="cf">
-    <button class="close">&times;</button>
-    <div class="container">
-        <section class="bb-about">
-            <span class="bb-heading">About Sunlight Foundation</span>
-            <p class="bb-description">Founded in 2006, the Sunlight Foundation is a nonpartisan nonprofit that uses cutting-edge technology and ideas to make government transparent and accountable. <a href="#">Learn more &raquo;</a></p>
+<div id="branding-bar-wrapper">
+    
+    <div id="branding-bar-pane" class="cf">
+        <button class="close">&times;</button>
+        <div class="container">
+            <section class="bb-about">
+                <span class="bb-heading">About Sunlight Foundation</span>
+                <p class="bb-description">Founded in 2006, the Sunlight Foundation is a nonpartisan nonprofit that uses cutting-edge technology and ideas to make government transparent and accountable. <a href="#">Learn more &raquo;</a></p>
 
-            <div class="bb-email">
-                <span class="bb-heading">Stay informed about our work</span>
-                <form class="bb-email-form">
-                    <!-- <label class="bb-hidden">Email Address</label> -->
-                    <input class="bb-email-input" type="email" placeholder="email address"/><input class="bb-email-input zip"type="text" placeholder="zip code"/><button class="bb-email-sumbit" type="submit">Submit</button>
-                </form>
+                <div class="bb-email">
+                    <span class="bb-heading">Stay informed about our work</span>
+                    <form class="bb-email-form">
+                        <!-- <label class="bb-hidden">Email Address</label> -->
+                        <input class="bb-email-input" type="email" placeholder="email address"/><input class="bb-email-input zip"type="text" placeholder="zip code"/><button class="bb-email-sumbit" type="submit">Submit</button>
+                    </form>
+                </div>
+            </section>
+
+            <section class="bb-tools">
+                <span class="bb-heading">
+                    <span class="tools-heading" id="bb-featured-tools-heading">Featured Tools</span>
+                    <span class="tools-heading inactive" id="bb-more-tools-heading">More Tools</span>
+                </span>
+
+                <div id="bb-featured-tools" class="tools-details">
+                    <ul class="tools-featured">
+                        <li>
+                            <a class="tools-logo" href="http://opencongress.com">
+                                <img src="/img/logo_opencongress.png" alt="Open Congress"/>
+                            </a>
+                            <p class="bb-description">
+                                <a href="">OpenCongress</a> allows anyone to follow legislation in Congress, from bill introduction to floor vote. Learn more about the issues you care about.
+                            </p>
+                        </li>
+                        <li>
+                            <a class="tools-logo" href="http://influenceexplorer.com">
+                                <img src="/img/logo_influence-explorer.png" alt="Influence Explorer"/>
+                            </a>
+                            <p class="bb-description">
+                                <a href="">Influence Explorer</a> provides an overview of campaign finance, lobbying, earmark, contractor misconduct and federal spending data.
+                            </p>
+                        </li>
+                    </ul>
             </div>
-        </section>
+            <div id="bb-more-tools" class="tools-details is-hidden">
+                <ul class="tools-list">
+                    <li><a href="">OpenCongress</a></li>
+                    <li><a href="">Influence Explorer</a></li>
+                    <li><a href="">Open States</a></li>
+                    <li><a href="">Scout</a></li>
+                </ul>
 
-        <section class="bb-tools">
-            <span class="bb-heading">
-                <span class="tools-heading active">Featured Tools</span>
-                <span class="tools-heading">More Tools</span>
-            </span>
-            <ul class="tools-list">
-                <li><a href="">OpenCongress</a></li>
-                <li><a href="">Influence Explorer</a></li>
-                <li><a href="">Open States</a></li>
-                <li><a href="">Scout</a></li>
-            </ul>
+                <ul class="tools-list">
+                    <li><a href="">Churnalism</a></li>
+                    <li><a href="">Capitol Words</a></li>
+                    <li><a href="">Politwoops</a></li>
+                    <li><a href="">Ad Hawk</a></li>
+                </ul>
 
-            <ul class="tools-list">
-                <li><a href="">Churnalism</a></li>
-                <li><a href="">Capitol Words</a></li>
-                <li><a href="">Politwoops</a></li>
-                <li><a href="">Ad Hawk</a></li>
-            </ul>
+                <ul class="tools-list">
+                    <li><a href="">Party Time</a></li>
+                    <li><a href="">Scout</a></li>
+                    <li><a href="">Docket Wrench</a></li>
+                    <li><a href="">Political Ad Sleuth</a></li>
+                </ul>
+            </div>        
+            </section>
+        </div>
 
-            <ul class="tools-list">
-                <li><a href="">Party Time</a></li>
-                <li><a href="">Scout</a></li>
-                <li><a href="">Docket Wrench</a></li>
-                <li><a href="">Political Ad Sleuth</a></li>
-            </ul>
-<!--             <ul class="tools-featured">
-                <li>
-                    <a class="tools-logo" href="http://opencongress.com">
-                        <img src="/img/logo_opencongress.png" alt="Open Congress"/>
-                    </a>
-                    <p class="bb-description">
-                        <a href="">OpenCongress</a> allows anyone to follow legislation in Congress, from bill introduction to floor vote. Learn more about the issues you care about.
-                    </p>
-                </li>
-                <li>
-                    <a class="tools-logo" href="http://influenceexplorer.com">
-                        <img src="/img/logo_influence-explorer.png" alt="Influence Explorer"/>
-                    </a>
-                    <p class="bb-description">
-                        <a href="">Influence Explorer</a> provides an overview of campaign finance, lobbying, earmark, contractor misconduct and federal spending data.
-                    </p>
-                </li>
-            </ul> -->
-        </section>
     </div>
 
+    <div id="branding-bar">
+        <div class="wrapper">
+            <a class="social" href=""><span class="icon-facebook"></span></a>
+            <a class="social" href=""><span class="icon-twitter"></span></a>
+            <a class="social" href=""><span class="icon-gplus"></span></a>
+            <a id="branding-bar-trigger">About Sunlight Foundation</a>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div class="sample-content">
+        <div class="wrapper">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor eros tincidunt metus blandit, et fermentum velit mattis. Duis euismod non diam at feugiat. Fusce dapibus odio ut mauris convallis blandit. Nulla purus urna, placerat vel fermentum et, adipiscing ac tellus. Pellentesque vitae eros consequat, cursus elit nec, venenatis nulla. In fringilla tellus id lacus venenatis, id eleifend libero tempus. Maecenas lacus eros, congue in massa vel, convallis elementum ante.</p>
+            <p>Etiam rhoncus pellentesque volutpat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum vitae gravida lectus. Vivamus vulputate quis neque ut blandit. Maecenas in venenatis neque, id tincidunt nunc. Morbi ac mauris vitae ipsum egestas vehicula. Nunc et dui nibh. Mauris bibendum neque ut auctor laoreet.</p>
+            <p>Duis gravida cursus libero, lobortis bibendum tortor suscipit vel. Ut nec orci consequat, malesuada lacus eget, adipiscing diam. Ut nulla dolor, lobortis ac aliquam eget, fermentum fermentum velit. Donec ornare tellus id porta sollicitudin. Curabitur convallis orci nec nisl tincidunt cursus. Vivamus nunc massa, dapibus ut augue a, posuere interdum nisi. Integer interdum metus vitae nulla semper, in rutrum elit rutrum. Sed in elementum dolor, posuere sodales leo. Donec lectus augue, lacinia ac gravida et, eleifend vitae orci.</p>
+        </div>
+    </div>
 </div>
-
-<a id="branding-bar_link" onclick="toggleBrandingBar();"n>Click to hide</a>
-
 <script src="js/branding-bar.js"></script>
 <script>
 

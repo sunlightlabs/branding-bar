@@ -1,0 +1,34 @@
+@font-face {
+	font-family: 'sunlight-icons';
+	src:url('/fonts/sunlight-icons.eot?-dhe804');
+	src:url('/fonts/sunlight-icons.eot?#iefix-dhe804') format('embedded-opentype'),
+		url('/fonts/sunlight-icons.woff?-dhe804') format('woff'),
+		url('/fonts/sunlight-icons.ttf?-dhe804') format('truetype'),
+		url('/fonts/sunlight-icons.svg?-dhe804#sunlight-icons') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+	font-family: 'sunlight-icons';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-facebook:before {
+	content: "\e600";
+}
+.icon-twitter:before {
+	content: "\e601";
+}
+.icon-gplus:before {
+	content: "\e602";
+}
