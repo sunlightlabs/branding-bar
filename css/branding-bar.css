@@ -1,7 +1,9 @@
 /* Branding Pane */
+/* Branding Pane: About */
 html {
   height: 100%;
   min-height: 100%;
+  margin: 0;
 }
 body {
   height: 100%;
@@ -17,21 +19,6 @@ body {
 
 .cf:after {
     clear: both;
-}
-
-.wrap{
-  position: relative;
-  height: 100%;
-  top: 0;
-  -webkit-transition: all 150ms ease-in-out;
-  -moz-transition: all 0.3s ease-out;
-  -ms-transition: all 0.3s ease-out;
-  -o-transition: all 0.3s ease-out;
-  transition: all 150ms ease-in-out;
-}
-
-.wrap.active{
-  top: -250px;
 }
 
 .container {
@@ -73,7 +60,9 @@ body {
   color: #000;
 }
 
-.tools-heading:first-of-type {
+/* Branding Pane: Tools */
+
+.tools-heading:first-child {
   border-right: 1px dashed #aaa;
   padding-right: 25px;
   margin-right: 25px;
@@ -91,14 +80,15 @@ body {
 .tools-list {
   list-style-type: none;
   line-height:150%;
-  float: left;
+  /*float: left;*/
+  display: inline-block;
   padding: 0;
   margin: 0;
   margin-top: 25px;
   margin-left: 80px;
   width: 100px;
 }
-.tools-list:first-of-type {
+.tools-list:first-child {
     margin-left: 0;
 }
 .tools-list li {
@@ -114,7 +104,7 @@ body {
   margin: 0;
   margin-top: 25px;
 }
-.tools-featured:first-of-type {
+.tools-featured:first-child {
     margin-left: 0;
 }
 .tools-featured li {
@@ -124,7 +114,7 @@ body {
     margin-left: 30px;
 }
 
-.tools-featured li:first-of-type {
+.tools-featured li:first-child {
     margin-left: 0;
 }
 
@@ -160,7 +150,7 @@ body {
     padding-bottom: 2px;
     border-bottom: 1px dotted #fcd74b;
 }
-button.close {
+#bb-close {
     position: absolute;
     top: 0;
     right: 0;
@@ -175,7 +165,7 @@ button.close {
     border: 0;
     -webkit-appearance: none;
 }
-button.close:hover {
+#bb-close:hover {
     opacity: .9;
     filter: alpha(opacity=90);
 }
@@ -268,12 +258,27 @@ button.bb-email-sumbit, button.bb-email-sumbit:active {
   display: none;
 }
 .tools-details {
-  -webkit-animation: fade 700ms 1;
 }
 .tools-details .bb-description {
   margin: 15px 0;
 }
 @-webkit-keyframes fade {
+  0% { opacity: .25; }
+  100% { opacity: 1; }
+}
+@-moz-keyframes fade {
+  0% { opacity: .25; }
+  100% { opacity: 1; }
+}
+@-o-keyframes fade {
+  0% { opacity: .25; }
+  100% { opacity: 1; }
+}
+@-ms-keyframes fade {
+  0% { opacity: .25; }
+  100% { opacity: 1; }
+}
+@keyframes fade {
   0% { opacity: .25; }
   100% { opacity: 1; }
 }
@@ -308,20 +313,22 @@ button.bb-email-sumbit, button.bb-email-sumbit:active {
   cursor: pointer;
 }
 
+#branding-bar-pane .fade-animation {
+  -webkit-animation: fade 700ms 1;
+  -moz-animation: fade 700ms 1;
+  -o-animation: fade 700ms 1;
+  -ms-animation: fade 700ms 1;
+  animation: fade 700ms 1;
+}
 #branding-bar-wrapper {
   position: relative;
   top: 0;
-  -webkit-transition: all 200ms ease-in-out;
-  -moz-transition: all 200ms ease-out;
-  -ms-transition: all 0.3s ease-out;
-  -o-transition: all 0.3s ease-out;
-  transition: all 200ms ease-in-out;  
+  -webkit-transition: top 200ms ease-out;
+  -moz-transition: top 200ms ease-out;
+  -ms-transition: top 0.3s ease-out;
+  -o-transition: top 0.3s ease-out;
+  transition: top 200ms ease-out;
 }
 #branding-bar-wrapper.is-active {
   top: 250px;
 }
-
-.sample-content{
-  background: #fff;
-}
-
