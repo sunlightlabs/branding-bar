@@ -1,25 +1,17 @@
-/* Branding Pane */
-/* Branding Pane: About */
+/* Template Layout */
 html {
-  height: 100%;
-  min-height: 100%;
+  /*height: 100%;*/
+  /*min-height: 100%;*/
   margin: 0;
 }
 body {
-  height: 100%;
-  min-height: 100%;
+  /*height: 100%;*/
+  /*min-height: 100%;*/
   margin: 0;
 }
 
-.cf:before,
-.cf:after {
-    content: " "; /* 1 */
-    display: table; /* 2 */
-}
 
-.cf:after {
-    clear: both;
-}
+/* Branding Pane */
 
 .container {
   width: 960px;
@@ -169,6 +161,9 @@ body {
     opacity: .9;
     filter: alpha(opacity=90);
 }
+#bb-close:focus {
+    outline: none;
+}
 .bb-email-input {
     border: none;
     padding: 8px 10px;
@@ -236,10 +231,6 @@ button.bb-email-sumbit, button.bb-email-sumbit:active {
     padding-bottom: 0;
 }
 
-#branding-bar-pane a.tools-logo:hover {
-    opacity: .8;
-    filter: alpha(opacity=80);
-}
 
 .bb-description {
     margin: 25px 0;
@@ -311,6 +302,9 @@ button.bb-email-sumbit, button.bb-email-sumbit:active {
   font-size: 13px;
   text-decoration: none;
   cursor: pointer;
+}
+#branding-bar-trigger:hover {
+  text-decoration: underline;
 }
 
 #branding-bar-pane .fade-animation {
