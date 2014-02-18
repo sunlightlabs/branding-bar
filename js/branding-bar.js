@@ -48,15 +48,15 @@
         }
     }
 
-    var brandingPane = document.getElementById('branding-bar-wrapper');
+    var brandingPane = document.getElementById('bb_wrapper');
     var brandingBarTrigger = document.getElementById('branding-bar-trigger');
-    var brandingBarClose = document.getElementById('bb-close');
+    var brandingBarClose = document.getElementById('bb_close-panel');
 
-    var featuredTools = document.getElementById('bb-featured-tools');
-    var featuredToolsTrigger = document.getElementById('bb-featured-tools-heading');
+    var featuredTools = document.getElementById('bb_featured-tools');
+    var featuredToolsTrigger = document.getElementById('bb_featured-tools-heading');
 
-    var moreTools = document.getElementById('bb-more-tools');
-    var moreToolsTrigger = document.getElementById('bb-more-tools-heading');
+    var moreTools = document.getElementById('bb_more-tools');
+    var moreToolsTrigger = document.getElementById('bb_more-tools-heading');
 
     addEventListener(brandingBarTrigger, 'click', toggleClass(brandingPane, 'is-active'));
     addEventListener(brandingBarClose, 'click', toggleClass(brandingPane, 'is-active'));
@@ -66,9 +66,9 @@
     //     moreToolsTrigger.classList.add('inactive');
 
     //     moreTools.classList.add('is-hidden');
-    //     moreTools.classList.remove('fade-animation');
+    //     moreTools.classList.remove('bb_fade-animation');
     //     featuredTools.classList.remove('is-hidden');
-    //     featuredTools.classList.add('fade-animation');
+    //     featuredTools.classList.add('bb_fade-animation');
     // });
 
     // addEventListener(moreToolsTrigger, 'click', function() {
@@ -76,32 +76,32 @@
     //     featuredToolsTrigger.classList.add('inactive');
 
     //     featuredTools.classList.add('is-hidden');
-    //     featuredTools.classList.remove('fade-animation');
+    //     featuredTools.classList.remove('bb_fade-animation');
     //     moreTools.classList.remove('is-hidden');
-    //     moreTools.classList.add('fade-animation');
+    //     moreTools.classList.add('bb_fade-animation');
     // });
 
 
  // IE 8+ Version
 
     addEventListener(featuredToolsTrigger, 'click', function() {
-        removeClass(featuredToolsTrigger, 'inactive');
-        addClass(moreToolsTrigger, 'inactive');
+        removeClass(featuredToolsTrigger, 'is-inactive');
+        addClass(moreToolsTrigger, 'is-inactive');
 
         addClass(moreTools, 'is-hidden');
-        removeClass(moreTools, 'fade-animation');
+        removeClass(moreTools, 'bb_fade-animation');
         removeClass(featuredTools, 'is-hidden');
-        addClass(featuredTools, 'fade-animation');
+        addClass(featuredTools, 'bb_fade-animation');
     });
 
     addEventListener(moreToolsTrigger, 'click', function() {
-        removeClass(moreToolsTrigger, 'inactive');
-        addClass(featuredToolsTrigger, 'inactive');
+        removeClass(moreToolsTrigger, 'is-inactive');
+        addClass(featuredToolsTrigger, 'is-inactive');
 
         addClass(featuredTools, 'is-hidden');
-        removeClass(featuredTools, 'fade-animation');
+        removeClass(featuredTools, 'bb_fade-animation');
         removeClass(moreTools, 'is-hidden');
-        addClass(moreTools, 'fade-animation');
+        addClass(moreTools, 'bb_fade-animation');
     });
 
 })();
