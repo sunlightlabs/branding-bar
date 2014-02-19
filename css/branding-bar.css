@@ -1,24 +1,3 @@
-/* Layout */
-
-html { margin: 0; }
-
-body { margin: 0; }
-
-
-/* Branding Bar Wrapper */
-
-#bb_wrapper {
-    position: relative;
-    top: 0;
-
-    -webkit-transition: top 200ms ease-out;
-    -moz-transition: top 200ms ease-out;
-    -ms-transition: top 0.3s ease-out;
-    -o-transition: top 0.3s ease-out;
-    transition: top 200ms ease-out;
-}
-
-
 /* Branding Bar Panel */
 
 #bb_panel {
@@ -103,8 +82,9 @@ a.bb_link:hover {
     width: 370px;
 }
 
-.bb_input {
+input.bb_input {
     border: none;
+    border-radius: 0;
 
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -120,7 +100,7 @@ a.bb_link:hover {
     width: 220px;
 }
 
-.bb_input.bb_input-zip { width: 70px; }
+input.bb_input.bb_input-zip { width: 70px; }
 
 button.bb_sumbit,
 button.bb_sumbit:active {
@@ -128,6 +108,7 @@ button.bb_sumbit:active {
     border: none;
     color: #444;
     cursor: pointer;
+    font-family: inherit;
     font-size: 11px;
     height: 30px;
     margin: 0;
@@ -147,7 +128,7 @@ button.bb_sumbit:active {
 
 .bb_sumbit:hover { background: #e5c345; }
 
-.bb_input::-webkit-input-placeholder { color: #bbb; font-family: georgia, times, serif; font-style: italic; }
+.bb_input::-webkit-input-placeholder { color: #bbb; font-family: georgia, times, serif; font-size: 11px; font-style: italic; }
 .bb_input:-moz-placeholder { color: #bbb; font-family: georgia, times, serif; font-style: italic; }
 .bb_input::-moz-placeholder { color: #bbb; font-family: georgia, times, serif; font-style: italic; }
 .bb_input:-ms-input-placeholder { color: #bbb; font-family: georgia, times, serif; font-style: italic; }
@@ -231,8 +212,6 @@ a.bb_tools-logo {
 
 /* States and Animations */
 
-#bb_wrapper.is-active { top: 250px; }
-
 .bb_tools-details.is-hidden { display: none; }
 
 .bb_tools-heading.is-inactive { color: #aaa; cursor: pointer; }
@@ -265,48 +244,4 @@ a.bb_tools-logo {
 @keyframes bb_fade {
   0% { opacity: .25; }
   100% { opacity: 1; }
-}
-
-/* Branding Bar (Styles may vary per site ) */
-
-.wrapper {
-  width: 960px;
-  margin: auto;
-}
-
-#branding-bar {
-  background: #fbf8ef;
-  padding: 10px 0 5px;
-  height: 30px;
-}
-#branding-bar .social {
-  font-size: 18px;
-  color: #aaa;
-  margin-right: 10px;
-  text-decoration: none;
-}
-#branding-bar .social span {color: inherit; transition: color 200ms ease-out;}
-#branding-bar .social .icon-facebook:hover{ color: #3B5998; }
-#branding-bar .social .icon-twitter:hover{ color: #00aced; }
-#branding-bar .social .icon-gplus:hover{ color: #dd4b39; }
-
-#branding-bar-trigger {
-  color: #666;
-  font-family: 'franklin-gothic-urw', helvetica, arial, sans-serif;
-  font-size: 13px;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-#branding-bar-trigger:hover {
-  text-decoration: underline;
-}
-
-.productOf {
-  background: url("http://d6ekjl42nohi3.cloudfront.net/images/new_assets/productOf.png?20140213203834329635353") no-repeat scroll center top transparent;
-  display: block;
-  float: right;
-  height: 29px;
-  text-indent: -99999em;
-  width: 200px;
 }
