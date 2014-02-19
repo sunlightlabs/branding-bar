@@ -48,7 +48,7 @@
         }
     }
 
-    var brandingPane = document.getElementById('bb_wrapper');
+    var brandingPane = document.querySelector('.bb_wrapper');
     var brandingBarTrigger = document.getElementById('branding-bar-trigger');
     var brandingBarClose = document.getElementById('bb_close-panel');
 
