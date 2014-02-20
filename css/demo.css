@@ -53,7 +53,7 @@ body { margin: 0; }
 }
 
 #branding-bar-trigger:hover {
-  text-decoration: underline;
+  color: #000;
 }
 
 .productOf {

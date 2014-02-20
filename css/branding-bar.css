@@ -1,7 +1,7 @@
 /* Branding Bar Panel */
 
 #bb_panel {
-    background: #ddd;
+    background: #4e5256;
     background: #4e5256 url('/img/branding_bar-background-base.jpg');
     background: url('/img/branding_bar-background-texture.png') top center repeat-x, url('/img/branding_bar-background-base.jpg');
 
