@@ -156,7 +156,6 @@ button.bb_sumbit:active {
 
 .bb_tools-featured {
     float: left;
-    line-height:150%;
     list-style-type: none;
     margin: 0;
     margin-top: 25px;
@@ -176,24 +175,26 @@ button.bb_sumbit:active {
     margin-left: 0;
 }
 
+a.bb_tools-logo {
+    background: none;
+    border-bottom: none;
+    display: block;
+    height: 50px;
+    padding-bottom: 0;
+}
+
 a.bb_tools-logo img {
     border: 0;
     outline: 0;
 }
 
-a.bb_tools-logo {
-    background: none;
-    border-bottom: none;
-    display: block;
-    padding-bottom: 0;
-}
 
 /* Tools Section: Tools List */
 
 .bb_tools-list {
     display: inline-block;
     float: left;
-    line-height:150%;
+    line-height: 150%;
     list-style-type: none;
     margin: 0;
     margin-top: 25px;
@@ -203,7 +204,10 @@ a.bb_tools-logo {
 }
 .bb_tools-list:first-child { margin-left: 0; }
 
-.bb_tools-list li { margin-bottom: 20px; }
+.bb_tools-list li {
+    margin-bottom: 20px;
+    line-height: 18px;
+}
 
 .bb_tools-list a.bb_link { color: #eee; }
 
