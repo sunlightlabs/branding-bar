@@ -1,9 +1,24 @@
+/* Branding Bar Wrapper */
+
+.bb_wrapper {
+    position: relative;
+    margin-top: 0;
+
+    -webkit-transition: margin-top 200ms ease-out;
+    -moz-transition: margin-top 200ms ease-out;
+    -ms-transition: margin-top 0.3s ease-out;
+    -o-transition: margin-top 0.3s ease-out;
+    transition: margin-top 200ms ease-out;
+}
+
+.bb_wrapper.is-active { margin-top: 250px; }
+
 /* Branding Bar Panel */
 
 #bb_panel {
     background: #4e5256;
-    background: #4e5256 url('/img/branding_bar-background-base.jpg');
-    background: url('/img/branding_bar-background-texture.png') top center repeat-x, url('/img/branding_bar-background-base.jpg');
+    background: #4e5256 url('../img/branding_bar-background-base.jpg');
+    background: url('../img/branding_bar-background-texture.png') top center repeat-x, url('../img/branding_bar-background-base.jpg');
 
     color: #eee;
     box-shadow: inset 0px -5px 15px -5px rgba(0,0,0,.4);
@@ -92,6 +107,7 @@ input.bb_input {
     box-sizing: border-box;
 
     color: #444;
+    display: inline-block;
     height: 30px;
     margin: 0px;
     margin-right: 1px;
@@ -102,12 +118,13 @@ input.bb_input {
 
 input.bb_input.bb_input-zip { width: 70px; }
 
-button.bb_sumbit,
-button.bb_sumbit:active {
+button.bb_submit,
+button.bb_submit:active {
     background: #fcd74b;
     border: none;
     color: #444;
     cursor: pointer;
+    display: inline-block;
     font-family: inherit;
     font-size: 11px;
     height: 30px;
@@ -126,7 +143,7 @@ button.bb_sumbit:active {
     width: 70px;
 }
 
-.bb_sumbit:hover { background: #e5c345; }
+.bb_submit:hover { background: #e5c345; }
 
 .bb_input::-webkit-input-placeholder { color: #bbb; font-family: georgia, times, serif; font-size: 11px; font-style: italic; }
 .bb_input:-moz-placeholder { color: #bbb; font-family: georgia, times, serif; font-style: italic; }
@@ -135,13 +152,21 @@ button.bb_sumbit:active {
 
 .bb_email .bb_heading { margin-top: 20px; }
 .bb_email .bb_email-form { margin-top: 10px; }
+.bb_email-form-fail { display: none; }
+.bb_email .bb_email-form-success {
+    background: #404040;
+    display: none;
+    margin-top: 10px;
+    padding: 5px 10px;
+    width: 350px;
+}
 
 
 /* Branding Panel: Tools Section*/
 
 .bb_tools {
     float: left;
-    margin-left: 49px;
+    margin-left: 48px;
     width: 490px;
 }
 
@@ -166,6 +191,7 @@ button.bb_sumbit:active {
 
 .bb_tools-featured li {
     float: left;
+    list-style-type: none;
     margin: 0;
     margin-left: 30px;
     width: 230px;
@@ -207,6 +233,7 @@ a.bb_tools-logo img {
 .bb_tools-list li {
     margin-bottom: 20px;
     line-height: 18px;
+    list-style-type: none;
 }
 
 .bb_tools-list a.bb_link { color: #eee; }
@@ -216,36 +243,48 @@ a.bb_tools-logo img {
 
 /* States and Animations */
 
+.bb_email-form .bb_input.is-hidden { display: none; }
+.bb_email-form .bb_submit.is-hidden { display: none; }
+.bb_email-form-fail.is-true { display: block; }
+.bb_email-form-success.is-true {
+    display: block;
+    -webkit-animation: bb_fade 700ms 1;
+    -moz-animation: bb_fade 700ms 1;
+    -o-animation: bb_fade 700ms 1;
+    -ms-animation: bb_fade 700ms 1;
+    animation: bb_fade 700ms 1;
+}
+
 .bb_tools-details.is-hidden { display: none; }
 
 .bb_tools-heading.is-inactive { color: #aaa; cursor: pointer; }
 .bb_tools-heading.is-inactive:hover { color: #fcd74b; }
 
 .bb_fade-animation {
-  -webkit-animation: bb_fade 700ms 1;
-  -moz-animation: bb_fade 700ms 1;
-  -o-animation: bb_fade 700ms 1;
-  -ms-animation: bb_fade 700ms 1;
-  animation: bb_fade 700ms 1;
+    -webkit-animation: bb_fade 700ms 1;
+    -moz-animation: bb_fade 700ms 1;
+    -o-animation: bb_fade 700ms 1;
+    -ms-animation: bb_fade 700ms 1;
+    animation: bb_fade 700ms 1;
 }
 
 @-webkit-keyframes bb_fade {
-  0% { opacity: .25; }
-  100% { opacity: 1; }
+    0% { opacity: .25; }
+    100% { opacity: 1; }
 }
 @-moz-keyframes bb_fade {
-  0% { opacity: .25; }
-  100% { opacity: 1; }
+    0% { opacity: .25; }
+    100% { opacity: 1; }
 }
 @-o-keyframes bb_fade {
-  0% { opacity: .25; }
-  100% { opacity: 1; }
+    0% { opacity: .25; }
+    100% { opacity: 1; }
 }
 @-ms-keyframes bb_fade {
-  0% { opacity: .25; }
-  100% { opacity: 1; }
+    0% { opacity: .25; }
+    100% { opacity: 1; }
 }
 @keyframes bb_fade {
-  0% { opacity: .25; }
-  100% { opacity: 1; }
+    0% { opacity: .25; }
+    100% { opacity: 1; }
 }
