@@ -30,7 +30,7 @@ The branding bar for Sunlight's tools and projects sits at the top of each site,
     
 ## Usage
 
-First, add this class `bb_wrapper` to your html tag:
+First, add the class `bb_wrapper` to your html tag:
 
 ```
 <html class="bb_wrapper">
@@ -40,7 +40,7 @@ First, add this class `bb_wrapper` to your html tag:
 ### Quick Setup
 Ideal for *new sites* that do not already have a branding bar. This creates the contents the branding bar from a template.
 
-1. Add this html where you want the branding bar injected:
+1. Add this html where you want the branding bar injected (ie. as the first element in the body tag):
 
     ```
     <div class="branding-bar" data-bb-brandingbar="true" data-bb-property-id="sunlightlabs-awesome"></div>
@@ -55,7 +55,7 @@ For sites that *already have* custom implementations of branding bars, to preven
 1. Add these two data attributes `data-bb-brandingbar="true"` `data-bb-property-id="sunlightlabs-awesome"` to the root element of the existing branding bar.
     
     ```
-    <div class="branding-bar" data-bb-brandingbar="true" data-bb-property-id="sunlightlabs-awesome">
+    <div class="my-custom-branding-bar" data-bb-brandingbar="true" data-bb-property-id="sunlightlabs-awesome">
         ...
     </div>
     ```
@@ -83,7 +83,7 @@ For sites that *already have* custom implementations of branding bars, to preven
     </div>
     ```
 
-3. Add css from the default branding bar styles. Refer to [/src/css/brandingbar-default.css](https://github.com/sunlightlabs/branding-bar/blob/master/src/css/brandingbar-default.css). You may need to override global styles set by the site's stylesheets.
+3. To style the contents of the branding bar (based on above html), use css from the [default branding bar stylesheet](https://github.com/sunlightlabs/branding-bar/blob/master/src/css/brandingbar-default.css). You may need to override global styles set by the site's stylesheets.
 
 
 ---
