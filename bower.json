@@ -1,0 +1,13 @@
+{
+  "name": "sunlight-brandingbar",
+  "version": "0.2.0",
+  "ignore": [
+    "**/.*",
+    "**/*.txt",
+    "**/*.md",
+    "node_modules",
+    "components"
+  ],
+  "dependencies": {},
+  "devDependencies": {}
+}
