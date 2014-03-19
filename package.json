@@ -24,6 +24,6 @@
     "gulp-connect": "^1.0.9"
   },
   "scripts": {
-    "build": "grunt --verbose"
+    "build": "gulp"
   }
 }
