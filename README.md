@@ -8,7 +8,7 @@ The branding bar for Sunlight's tools and projects sits at the top of each site,
 
 **Using Bower**
 
-You can include `'branding-bar': 'sunlightlabs/branding-bar'` in your projects' `bower.json` dependencies,
+You can include `'branding-bar': 'sunlightlabs/branding-bar'` in your project's `bower.json` dependencies,
 or just `bower install sunlightlabs/branding-bar`
 
 **From CDN**
