@@ -105,4 +105,16 @@ The fallback font for the branding bar is Helvetica and then Arial, but the pref
 #####CSS: To vertically center branding bar content
 Set line-height of `.branding-bar_links` and `.branding-bar_logo` equal to the height of the branding bar
 
+## Development
+
+1. Clone this repo.
+2. Run `npm install`
+3. Run `gulp watch` to start the server and watch for changes.
+4. Edit files in the `src` directory to your liking.
+5. If there is **any** possibility that the changes you made could break existing implementations,
+    you **must** increment the version in `package.json`
+6. If the version changed, run `gulp` to rebuild the JS, which includes CSS based on the version number.
+7. Check in your files, and then tag a release (if the version changed) by running `gulp tag`
+8. Push everything to github, and then publish to S3 by running `gulp publish`.
+    You will need valid S3 credentials in your aws.json file to do this.
 
