@@ -41,7 +41,9 @@ or just `bower install sunlightlabs/branding-bar`
     <![endif]-->
     ```
     
-    
+**Note:**
+
+The files in `src/` are not production-ready! Your code will break if you try to use them. Use the files in `dist/`.
     
 ## Usage
 
@@ -121,7 +123,10 @@ Set line-height of `.branding-bar_links` and `.branding-bar_logo` equal to the h
 5. If there is **any** possibility that the changes you made could break existing implementations,
     you **must** increment the version in [package.json](https://github.com/sunlightlabs/branding-bar/blob/master/package.json).
 6. If the version changed, run `gulp` to rebuild the JS, which includes CSS based on the version number.
-7. Check in your files, and then tag a release (if the version changed) by running `gulp tag`
-8. Push everything to github, and then publish to S3 by running `gulp publish`.
+    (This step is only necessary if you have uncompiled changes--any changes made under `watch` have already been built.)
+7. Check-in/push your files.
+8. Tag a release (if the version changed) by running `gulp tag`.
+9. Push your tag: `git push origin --tags`
+10. Publish to S3 by running `gulp publish`.
     You will need valid S3 credentials in your aws.json file to do this.
 

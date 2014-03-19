@@ -1,4 +1,5 @@
 var gulp = require('gulp'),
+    help = require('gulp-task-listing'),
     clean = require('gulp-clean'),
     srcreplace = require('gulp-replace'),
     uglify = require('gulp-uglify'),
@@ -33,12 +34,12 @@ gulp.task('update-bower-version', function(){
   fs.writeSync(fs.openSync('./bower.json', 'w+'), JSON.stringify(bowerpkg, null, '  '));
 });
 
-gulp.task('clean', function(){
+gulp.task('build-clean', function(){
   return gulp.src('dist')
     .pipe(clean());
 });
 
-gulp.task('js', function(){
+gulp.task('build-js', function(){
   return gulp.src(paths.js)
     .pipe(srcreplace(/\{\{ ?version ?\}\}/g, version))
       .pipe(gulp.dest('dist/js'))
@@ -49,7 +50,7 @@ gulp.task('js', function(){
       .pipe(gulp.dest('dist/js'));
 });
 
-gulp.task('css', function(){
+gulp.task('build-css', function(){
   return gulp.src(paths.css)
     .pipe(sass())
     .pipe(prefix("last 2 version", "> 1%", "ie 8", "ie 7"))
@@ -61,7 +62,7 @@ gulp.task('css', function(){
       .pipe(gulp.dest('dist/css'));
 });
 
-gulp.task('img', function(){
+gulp.task('build-img', function(){
   return gulp.src(paths.img)
     .pipe(imagemin({optimizationLevel: 5}))
     .pipe(gulp.dest('dist/img'));
@@ -116,18 +117,19 @@ gulp.task('connect', connect.server({
 
 gulp.task('watch', ['connect'], function(){
   gulp.watch(paths.js, ['js']).on('change', function(){
-    gulp.run('js');
+    gulp.run('build-js');
   });
   gulp.watch(paths.css, ['css']).on('change', function(){
-    gulp.run('css');
+    gulp.run('build-css');
   });
   gulp.watch(paths.img, ['img']).on('change', function(){
-    gulp.run('img');
+    gulp.run('build-img');
   });
 });
 
-gulp.task('setup', ['update-bower-version', 'clean']);
-gulp.task('build', ['js', 'css', 'img']);
+gulp.task('help', help);
+gulp.task('setup', ['update-bower-version', 'build-clean']);
+gulp.task('build', ['build-js', 'build-css', 'build-img']);
 gulp.task('default', ['setup'], function(){
   gulp.run('build');
 });

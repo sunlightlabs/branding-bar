@@ -21,7 +21,8 @@
     "gulp-git": "^0.3.5",
     "gulp-s3": "nkostelnik/gulp-s3#af55865",
     "gulp-livereload": "^1.2.0",
-    "gulp-connect": "^1.0.9"
+    "gulp-connect": "^1.0.9",
+    "gulp-task-listing": "^0.2.2"
   },
   "scripts": {
     "build": "gulp"
