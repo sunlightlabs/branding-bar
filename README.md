@@ -7,31 +7,31 @@ The branding bar for Sunlight's tools and projects sits at the top of each site,
 ## Install
 
 1. Include minified CSS and javascript for the branding bar from the Sunlight CDN. The current version is `0.1.1`
-	
-	CSS should be dropped inside your head tag:
     
-    ```
+    CSS should be dropped inside your head tag:
+    
+    ```html
     <link rel="stylesheet" href="https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.1.1/css/brandingbar.css">
-	```
+    ```
 
-	Javascript should be dropped in after your page content, usually at the bottom of the page:
-	
-	```
+    Javascript should be dropped in after your page content, usually at the bottom of the page:
+    
+    ```html
     <script src="https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.1.1/js/brandingbar.min.js.gz"></script>
     ```
     
 
 2. Include the icon font [SF Icons](https://github.com/sunlightlabs/sf-icons):
 
-    ```
+    ```html
     <link rel="stylesheet" href="http://sf-icons.s3.amazonaws.com/css/sf-icons.css">
     ```
     If IE8 support is needed, include the following javascript at the bottom of your page as well :
     
-    ```
-	<!--[if IE 8]>
-		<script src="http://sf-icons.s3.amazonaws.com/js/sf-icons.js"></script>
-	<![endif]-->
+    ```html
+    <!--[if IE 8]>
+        <script src="http://sf-icons.s3.amazonaws.com/js/sf-icons.js"></script>
+    <![endif]-->
     ```
     
     
@@ -40,7 +40,7 @@ The branding bar for Sunlight's tools and projects sits at the top of each site,
 
 First, add the class `bb_wrapper` to your html tag:
 
-```
+```html
 <html class="bb_wrapper">
 ```
 
@@ -51,7 +51,7 @@ Ideal for *new sites* that do not already have a branding bar. This injects the 
 
 1. Add this html where you want the branding bar injected (ie. as the first element in the body tag):
 
-    ```
+    ```html
     <div class="branding-bar" data-bb-brandingbar="true" data-bb-property-id="sunlightlabs-awesome"></div>
     ```
 2. Add additional branding styles as needed.
@@ -63,7 +63,7 @@ For sites that *already* have custom implementations of the branding bar. To avo
 
 1. Add these two data attributes `data-bb-brandingbar="true"` `data-bb-property-id="sunlightlabs-awesome"` to the root element of the existing branding bar.
     
-    ```
+    ```html
     <div class="my-custom-branding-bar" data-bb-brandingbar="true" data-bb-property-id="sunlightlabs-awesome">
         ...
     </div>
@@ -71,7 +71,7 @@ For sites that *already* have custom implementations of the branding bar. To avo
 
 2. Include or replace the contents of the branding bar as needed. Include social media icons, branding bar toggle, and Sunlight logo.
     
-    ```
+    ```html
     <div class="branding-bar_container">
         <div class="branding-bar_links">
 
