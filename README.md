@@ -6,18 +6,25 @@ The branding bar for Sunlight's tools and projects sits at the top of each site,
 
 ## Install
 
-1. Include minified CSS and javascript for the branding bar from the Sunlight CDN. The current version is `0.1.1`
+**Using Bower**
+
+You can include `'branding-bar': 'sunlightlabs/branding-bar'` in your projects' `bower.json` dependencies,
+or just `bower install sunlightlabs/branding-bar`
+
+**From CDN**
+
+1. Include minified CSS and javascript for the branding bar from the Sunlight CDN. The current version is `0.2.0`.
     
     CSS should be dropped inside your head tag:
     
     ```html
-    <link rel="stylesheet" href="https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.1.1/css/brandingbar.css">
+    <link rel="stylesheet" href="https://sunlight-cdn.s3.amazonaws.com/brandingbar/:version/css/brandingbar.css">
     ```
 
     Javascript should be dropped in after your page content, usually at the bottom of the page:
     
     ```html
-    <script src="https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.1.1/js/brandingbar.min.js.gz"></script>
+    <script src="https://sunlight-cdn.s3.amazonaws.com/brandingbar/:version/js/brandingbar.min.js.gz"></script>
     ```
     
 
