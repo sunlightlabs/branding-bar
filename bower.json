@@ -6,7 +6,12 @@
     "**/*.txt",
     "**/*.md",
     "node_modules",
-    "components"
+    "components",
+    "example",
+    "src",
+    "gulpfile.js",
+    "package.json",
+    "aws.*"
   ],
   "dependencies": {},
   "devDependencies": {}
