@@ -116,13 +116,13 @@ gulp.task('connect', connect.server({
 }));
 
 gulp.task('watch', ['connect'], function(){
-  gulp.watch(paths.js, ['js']).on('change', function(){
+  gulp.watch(paths.js, ['build-js']).on('change', function(){
     gulp.run('build-js');
   });
-  gulp.watch(paths.css, ['css']).on('change', function(){
+  gulp.watch(paths.css, ['build-css']).on('change', function(){
     gulp.run('build-css');
   });
-  gulp.watch(paths.img, ['img']).on('change', function(){
+  gulp.watch(paths.img, ['build-img']).on('change', function(){
     gulp.run('build-img');
   });
 });
