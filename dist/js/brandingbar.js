@@ -148,7 +148,22 @@
 
   // loads a link or script unless one ending with condition is found on the page.
   function conditionalGet(tagName, url, condition) {
-    var already = document.querySelectorAll(tagName + (tagName == 'script') ? '[src$="' + condition + '"]' : '[href$="' + condition + '"]').length;
+    var already = false;
+    if (typeof condition === 'object' && Object.prototype.toString.call(condition) === '[object Array]') {
+      if (tagName == 'script'){
+        selectors = condition.map(function(item){
+          return tagName + '[src$="' + condition + '"]';
+        });
+      } else {
+        selectors = condition.map(function(item){
+          return tagName + '[href$="' + condition + '"]';
+        });
+      }
+      condition = selectors.join(', ');
+      already = document.querySelectorAll(condition).length
+    } else if (typeof condition === 'string'){
+      already = document.querySelectorAll(tagName + (tagName == 'script') ? '[src$="' + condition + '"]' : '[href$="' + condition + '"]').length;
+    }
     if(already) { return false; }
     var tag = document.createElement(tagName);
     if (tagName == 'script') {
@@ -235,7 +250,7 @@
       var panel = document.querySelector('#' + namespace() + '_panel');
       var url = 'https://sunlightfoundation.com/brandingbar/';
       var propertyId = bar.getAttribute('data-' + namespace() + '-property-id');
-      var loadingStylesheet = conditionalGet('link', 'https://s3.amazonaws.com/sunlight-cdn/brandingbar/' + version() + '/css/brandingbar.css', 'brandingbar.css');
+      var loadingStylesheet = conditionalGet('link', 'https://s3.amazonaws.com/sunlight-cdn/brandingbar/' + version() + '/css/brandingbar.css', ['brandingbar.css', 'brandingbar.min.css', 'brandingbar.min.css.gz']);
       var loadingDefaultStylesheet = false;
       // // comment this line in to load the twitter widgets platform
       // var loadingTwitter = conditionalGet('script', 'https://platform.twitter.com/widgets.js', 'platform.twitter.com/widgets.js');
@@ -243,7 +258,7 @@
       // set up bar
       if(!bar.innerHTML) {
         bar.innerHTML = render(barTemplate);
-        loadingDefaultStylesheet = conditionalGet('link', 'https://s3.amazonaws.com/sunlight-cdn/brandingbar/' + version() + '/css/brandingbar-default.css')
+        loadingDefaultStylesheet = conditionalGet('link', 'https://s3.amazonaws.com/sunlight-cdn/brandingbar/' + version() + '/css/brandingbar-default.css');
       }
       // set up panel
       if (!panel) {
