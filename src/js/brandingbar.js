@@ -152,15 +152,15 @@
     if (typeof condition === 'object' && Object.prototype.toString.call(condition) === '[object Array]') {
       if (tagName == 'script'){
         selectors = condition.map(function(item){
-          return tagName + '[src$="' + condition + '"]';
+          return tagName + '[src$="' + item + '"]';
         });
       } else {
         selectors = condition.map(function(item){
-          return tagName + '[href$="' + condition + '"]';
+          return tagName + '[href$="' + item + '"]';
         });
       }
       condition = selectors.join(', ');
-      already = document.querySelectorAll(condition).length
+      already = document.querySelectorAll(condition).length;
     } else if (typeof condition === 'string'){
       already = document.querySelectorAll(tagName + (tagName == 'script') ? '[src$="' + condition + '"]' : '[href$="' + condition + '"]').length;
     }
@@ -250,7 +250,7 @@
       var panel = document.querySelector('#' + namespace() + '_panel');
       var url = 'https://sunlightfoundation.com/brandingbar/';
       var propertyId = bar.getAttribute('data-' + namespace() + '-property-id');
-      var loadingStylesheet = conditionalGet('link', 'https://s3.amazonaws.com/sunlight-cdn/brandingbar/' + version() + '/css/brandingbar.css', ['brandingbar.css', 'brandingbar.min.css', 'brandingbar.min.css.gz']);
+      var loadingStylesheet = conditionalGet('link', 'https://s3.amazonaws.com/sunlight-cdn/brandingbar/' + version() + '/css/brandingbar.min.css.gz', ['brandingbar.css', 'brandingbar.min.css', 'brandingbar.min.css.gz']);
       var loadingDefaultStylesheet = false;
       // // comment this line in to load the twitter widgets platform
       // var loadingTwitter = conditionalGet('script', 'https://platform.twitter.com/widgets.js', 'platform.twitter.com/widgets.js');
@@ -258,7 +258,7 @@
       // set up bar
       if(!bar.innerHTML) {
         bar.innerHTML = render(barTemplate);
-        loadingDefaultStylesheet = conditionalGet('link', 'https://s3.amazonaws.com/sunlight-cdn/brandingbar/' + version() + '/css/brandingbar-default.css');
+        loadingDefaultStylesheet = conditionalGet('link', 'https://s3.amazonaws.com/sunlight-cdn/brandingbar/' + version() + '/css/brandingbar-default.min.css.gz', ['brandingbar-default.css', 'brandingbar-default.min.css', 'brandingbar-default.min.css.gz']);
       }
       // set up panel
       if (!panel) {
@@ -326,7 +326,7 @@
           ev.preventDefault();
           var email = form.querySelector('input[name=email]').value;
           var zipcode = form.querySelector('input[name=zipcode]').value;
-          console.log(email + " " + zipcode);
+          window.console && console.log(email + " " + zipcode);
           join('http://sunlightfoundation.com/subscribe/', email, zipcode);
         });
       }
