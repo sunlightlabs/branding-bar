@@ -13,7 +13,7 @@ or just `bower install sunlightlabs/branding-bar`
 
 **From CDN**
 
-1. Include minified CSS and javascript for the branding bar from the Sunlight CDN. The current version is `0.2.0`.
+1. Include minified CSS and javascript for the branding bar from the Sunlight CDN. The current version is `0.2`.
 
     CSS should be dropped inside your head tag:
 
