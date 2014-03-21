@@ -73,19 +73,20 @@ gulp.task('tag', function(){
 });
 
 gulp.task('publish', function(){
+  var s3Version = parseFloat(version).toString();
   gulp.src(paths.dist.img, {read: false})
     .pipe(s3(aws, {
-      uploadPath: 'brandingbar/' + version + '/img/',
+      uploadPath: 'brandingbar/' + s3Version + '/img/',
       delay: 1000,
     }));
   gulp.src(paths.dist.css, {read: false})
     .pipe(s3(aws, {
-      uploadPath: 'brandingbar/' + version + '/css/',
+      uploadPath: 'brandingbar/' + s3Version + '/css/',
       delay: 1000,
     }));
   gulp.src(paths.dist.cssgz, {read: false})
     .pipe(s3(aws, {
-      uploadPath: 'brandingbar/' + version + '/css/',
+      uploadPath: 'brandingbar/' + s3Version + '/css/',
       delay: 1000,
       headers: {
         "Content-Disposition": "inline",
@@ -95,12 +96,12 @@ gulp.task('publish', function(){
     }));
   gulp.src(paths.dist.js, {read: false})
     .pipe(s3(aws, {
-      uploadPath: 'brandingbar/' + version + '/js/',
+      uploadPath: 'brandingbar/' + s3Version + '/js/',
       delay: 1000,
     }));
   gulp.src(paths.dist.jsgz, {read: false})
     .pipe(s3(aws, {
-      uploadPath: 'brandingbar/' + version + '/js/',
+      uploadPath: 'brandingbar/' + s3Version + '/js/',
       delay: 1000,
       headers: {
         "Content-Disposition": "inline",
