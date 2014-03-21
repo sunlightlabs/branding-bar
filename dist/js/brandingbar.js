@@ -370,7 +370,7 @@
   '            </p>' +
   '          </li>' +
   '          <li>' +
-  '            <a class="{{ namespace }}_tools-logo" href="https://scout.sunlightfoundation.com">' +
+  '            <a class="{{ namespace }}_tools-logo" href="http://scout.sunlightfoundation.com">' +
   '              <img src="https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.2.0/img/logo_scout.png" alt="Scout"/>' +
   '            </a>' +
   '            <p class="{{ namespace }}_description">' +
