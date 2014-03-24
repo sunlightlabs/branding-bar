@@ -11,6 +11,10 @@
     return '{{ version }}';
   }
 
+  function s3Version() {
+    return parseFloat(version()).toString();
+  }
+
   /*
    * event support
    */
@@ -179,7 +183,7 @@
   function render(tmpl, ctx) {
     ctx || (ctx = {});
     ctx.namespace = namespace();
-    ctx.version = version();
+    ctx.version = s3Version();
     return tmpl.replace(/\{\{ ?([\w\d_]+) ?\}\}/gi, function(tag, match) {
       return ctx[match] || '';
     });
