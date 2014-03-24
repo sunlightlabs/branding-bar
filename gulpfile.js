@@ -41,7 +41,7 @@ gulp.task('build-clean', function(){
 
 gulp.task('build-js', function(){
   return gulp.src(paths.js)
-    .pipe(srcreplace(/\{\{ ?version ?\}\}/g, version))
+    .pipe(srcreplace(/\{\{ ?version ?\}\}/, version))
       .pipe(gulp.dest('dist/js'))
     .pipe(rename({suffix: '.min'}))
     .pipe(uglify())
