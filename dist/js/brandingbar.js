@@ -8,7 +8,11 @@
   }
 
   function version() {
-    return '0.2.1';
+    return '0.2.2';
+  }
+
+  function s3Version() {
+    return parseFloat(version()).toString();
   }
 
   /*
@@ -179,7 +183,7 @@
   function render(tmpl, ctx) {
     ctx || (ctx = {});
     ctx.namespace = namespace();
-    ctx.version = version();
+    ctx.version = s3Version();
     return tmpl.replace(/\{\{ ?([\w\d_]+) ?\}\}/gi, function(tag, match) {
       return ctx[match] || '';
     });
@@ -363,7 +367,7 @@
   '        <ul class="{{ namespace }}_tools-featured">' +
   '          <li>' +
   '            <a class="{{ namespace }}_tools-logo" href="http://opencongress.com">' +
-  '            <img src="https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.2.1/img/logo_opencongress.png" alt="Open Congress"/>' +
+  '            <img src="https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.2.2/img/logo_opencongress.png" alt="Open Congress"/>' +
   '            </a>' +
   '            <p class="{{ namespace }}_description">' +
   '              <a class="{{ namespace }}_link" href="http://opencongress.com">OpenCongress</a> allows anyone to follow legislation in Congress, from bill introduction to floor votes. Learn more about the issues you care about.' +
@@ -371,7 +375,7 @@
   '          </li>' +
   '          <li>' +
   '            <a class="{{ namespace }}_tools-logo" href="http://scout.sunlightfoundation.com">' +
-  '              <img src="https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.2.1/img/logo_scout.png" alt="Scout"/>' +
+  '              <img src="https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.2.2/img/logo_scout.png" alt="Scout"/>' +
   '            </a>' +
   '            <p class="{{ namespace }}_description">' +
   '              <a class="{{ namespace }}_link" href="https://scout.sunlightfoundation.com">Scout</a> is a rapid notification service that allows anyone to create customized email or text alerts on actions Congress takes on an issue or a specific bill.' +
