@@ -335,7 +335,7 @@
 
   // this is the main panel template
   panelTemplate = '' +
-  '  <button id="{{ namespace }}_close-panel" data-{{ namespace }}-toggle=".{{ namespace }}_wrapper">&times;</button>' +
+  '  <button id="{{ namespace }}_close-panel" type="button" data-{{ namespace }}-toggle=".{{ namespace }}_wrapper">&times;</button>' +
   '  <div class="{{ namespace }}_panel-container">' +
   '    <div class="{{ namespace }}_about">' +
   '      <span class="{{ namespace }}_heading">About Sunlight Foundation</span>' +
