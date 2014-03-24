@@ -8,7 +8,7 @@
   }
 
   function version() {
-    return '0.2.0';
+    return '0.2.1';
   }
 
   /*
@@ -335,7 +335,7 @@
 
   // this is the main panel template
   panelTemplate = '' +
-  '  <button id="{{ namespace }}_close-panel" data-{{ namespace }}-toggle=".{{ namespace }}_wrapper">&times;</button>' +
+  '  <button id="{{ namespace }}_close-panel" type="button" data-{{ namespace }}-toggle=".{{ namespace }}_wrapper">&times;</button>' +
   '  <div class="{{ namespace }}_panel-container">' +
   '    <div class="{{ namespace }}_about">' +
   '      <span class="{{ namespace }}_heading">About Sunlight Foundation</span>' +
@@ -363,7 +363,7 @@
   '        <ul class="{{ namespace }}_tools-featured">' +
   '          <li>' +
   '            <a class="{{ namespace }}_tools-logo" href="http://opencongress.com">' +
-  '            <img src="https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.2.0/img/logo_opencongress.png" alt="Open Congress"/>' +
+  '            <img src="https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.2.1/img/logo_opencongress.png" alt="Open Congress"/>' +
   '            </a>' +
   '            <p class="{{ namespace }}_description">' +
   '              <a class="{{ namespace }}_link" href="http://opencongress.com">OpenCongress</a> allows anyone to follow legislation in Congress, from bill introduction to floor votes. Learn more about the issues you care about.' +
@@ -371,7 +371,7 @@
   '          </li>' +
   '          <li>' +
   '            <a class="{{ namespace }}_tools-logo" href="http://scout.sunlightfoundation.com">' +
-  '              <img src="https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.2.0/img/logo_scout.png" alt="Scout"/>' +
+  '              <img src="https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.2.1/img/logo_scout.png" alt="Scout"/>' +
   '            </a>' +
   '            <p class="{{ namespace }}_description">' +
   '              <a class="{{ namespace }}_link" href="https://scout.sunlightfoundation.com">Scout</a> is a rapid notification service that allows anyone to create customized email or text alerts on actions Congress takes on an issue or a specific bill.' +
