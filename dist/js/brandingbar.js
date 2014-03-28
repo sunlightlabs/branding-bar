@@ -8,7 +8,7 @@
   }
 
   function version() {
-    return '0.2.3';
+    return '0.3.0';
   }
 
   function s3Version() {
@@ -426,9 +426,9 @@
   barTemplate = '' +
   '  <div class="branding-bar_container">' +
   '    <div class="branding-bar_links">' +
-  '      <a class="social" href="https://www.facebook.com/sunlightfoundation"><span class="icon icon-facebook"></span></a>' +
-  '      <a class="social" href="https://twitter.com/sunfoundation"><span class="icon icon-twitter"></span></a>' +
-  '      <a class="social" href="https://plus.google.com/+sunlightfoundation"><span class="icon icon-google-plus"></span></a>' +
+  '      <a class="social" href="https://www.facebook.com/sunlightfoundation"><span class="sficon-facebook"></span></a>' +
+  '      <a class="social" href="https://twitter.com/sunfoundation"><span class="sficon-twitter"></span></a>' +
+  '      <a class="social" href="https://plus.google.com/+sunlightfoundation"><span class="sficon-google-plus"></span></a>' +
   '      <a class="branding-bar_trigger" data-bb-toggle=".bb_wrapper" href="http://sunlightfoundation.com/about/">About Sunlight Foundation</a>' +
   '    </div>' +
   '    <div class="branding-bar_logo">' +
