@@ -101,7 +101,7 @@ For sites that *already* have custom implementations of the branding bar. To avo
     </div>
     ```
 
-3. To style the contents of the branding bar (based on above html), use css from the [default branding bar stylesheet](https://github.com/sunlightlabs/branding-bar/blob/master/dist/css/brandingbar-default.scss). You may need to override global styles set by the site's stylesheets.
+3. To style the contents of the branding bar (based on above html), use css from the [default branding bar stylesheet](dist/css/brandingbar-default.css). You may need to override global styles set by the site's stylesheets.
 
 
 ---
