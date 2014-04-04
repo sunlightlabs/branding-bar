@@ -2,7 +2,7 @@
 
 The branding bar for Sunlight's tools and projects sits at the top of each site, and includes social media icons, an "About Sunlight" panel, and the Sunlight Foundation logo.
 
-![Open Branding Bar](example/screenshot-brandingbar-open.png)
+![Demo](example/demo-brandingbar.gif)
 
 ## Install
 
@@ -106,7 +106,7 @@ For sites that *already* have custom implementations of the branding bar. To avo
 
 ---
 
-##Tips
+##Design Tips
 
 #####Fonts: Helvetica and Franklin Gothic
 The fallback font for the branding bar is Helvetica and then Arial, but the preferred font is Franklin Gothic. If the site has a Typekit kit, [Franklin Gothic URW, 400](https://typekit.com/fonts/franklin-gothic-urw) can be added as necessary.
