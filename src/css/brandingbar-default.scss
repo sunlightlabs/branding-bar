@@ -7,18 +7,18 @@
   a.social {
     text-decoration: none;
 
-    .icon {
+    [class^="sficon-"], [class*=" sficon-"] {
       color: #aaa;
       font-size: 16px;
       margin-right: 10px;
       transition: color 200ms ease-out;
     }
 
-    .icon-facebook:hover{ color: #3b5998; }
+    .sficon-facebook:hover{ color: #3b5998; }
 
-    .icon-twitter:hover{ color: #00aced; }
+    .sficon-twitter:hover{ color: #00aced; }
 
-    .icon-google-plus:hover{ color: #dd4b39; }
+    .sficon-google-plus:hover{ color: #dd4b39; }
   }
 }
 
