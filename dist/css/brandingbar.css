@@ -50,7 +50,8 @@
   .bb_wrapper .bb_description {
     line-height: 20px;
     margin: 25px 0;
-    padding: 0; }
+    padding: 0;
+    font-size: 12px; }
   .bb_wrapper a.bb_link {
     background: none;
     color: #fcd74b;
@@ -115,6 +116,7 @@
     outline: none;
     padding: 6px 0;
     text-transform: uppercase;
+    text-indent: 0;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
