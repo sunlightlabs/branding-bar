@@ -70,10 +70,10 @@ $namespace: 'bb';
   }
 
   .#{$namespace}_description {
+    font-size: 12px;
     line-height: 20px;
     margin: 25px 0;
     padding: 0;
-    font-size: 12px;
   }
 
   a.#{$namespace}_link {
@@ -107,6 +107,7 @@ $namespace: 'bb';
     -o-box-sizing: border-box;
     box-sizing: border-box;
 
+    background: #fff;
     color: #444;
     display: inline-block;
     height: 30px;
@@ -125,6 +126,7 @@ $namespace: 'bb';
   button.#{$namespace}_submit:active {
     background: #fcd74b;
     border: none;
+    box-shadow: none;
     color: #444;
     cursor: pointer;
     display: inline-block;
@@ -134,8 +136,9 @@ $namespace: 'bb';
     margin: 0;
     outline: none;
     padding: 6px 0;
-    text-transform: uppercase;
     text-indent: 0;
+    text-shadow: none;
+    text-transform: uppercase;
 
     -webkit-user-select: none;
     -moz-user-select: none;
