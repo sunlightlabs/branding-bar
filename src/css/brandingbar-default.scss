@@ -54,8 +54,8 @@
 }
 
 .branding-bar_sunlight-logo {
-  background: url('https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.1.1/img/sunlight-logo.png') no-repeat 50% 50%;
-  background: rgba(0,0,0,0) url('https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.1.1/img/sunlight-logo.svg') no-repeat 50% 50%;
+  background: url('https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.3/img/sunlight-logo.png') no-repeat 50% 50%;
+  background: rgba(0,0,0,0) url('https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.3/img/sunlight-logo.svg') no-repeat 50% 50%;
   background-size: 100% 100%;
   color: transparent;
   display: inline-block;
@@ -63,4 +63,9 @@
   height: 30px;
   width: 160px;
   vertical-align: middle;
+}
+
+.branding-bar.sflogo-light .branding-bar_sunlight-logo {
+  background: url('https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.3/img/sunlight-logo-light.png') no-repeat 50% 50%;
+  background: rgba(0,0,0,0) url('https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.3/img/sunlight-logo-light.svg') no-repeat 50% 50%;
 }
