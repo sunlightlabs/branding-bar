@@ -13,7 +13,7 @@ or just `bower install sunlightlabs/branding-bar`
 
 **From CDN**
 
-1. Include minified CSS and javascript for the branding bar from the Sunlight CDN. The current version is `0.2`.
+1. Include minified CSS and javascript for the branding bar from the Sunlight CDN. The current version is `0.3`.
 
     CSS should be dropped inside your head tag:
 
@@ -31,13 +31,13 @@ or just `bower install sunlightlabs/branding-bar`
 2. Include the icon font [SF Icons](https://github.com/sunlightlabs/sf-icons):
 
     ```html
-    <link rel="stylesheet" href="https://sf-icons.s3.amazonaws.com/css/sf-icons.css">
+    <link rel="stylesheet" href="http://sunlight-cdn.s3.amazonaws.com/sf-icons/0.2/css/sf-icons.css">
     ```
     If IE8 support is needed, include the following javascript at the bottom of your page as well :
 
     ```html
     <!--[if IE 8]>
-        <script src="https://sf-icons.s3.amazonaws.com/js/sf-icons.js"></script>
+        <script src="http://sunlight-cdn.s3.amazonaws.com/sf-icons/0.1.0/js/sf-icons.js"></script>
     <![endif]-->
     ```
 
@@ -85,9 +85,9 @@ For sites that *already* have custom implementations of the branding bar. To avo
         <div class="branding-bar_links">
 
             <!-- Social Media Icons -->
-            <a class="social" href="https://www.facebook.com/sunlightfoundation"><span class="icon icon-facebook"></span></a>
-            <a class="social" href="https://twitter.com/sunfoundation"><span class="icon icon-twitter"></span></a>
-            <a class="social" href="https://plus.google.com/+sunlightfoundation"><span class="icon icon-google-plus"></span></a>
+            <a class="social" href="https://www.facebook.com/sunlightfoundation"><span class="sficon-facebook"></span></a>
+            <a class="social" href="https://twitter.com/sunfoundation"><span class="sficon-twitter"></span></a>
+            <a class="social" href="https://plus.google.com/+sunlightfoundation"><span class="sficon-google-plus"></span></a>
 
             <!-- Branding Bar Toggle -->
             <a class="branding-bar_trigger" data-bb-toggle=".bb_wrapper" href="http://sunlightfoundation.com/about/">About Sunlight Foundation</a>
