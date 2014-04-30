@@ -72,6 +72,7 @@
     -moz-box-sizing: border-box;
     -o-box-sizing: border-box;
     box-sizing: border-box;
+    background: #fff;
     color: #444;
     display: inline-block;
     height: 30px;
@@ -105,6 +106,8 @@
   .bb_wrapper button.bb_submit, .bb_wrapper button.bb_submit:active {
     background: #fcd74b;
     border: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
     color: #444;
     cursor: pointer;
     display: inline-block;
@@ -114,6 +117,7 @@
     margin: 0;
     outline: none;
     padding: 6px 0;
+    text-shadow: none;
     text-transform: uppercase;
     -webkit-user-select: none;
     -moz-user-select: none;
