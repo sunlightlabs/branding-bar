@@ -8,7 +8,7 @@
   }
 
   function version() {
-    return '0.3.0';
+    return '0.3.1';
   }
 
   function s3Version() {
@@ -344,7 +344,7 @@
   '  <div class="{{ namespace }}_panel-container">' +
   '    <div class="{{ namespace }}_about">' +
   '      <span class="{{ namespace }}_heading">About Sunlight Foundation</span>' +
-  '      <p class="{{ namespace }}_description">Founded in 2006, the Sunlight Foundation is a nonpartisan nonprofit that uses cutting-edge technology and ideas to make government transparent and accountable. <a class="{{ namespace }}_link" href="http://sunlightfoundation.com/about">Learn more &raquo;</a></p>' +
+  '      <p class="{{ namespace }}_description">The Sunlight Foundation is a nonpartisan nonprofit that advocates for open government globally and uses technology to make government more accountable to all. <a class="{{ namespace }}_link" href="http://sunlightfoundation.com/about">Learn more &raquo;</a></p>' +
   '' +
   '      <div class="{{ namespace }}_email">' +
   '        <span class="{{ namespace }}_heading">Stay informed about our work</span>' +
