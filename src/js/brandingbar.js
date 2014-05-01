@@ -370,7 +370,7 @@
   '  <div class="{{ namespace }}_panel-container">' +
   '    <div class="{{ namespace }}_about">' +
   '      <span class="{{ namespace }}_heading">About Sunlight Foundation</span>' +
-  '      <p class="{{ namespace }}_description">The Sunlight Foundation is a nonpartisan nonprofit that advocates for open government globally and uses technology to make government more accountable to all. <a class="{{ namespace }}_link" href="http://sunlightfoundation.com/about">Learn more &raquo;</a></p>' +
+  '      <p class="{{ namespace }}_description">The <a class="{{ namespace }}_link" href="http://sunlightfoundation.com">Sunlight Foundation</a> is a nonpartisan nonprofit that advocates for open government globally and uses technology to make government more accountable to all.</p>' +
   '' +
   '      <div class="{{ namespace }}_email">' +
   '        <span class="{{ namespace }}_heading">Stay informed about our work</span>' +
