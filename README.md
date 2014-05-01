@@ -63,6 +63,8 @@ Ideal for *new sites* that do not already have a branding bar. This injects the 
     ```html
     <div class="branding-bar" data-bb-brandingbar="true" data-bb-property-id="sunlightlabs-awesome"></div>
     ```
+    If a light version of the Sunlight Foundation logo is needed, add this class: `sflogo-light`.
+
 2. Add additional branding styles as needed.
 
 
