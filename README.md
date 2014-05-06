@@ -31,13 +31,13 @@ or just `bower install sunlightlabs/branding-bar`
 2. Include the icon font [SF Icons](https://github.com/sunlightlabs/sf-icons). The current version is `0.2`.
 
     ```html
-    <link rel="stylesheet" href="http://sunlight-cdn.s3.amazonaws.com/sf-icons/:version/css/sf-icons.css">
+    <link rel="stylesheet" href="https://sunlight-cdn.s3.amazonaws.com/sf-icons/:version/css/sf-icons.css">
     ```
     If IE8 support is needed, include the following javascript at the bottom of your page as well :
 
     ```html
     <!--[if IE 8]>
-        <script src="http://sunlight-cdn.s3.amazonaws.com/sf-icons/:version/js/sf-icons.js"></script>
+        <script src="https://sunlight-cdn.s3.amazonaws.com/sf-icons/:version/js/sf-icons.js"></script>
     <![endif]-->
     ```
 
