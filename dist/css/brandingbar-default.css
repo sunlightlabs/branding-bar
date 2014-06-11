@@ -1,5 +1,5 @@
 .branding-bar {
-  background: #fbf8ef;
+  background: #E6EDE5;
   height: 45px; }
   .branding-bar a.social {
     text-decoration: none; }
@@ -20,13 +20,13 @@
   float: left;
   line-height: 45px; }
 
-.branding-bar_trigger {
+a.branding-bar_trigger {
   color: #666;
   cursor: pointer;
   font-family: 'franklin-gothic-urw', helvetica, arial, sans-serif;
   font-size: 13px;
   text-decoration: none; }
-  .branding-bar_trigger:hover {
+  a.branding-bar_trigger:hover {
     color: #000; }
 
 .branding-bar_logo {
