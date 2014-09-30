@@ -222,7 +222,7 @@
       email: email,
       zipcode: zipcode
     };
-    post('http://sunlightfoundation.com/join/', data, function(err, resp) {
+    post('https://sunlightfoundation.com/join/', data, function(err, resp) {
       if (err) {
         // resp is a string of err message
         var emailFormError = document.querySelector('.' + namespace() + '_email-form-fail');
@@ -231,7 +231,7 @@
         });
       } else {
         var respData = JSON.parse(resp);
-        var url = 'http://sunlightfoundation.com' + respData.redirect;
+        var url = 'https://sunlightfoundation.com' + respData.redirect;
 
         var emailForm = document.querySelector('.' + namespace() + '_email-form');
         toggle(emailForm, {
@@ -358,7 +358,7 @@
           var email = form.querySelector('input[name=email]').value;
           var zipcode = form.querySelector('input[name=zipcode]').value;
           window.console && console.log(email + " " + zipcode);
-          join('http://sunlightfoundation.com/subscribe/', email, zipcode);
+          join('https://sunlightfoundation.com/subscribe/', email, zipcode);
         });
       }
     }
@@ -370,11 +370,11 @@
   '  <div class="{{ namespace }}_panel-container">' +
   '    <div class="{{ namespace }}_about">' +
   '      <span class="{{ namespace }}_heading">About Sunlight Foundation</span>' +
-  '      <p class="{{ namespace }}_description">The <a class="{{ namespace }}_link" href="http://sunlightfoundation.com">Sunlight Foundation</a> is a nonpartisan nonprofit that advocates for open government globally and uses technology to make government more accountable to all.</p>' +
+  '      <p class="{{ namespace }}_description">The <a class="{{ namespace }}_link" href="https://sunlightfoundation.com">Sunlight Foundation</a> is a nonpartisan nonprofit that advocates for open government globally and uses technology to make government more accountable to all.</p>' +
   '' +
   '      <div class="{{ namespace }}_email">' +
   '        <span class="{{ namespace }}_heading">Stay informed about our work</span>' +
-  '        <form class="{{ namespace }}_email-form" action="http://sunlightfoundation.com/join/" method="post">' +
+  '        <form class="{{ namespace }}_email-form" action="https://sunlightfoundation.com/join/" method="post">' +
   '          <input class="{{ namespace }}_input" type="email" placeholder="email address" name="email">' +
   '          <input class="{{ namespace }}_input {{ namespace }}_input-zip" type="text" placeholder="zip code" name="zipcode">' +
   '          <button class="{{ namespace }}_submit" type="submit">Submit</button>' +
@@ -393,15 +393,15 @@
   '      <div id="{{ namespace }}_featured-tools" class="{{ namespace }}_tools-details">' +
   '        <ul class="{{ namespace }}_tools-featured">' +
   '          <li>' +
-  '            <a class="{{ namespace }}_tools-logo" href="http://opencongress.com">' +
+  '            <a class="{{ namespace }}_tools-logo" href="https://www.opencongress.org">' +
   '            <img src="https://sunlight-cdn.s3.amazonaws.com/brandingbar/{{ s3Version }}/img/logo_opencongress.png" alt="Open Congress"/>' +
   '            </a>' +
   '            <p class="{{ namespace }}_description">' +
-  '              <a class="{{ namespace }}_link" href="http://opencongress.com">OpenCongress</a> allows anyone to follow legislation in Congress, from bill introduction to floor votes. Learn more about the issues you care about.' +
+  '              <a class="{{ namespace }}_link" href="https://www.opencongress.org">OpenCongress</a> allows anyone to follow legislation in Congress, from bill introduction to floor votes. Learn more about the issues you care about.' +
   '            </p>' +
   '          </li>' +
   '          <li>' +
-  '            <a class="{{ namespace }}_tools-logo" href="http://scout.sunlightfoundation.com">' +
+  '            <a class="{{ namespace }}_tools-logo" href="https://scout.sunlightfoundation.com">' +
   '              <img src="https://sunlight-cdn.s3.amazonaws.com/brandingbar/{{ s3Version }}/img/logo_scout.png" alt="Scout"/>' +
   '            </a>' +
   '            <p class="{{ namespace }}_description">' +
@@ -412,7 +412,7 @@
   '      </div>' +
   '      <div id="{{ namespace }}_more-tools" class="{{ namespace }}_tools-details is-hidden">' +
   '        <ul class="{{ namespace }}_tools-list">' +
-  '          <li><a class="{{ namespace }}_link" href="http://www.opencongress.org">OpenCongress</a></li>' +
+  '          <li><a class="{{ namespace }}_link" href="https://www.opencongress.org">OpenCongress</a></li>' +
   '          <li><a class="{{ namespace }}_link" href="http://influenceexplorer.com">Influence Explorer</a></li>' +
   '          <li><a class="{{ namespace }}_link" href="http://openstates.org">Open States</a></li>' +
   '          <li><a class="{{ namespace }}_link" href="https://scout.sunlightfoundation.com">Scout</a></li>' +
@@ -455,11 +455,11 @@
   '      <a class="social" href="https://www.facebook.com/sunlightfoundation"><span class="sficon-facebook"></span></a>' +
   '      <a class="social" href="https://twitter.com/sunfoundation"><span class="sficon-twitter"></span></a>' +
   '      <a class="social" href="https://plus.google.com/+sunlightfoundation"><span class="sficon-google-plus"></span></a>' +
-  '      <a class="branding-bar_trigger" data-bb-toggle=".bb_wrapper" href="http://sunlightfoundation.com/about/">About Sunlight Foundation</a>' +
+  '      <a class="branding-bar_trigger" data-bb-toggle=".bb_wrapper" href="https://sunlightfoundation.com/about/">About Sunlight Foundation</a>' +
   '    </div>' +
   '    <div class="branding-bar_logo">' +
   '      <span class="branding-bar_productof">a product of </span>' +
-  '      <a class="branding-bar_sunlight-logo" href="http://www.sunlightfoundation.com">Sunlight Foundation</a>' +
+  '      <a class="branding-bar_sunlight-logo" href="https://www.sunlightfoundation.com">Sunlight Foundation</a>' +
   '    </div>' +
   '  </div>' +
   '';
