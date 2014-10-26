@@ -15,6 +15,7 @@ var gulp = require('gulp'),
     s3 = require('gulp-s3'),
     fs = require('fs'),
     connect = require('gulp-connect'),
+    version = require('./package.json').version,
     aws = JSON.parse(fs.readFileSync('./aws.json')),
     paths = {
       js: 'src/js/*.js',
@@ -29,17 +30,6 @@ var gulp = require('gulp'),
         img: 'dist/img/**/*'
       }
     };
-
-gulp.task('build-js', function(){
-  return gulp.src(paths.js)
-    .pipe(srcreplace(/\{\{ ?version ?\}\}/, version))
-      .pipe(gulp.dest('dist/js'))
-    .pipe(rename({suffix: '.min'}))
-    .pipe(uglify())
-      .pipe(gulp.dest('dist/js'))
-    .pipe(gzip())
-      .pipe(gulp.dest('dist/js'));
-});
 
 gulp.task('build-css', function(){
   return gulp.src(paths.css)
@@ -108,8 +98,8 @@ gulp.task('connect', connect.server({
 }));
 
 gulp.task('watch', ['connect'], function(){
-  gulp.watch(paths.js, ['build-js']).on('change', function(){
-    gulp.run('build-js');
+  gulp.watch(paths.js, ['buildJs']).on('change', function(){
+    gulp.run('buildJs');
   });
   gulp.watch(paths.css, ['build-css']).on('change', function(){
     gulp.run('build-css');
@@ -120,8 +110,8 @@ gulp.task('watch', ['connect'], function(){
 });
 
 gulp.task('help', help);
-gulp.task('setup', ['update-bower-version', 'build-clean']);
-gulp.task('build', ['build-js', 'build-css', 'build-img']);
+gulp.task('setup', ['updateBowerVersion', 'buildClean']);
+gulp.task('build', ['buildJs', 'build-css', 'build-img']);
 gulp.task('default', ['setup'], function(){
   gulp.run('build');
 });
