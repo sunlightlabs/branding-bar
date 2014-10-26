@@ -1,6 +1,9 @@
+var requireDir = require('require-dir');
+
+requireDir('./gulp/tasks', { recurse: true });
+
 var gulp = require('gulp'),
     help = require('gulp-task-listing'),
-    clean = require('gulp-clean'),
     srcreplace = require('gulp-replace'),
     uglify = require('gulp-uglify'),
     sass = require('gulp-sass'),
@@ -12,7 +15,6 @@ var gulp = require('gulp'),
     s3 = require('gulp-s3'),
     fs = require('fs'),
     connect = require('gulp-connect'),
-    version = require('./package.json').version,
     aws = JSON.parse(fs.readFileSync('./aws.json')),
     paths = {
       js: 'src/js/*.js',
@@ -27,17 +29,6 @@ var gulp = require('gulp'),
         img: 'dist/img/**/*'
       }
     };
-
-gulp.task('update-bower-version', function(){
-  var bowerpkg = require('./bower.json');
-  bowerpkg.version = version;
-  fs.writeSync(fs.openSync('./bower.json', 'w+'), JSON.stringify(bowerpkg, null, '  '));
-});
-
-gulp.task('build-clean', function(){
-  return gulp.src('dist')
-    .pipe(clean());
-});
 
 gulp.task('build-js', function(){
   return gulp.src(paths.js)
