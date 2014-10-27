@@ -68,11 +68,43 @@ function uriSerializer(obj) {
   return str.join('&');
 }
 
+// Loads a link or script unless one ending with condition is found on the page.
+function conditionalGet(tagName, url, condition) {
+  var already = false,
+      selectors;
+  if (typeof condition === 'object' && Object.prototype.toString.call(condition) === '[object Array]') {
+    if (tagName == 'script'){
+      selectors = condition.map(function(item){
+        return tagName + '[src$="' + item + '"]';
+      });
+    } else {
+      selectors = condition.map(function(item){
+        return tagName + '[href$="' + item + '"]';
+      });
+    }
+    condition = selectors.join(', ');
+    already = document.querySelectorAll(condition).length;
+  } else if (typeof condition === 'string'){
+    already = document.querySelectorAll(tagName + (tagName == 'script') ? '[src$="' + condition + '"]' : '[href$="' + condition + '"]').length;
+  }
+  if(already) { return false; }
+  var tag = document.createElement(tagName);
+  if (tagName == 'script') {
+    tag.src = url;
+  } else {
+    tag.href = url;
+    tag.rel = 'stylesheet';
+  }
+  document.querySelector('head').appendChild(tag);
+  return true;
+}
+
 module.exports = {
   xhr: xhr,
   get: get,
   post: post,
   getJSONP: getJSONP,
   supportsCORS: supportsCORS,
-  uriSerializer: uriSerializer
+  uriSerializer: uriSerializer,
+  conditionalGet: conditionalGet
 };
