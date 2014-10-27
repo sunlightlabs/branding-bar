@@ -1,6 +1,6 @@
 module.exports = {
   paths: {
-    js  : 'src/js/*.js',
+    js  : 'src/js/**/*.js',
     css : 'src/css/*.scss',
     img : 'src/img/**/*',
     dist: {
