@@ -5,9 +5,11 @@ require('es5-shim');
 var event = require('./util/event'),
     dom = require('./util/dom'),
     ajax = require('./util/ajax'),
-    panelTemplate = require('./template/panel'),
-    barTemplate = require('./template/bar'),
-    toolsTemplate = require('./template/tools');
+    // panelTemplate = require('./template/panel'),
+    // barTemplate = require('./template/bar'),
+    // toolsTemplate = require('./template/tools');
+    barTemplate = require('./template/barDonate'),
+    modalTemplate = require('./template/modalDonate');
 
 /*
  * Return the namespace that all html, css and js should use
@@ -108,7 +110,7 @@ function initialize() {
     // Set up bar
     if(!bar.innerHTML) {
       bar.innerHTML = render(barTemplate);
-      loadingDefaultStylesheet = ajax.conditionalGet('link', 'https://s3.amazonaws.com/sunlight-cdn/brandingbar/' + s3Version() + '/css/brandingbar-default.min.css.gz', ['brandingbar-default.css', 'brandingbar-default.min.css', 'brandingbar-default.min.css.gz']);
+      // loadingDefaultStylesheet = ajax.conditionalGet('link', 'https://s3.amazonaws.com/sunlight-cdn/brandingbar/' + s3Version() + '/css/brandingbar-default.min.css.gz', ['brandingbar-default.css', 'brandingbar-default.min.css', 'brandingbar-default.min.css.gz']);
     }
     // Set up panel
     if (!panel) {

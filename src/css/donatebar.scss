@@ -1,0 +1,87 @@
+.branding-bar {
+    font-family: 'franklin-gothic-urw', helvetica, arial, sans-serif;
+    background: #f4ce2b;
+    height: 65px;
+}
+
+.branding-bar_links {
+    float: left;
+    line-height: 65px;
+}
+strong {
+    font-weight: 500;
+}
+
+a.branding-bar_trigger {
+    color: #666;
+    cursor: pointer;
+    font-family: 'franklin-gothic-urw', helvetica, arial, sans-serif;
+    font-size: 13px;
+    text-decoration: none;
+}
+
+a.branding-bar_trigger:hover {
+    color: #000;
+}
+
+.branding-bar_logo {
+    float: right;
+    line-height: 65px;
+}
+
+.branding-bar_productof {
+    color: #888;
+    font-family: 'Georgia';
+    font-size: 11px;
+    font-style: italic;
+    margin-right: 2px;
+    text-rendering: optimizeLegibility;
+}
+
+.branding-bar_sunlight-logo {
+    background: url('https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.3/img/sunlight-logo.png') no-repeat 50% 50%;
+    background: rgba(0, 0, 0, 0) url('https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.3/img/sunlight-logo.svg') no-repeat 50% 50%;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+    color: transparent;
+    display: inline-block;
+    font-size: 0;
+    height: 30px;
+    width: 160px;
+    vertical-align: middle;
+}
+
+.branding-bar.sflogo-light .branding-bar_sunlight-logo {
+    background: url('https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.3/img/sunlight-logo-light.png') no-repeat 50% 50%;
+    background: rgba(0, 0, 0, 0) url('https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.3/img/sunlight-logo-light.svg') no-repeat 50% 50%;
+}
+
+button.donate-cta-button,
+button.donate-cta-button:active {
+    background: #c55c04;
+    border: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    color: #fff;
+    cursor: pointer;
+    /*display: inline-block;*/
+    font-family: inherit;
+    font-size: 13px;
+    height: 30px;
+    margin: 0 10px;
+    outline: none;
+    padding: 6px 2px;
+    text-indent: 0;
+    text-shadow: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    vertical-align: middle;
+    width: 125px;
+    }
+
+button.donate-cta-button:active {
+    background: #b55300;
+}
