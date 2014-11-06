@@ -1,0 +1,249 @@
+/* Modal */
+
+html, body {
+    margin: 0;
+    min-height: 100%;
+}
+
+body {
+    position: relative;
+}
+
+.bb-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#7F000000,endColorstr=#7F000000);
+    background-color: rgba(0,0,0,0.5);
+    z-index: 10;
+    visibility: visible;
+    opacity: 0;
+}
+
+
+
+/* Modal Base */
+
+.modal {
+    width: 550px;
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    margin-left: -250px;
+    background-color: #eee;
+    border-radius: 4px;
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.25);
+    transition: all 300ms;
+    font-family: 'franklin-gothic-urw', helvetica, arial, sans-serif;
+    font-size: 14px;
+    color: #333;
+
+    &.is-active {
+    display: block;
+    visibility: visible;
+    opacity: 1;
+    top: 85px;
+    }
+}
+
+.modal--header {
+    
+    border-radius: 4px 4px 0 0;
+    padding: 10px 50px;
+    position: relative;
+    text-align: center;
+}
+ 
+.modal--title {
+    font-size: 19px;
+}
+
+.modal--footer {
+    background-color: #f0eded;
+    border-radius: 0 0 4px 4px;
+    padding: 10px 25px;
+    font-size: 12px;
+    text-align: center;
+    color: #777;
+}
+
+.modal--action {
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    background: rgba(0,0,0, .15);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    color: #fff;
+    cursor: pointer;
+
+    span {
+        vertical-align: middle;
+    }
+}
+
+a.modal--link {
+    color: #488293;
+}
+
+/* Modal: Initial Prompt */
+
+.modal_inital-prompt {
+    @extend .modal;
+}
+
+.modal_initial-prompt--modal-header {
+    @extend .modal--header;
+    border-radius: 4px;    
+    padding-bottom: 30px;
+}
+
+/* Modal: Donation */
+
+
+.modal_donation {
+    @extend .modal;   
+}
+
+.modal_donation--header {
+    @extend .modal--header;
+    background-color: #f3da74;
+}
+
+.modal_donation--title {
+    @extend .modal--title;
+}
+
+
+
+.bb-divider {
+    border: 0;
+    border-top: 1px dashed #e5e5e5;
+    margin: 20px 0;
+}
+
+.modal-content {
+    padding: 30px 50px 10px;
+    background-color: #f8f8f8;
+
+    .donation-amount {
+        margin-right: 23px;
+    }
+
+    .form-grouping {
+        width: 450px;
+        margin-bottom: 15px;
+        overflow: auto;
+
+        &.next-step {
+            margin-top: 30px;
+            text-align: right;
+        }
+        .alt-option {
+            /*float: left;*/
+            margin-top: 10px;
+            margin-right: 10px;
+            /*text-decoration: none;*/
+            color: #999;
+        }
+    }
+    .form-grouping.donation {
+        overflow: visible;
+    }
+
+    .form-group {
+        float: left;
+        display: inline-block;
+    }
+
+    .form-group label span {
+        display: block;
+        margin-left: 2px;
+    }
+
+    .bb-input {
+        box-sizing: border-box;
+        padding: 5px 6px;
+        border: 1px solid #ccc;
+        font-size: 15px;
+        color: #444;
+        margin-top: 5px;
+    }
+
+    .bb-input[type="radio"] {
+        margin-left: 0;
+        margin-right: 8px;
+        cursor: pointer;
+    }
+    .bb-input[type="checkbox"] {
+        margin-left: 0;
+        margin-right: 8px;
+        cursor: pointer;
+    }
+    
+    .bb-input.other-amount {
+        width: 120px;
+    }
+
+    .bb-input.note {
+        font-size: 13px;
+        height: 70px;
+    }
+    .bb-input.no-border-left {
+        border-left: 0;
+    }
+
+    .other-amount-prefix {
+        font-size: 15px;
+    }
+    .form-group.fg-10 .bb-input { width: 450px ;}
+    .form-group.fg-9 .bb-input { width: 405px ;}
+    .form-group.fg-8 .bb-input { width: 360px ;}
+    .form-group.fg-7 .bb-input { width: 315px ;}
+    .form-group.fg-6 .bb-input { width: 270px ;}
+    .form-group.fg-5 .bb-input { width: 225px ;}
+    .form-group.fg-4 .bb-input { width: 180px ;}
+    .form-group.fg-3 .bb-input { width: 135px ;}
+    .form-group.fg-2 .bb-input { width: 90px ;}
+    .form-group.fg-1 .bb-input { width: 45px ;}
+}
+
+
+
+
+
+label {
+    cursor: pointer;
+}
+
+
+.bb-overlay.is-active {
+    display: block;
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 300ms;
+}
+
+
+
+
+
+.modal.initial-prompt {
+    display: none;
+}
+
+.modal-form-step-1.is-hidden,
+.modal-form-step-2.is-hidden,
+.modal-form-step-3.is-hidden {
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.additional-info.is-hidden {display: none;}

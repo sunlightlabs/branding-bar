@@ -1,7 +1,11 @@
+@import 'modal';
+
 .branding-bar {
     font-family: 'franklin-gothic-urw', helvetica, arial, sans-serif;
     background: #f4ce2b;
     height: 65px;
+    z-index: 1000;
+    position: relative;
 }
 
 .branding-bar_links {
@@ -56,19 +60,17 @@ a.branding-bar_trigger:hover {
     background: rgba(0, 0, 0, 0) url('https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.3/img/sunlight-logo-light.svg') no-repeat 50% 50%;
 }
 
-button.donate-cta-button,
-button.donate-cta-button:active {
-    background: #c55c04;
+.cta-button,
+.cta-button:active {
+    background: #b55300;
     border: none;
     -webkit-box-shadow: none;
     box-shadow: none;
     color: #fff;
     cursor: pointer;
-    /*display: inline-block;*/
     font-family: inherit;
     font-size: 13px;
     height: 30px;
-    margin: 0 10px;
     outline: none;
     padding: 6px 2px;
     text-indent: 0;
@@ -82,6 +84,34 @@ button.donate-cta-button:active {
     width: 125px;
     }
 
-button.donate-cta-button:active {
+.cta-button.btn-donate,
+.cta-button.btn-donate:active {
     background: #b55300;
+    margin: 0 10px;
+    padding: 6px 3px;
+}
+.cta-button.btn-donate:hover {
+    background: #DF6601;
+}
+
+.cta-button.btn-next,
+.cta-button.btn-next:active {
+    background: #53afc9;
+    display: inline-block;
+    margin: auto;
+    width: 175px;
+    height: 40px;
+    font-size: 16px;
+    border-bottom: 4px #488293 solid;
+}
+
+.cta-button.btn-next:hover {
+    background: #53BBD8;
+}
+
+.cta-button.btn-large {
+    height: 50px;
+    width: 175px;
+    font-size: 18px;
+    margin: 25px 25px 10px;
 }
