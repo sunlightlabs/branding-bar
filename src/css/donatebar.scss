@@ -1,3 +1,4 @@
+@import 'mixins';
 @import 'modal';
 
 .branding-bar {
@@ -8,41 +9,35 @@
     position: relative;
 }
 
-.branding-bar_links {
+.bb-donation-bar_container {
+    width: 960px;
+    margin: auto;
+}
+
+.bb-donation-message {
     float: left;
     line-height: 65px;
 }
-strong {
+
+.bb-donation-message_text {
+  max-width: 525px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+  float: left;
+}
+
+.bb-strong {
     font-weight: 500;
 }
 
-a.branding-bar_trigger {
-    color: #666;
-    cursor: pointer;
-    font-family: 'franklin-gothic-urw', helvetica, arial, sans-serif;
-    font-size: 13px;
-    text-decoration: none;
-}
-
-a.branding-bar_trigger:hover {
-    color: #000;
-}
-
-.branding-bar_logo {
+.bb-donation-bar_logo {
     float: right;
     line-height: 65px;
 }
 
-.branding-bar_productof {
-    color: #888;
-    font-family: 'Georgia';
-    font-size: 11px;
-    font-style: italic;
-    margin-right: 2px;
-    text-rendering: optimizeLegibility;
-}
-
-.branding-bar_sunlight-logo {
+.bb-donation-bar_sunlight-logo {
     background: url('https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.3/img/sunlight-logo.png') no-repeat 50% 50%;
     background: rgba(0, 0, 0, 0) url('https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.3/img/sunlight-logo.svg') no-repeat 50% 50%;
     -webkit-background-size: 100% 100%;
@@ -55,13 +50,7 @@ a.branding-bar_trigger:hover {
     vertical-align: middle;
 }
 
-.branding-bar.sflogo-light .branding-bar_sunlight-logo {
-    background: url('https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.3/img/sunlight-logo-light.png') no-repeat 50% 50%;
-    background: rgba(0, 0, 0, 0) url('https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.3/img/sunlight-logo-light.svg') no-repeat 50% 50%;
-}
-
-.cta-button,
-.cta-button:active {
+.bb-button_cta {
     background: #b55300;
     border: none;
     -webkit-box-shadow: none;
@@ -84,32 +73,36 @@ a.branding-bar_trigger:hover {
     width: 125px;
     }
 
-.cta-button.btn-donate,
-.cta-button.btn-donate:active {
+.bb-button_cta--donate {
+    @extend .bb-button_cta;
+
     background: #b55300;
     margin: 0 10px;
     padding: 6px 3px;
-}
-.cta-button.btn-donate:hover {
-    background: #DF6601;
+    
+    &:hover {
+        background: #DF6601;
+    }
 }
 
-.cta-button.btn-next,
-.cta-button.btn-next:active {
+.bb-button_cta--next {
+    @extend .bb-button_cta;
+
     background: #53afc9;
-    display: inline-block;
     margin: auto;
     width: 175px;
     height: 40px;
     font-size: 16px;
     border-bottom: 4px #488293 solid;
+
+    &:hover {
+        background: #53BBD8;
+    }
 }
 
-.cta-button.btn-next:hover {
-    background: #53BBD8;
-}
+.bb-button_cta--large {
+    @extend .bb-button_cta;
 
-.cta-button.btn-large {
     height: 50px;
     width: 175px;
     font-size: 18px;
