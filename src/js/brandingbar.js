@@ -5,11 +5,11 @@ require('es5-shim');
 var event = require('./util/event'),
     dom = require('./util/dom'),
     ajax = require('./util/ajax'),
-    // panelTemplate = require('./template/panel'),
-    // barTemplate = require('./template/bar'),
-    // toolsTemplate = require('./template/tools');
-    barTemplate = require('./template/barDonate'),
+    panelTemplate = require('./template/panel'),
+    barTemplate = require('./template/bar'),
+    donationTemplate = require('./template/barDonate'),
     modalTemplate = require('./template/modalDonate');
+
 
 /*
  * Return the namespace that all html, css and js should use
@@ -96,12 +96,12 @@ var toggle = function (els, opts) {
   }
 };
 
-function initialize() {
+function loadBrandingBar() {
   var bar = document.querySelector('[data-' + namespace() + '-brandingbar]');
   if (bar) {
     var panel = document.querySelector('#' + namespace() + '_panel');
     var url = 'https://sunlightfoundation.com/brandingbar/';
-    var propertyId = bar.getAttribute('data-' + namespace() + '-property-id');
+    // var propertyId = bar.getAttribute('data-' + namespace() + '-property-id');
     var loadingStylesheet = ajax.conditionalGet('link', 'https://s3.amazonaws.com/sunlight-cdn/brandingbar/' + s3Version() + '/css/brandingbar.min.css.gz', ['brandingbar.css', 'brandingbar.min.css', 'brandingbar.min.css.gz']);
     var loadingDefaultStylesheet = false;
     // // comment this line in to load the twitter widgets platform
@@ -110,7 +110,7 @@ function initialize() {
     // Set up bar
     if(!bar.innerHTML) {
       bar.innerHTML = render(barTemplate);
-      // loadingDefaultStylesheet = ajax.conditionalGet('link', 'https://s3.amazonaws.com/sunlight-cdn/brandingbar/' + s3Version() + '/css/brandingbar-default.min.css.gz', ['brandingbar-default.css', 'brandingbar-default.min.css', 'brandingbar-default.min.css.gz']);
+      loadingDefaultStylesheet = ajax.conditionalGet('link', 'https://s3.amazonaws.com/sunlight-cdn/brandingbar/' + s3Version() + '/css/brandingbar-default.min.css.gz', ['brandingbar-default.css', 'brandingbar-default.min.css', 'brandingbar-default.min.css.gz']);
     }
     // Set up panel
     if (!panel) {
@@ -158,18 +158,17 @@ function initialize() {
       });
     });
 
-
     // Update featured tools based on current site
-    if (propertyId) {
-      url += '?pid=' + propertyId;
-      ajax.getJSONP(url, function(data) {
-        var list = featuredTools.querySelector('ul');
-        list.innerHTML = '';
-        for (var i=0; i<data.length; i++) {
-          list.innerHTML += render(toolTemplate, data[i]);
-        }
-      });
-    }
+    // if (propertyId) {
+    //   url += '?pid=' + propertyId;
+    //   ajax.getJSONP(url, function(data) {
+    //     var list = featuredTools.querySelector('ul');
+    //     list.innerHTML = '';
+    //     for (var i=0; i<data.length; i++) {
+    //       list.innerHTML += render(toolTemplate, data[i]);
+    //     }
+    //   });
+    // }
 
     // Ajax the signup form if cors support was detected
     if (ajax.supportsCORS()) {
@@ -185,7 +184,127 @@ function initialize() {
   }
 }
 
-var featuredTools;
+function loadDonationBar() {
+  var bar = document.querySelector('[data-' + namespace() + '-brandingbar]');
+  var body = document.querySelector('body');
+  if (bar) {
+    // var panel = document.querySelector('#' + namespace() + '_panel');
+    var url = 'https://sunlightfoundation.com/brandingbar/';
+    // var propertyId = bar.getAttribute('data-' + namespace() + '-property-id');
+    var loadingStylesheet = ajax.conditionalGet('link', '//localhost:4000/dist/css/donatebar.min.css', ['donatebar.css', 'donatebar.min.css', 'donatebar.min.css.gz']);
+    var loadingDefaultStylesheet = false;
+    // // comment this line in to load the twitter widgets platform
+    // var loadingTwitter = ajax.conditionalGet('script', 'https://platform.twitter.com/widgets.js', 'platform.twitter.com/widgets.js');
 
-// This kicks off the panel render
-initialize();
+    // Set up bar
+    if(!bar.innerHTML) {
+      bar.innerHTML = render(donationTemplate);
+    }
+
+    // Set up modal
+    
+    modal = document.createElement('div');
+    bar.parentElement.insertBefore(modal, bar);
+    
+    modal.innerHTML = render(modalTemplate);
+
+
+    var donateButton = document.querySelectorAll('.js-modal-open');
+    var modalClose = document.querySelectorAll('.js-modal-close');
+    var overlay = document.querySelector('.bb-overlay');
+    var modal = document.querySelector('.bb-modal_donation');
+    var modalPrompt = document.querySelector('.bb-modal_initial-prompt');
+
+    var step1 = document.querySelectorAll('.bb-modal-form-step-1');
+    var step2 = document.querySelectorAll('.bb-modal-form-step-2');
+    var step3 = document.querySelectorAll('.bb-modal-form-step-3');
+
+    var nextFrame1 = document.querySelectorAll('.bb-modal-form-step-1 .js-next-frame');
+    var nextFrame2 = document.querySelectorAll('.bb-modal-form-step-2 .js-next-frame');
+
+    var prevFrame2 = document.querySelectorAll('.bb-modal-form-step-2 .js-prev-frame');
+
+    function resetDonationForm() {
+      // clear form
+      var formInput = document.querySelectorAll('.bb-input');
+
+      for (var i = 0; i < formInput.length; i++) {
+        formInput[i].value = '';
+      }
+
+      // reset form steps after modal is hidden
+      setTimeout(function() {
+        dom.removeClass(step1, 'is-active');
+        dom.removeClass(step2, 'is-active');
+        dom.removeClass(step3, 'is-active');
+      }, 300);
+    }
+
+    // open donate modal
+    event.on(donateButton, 'click', function(e){
+      e.preventDefault ? e.preventDefault() : e.returnValue = false;
+      dom.addClass(overlay, 'is-active');
+      dom.addClass(modal, 'is-active');
+      dom.addClass(step1, 'is-active');
+    });
+
+    // close donate modal
+    event.on(modalClose, 'click', function(e){
+      e.preventDefault ? e.preventDefault() : e.returnValue = false;
+      dom.removeClass(overlay, 'is-active');
+      dom.removeClass(modal, 'is-active');
+      dom.removeClass(modalPrompt, 'is-active');
+
+      resetDonationForm();
+    });
+
+    // proceed to next step
+    event.on(nextFrame1, 'click', function(e) {
+      toggle(step1, {toggle: 'is-active'}); 
+      toggle(step2, {toggle: 'is-active'}); 
+    });
+
+    event.on(nextFrame2, 'click', function(e) {
+      toggle(step2, {toggle: 'is-active'}); 
+      toggle(step3, {toggle: 'is-active'}); 
+    });
+
+    event.on(prevFrame2, 'click', function(e) {
+      toggle(step2, {toggle: 'is-active'}); 
+      toggle(step1, {toggle: 'is-active'}); 
+    });
+
+
+    var triggerAdditionalFields = document.querySelectorAll('.js-trigger-note');
+    var additionalFields = document.querySelector('.bb-form-additional-fields');
+
+    event.on(triggerAdditionalFields, 'change', function() {
+        toggle(additionalFields, {toggle: 'is-active'});
+    });
+
+  }
+}
+
+// Determine which bar to render
+var type = getBarType();
+loadBar(type);
+
+function getBarType() {
+  // TODO: Fetch what bar to render from the endpoint. hardcoded now
+  return 'DONATION';
+}
+
+function loadBar(type) {
+  switch (type) {
+    case 'BRANDING':
+      loadBrandingBar();
+      break;
+    case 'DONATION':
+      loadDonationBar();
+      break;
+    default:
+      // By default,
+      loadBrandingBar();
+      break;
+  }
+}
