@@ -170,7 +170,7 @@ var template = '' +
 '                    <div class="bb-form-group fg-10">' +
 '                        <label class="bb-label">' +
 '                            <span>Note (optional)</span>' +
-'                            <textarea class="bb-input_note modal--link" placeholder="Write a note"></textarea>' +
+'                            <textarea class="bb-input_note bb-modal--link" placeholder="Write a note"></textarea>' +
 '                        </label>' +
 '                    </div>' +
 '                </div>' +
@@ -201,14 +201,14 @@ var template = '' +
 '        <div class="bb-modal-form-step-3">' +
 '            <p>We\'ve sent an email confirmation and reciept to <strong class="bb-strong">name@example.com</strong> that you can keep for your records. </p>' +
 '            <hr class="bb-divider">' +
-'            <p>If you have any questions about your donation, feel free give us a call at <br>(202)742-1520, or email us at <a href="mailto:donors@sunlightfoundation.com" class="modal--link">donors@sunlightfoundation.com</a></p>' +
+'            <p>If you have any questions about your donation, feel free give us a call at <br>(202)742-1520, or email us at <a href="mailto:donors@sunlightfoundation.com" class="bb-modal--link">donors@sunlightfoundation.com</a></p>' +
 '        </div>' +
 '' +
 '    </div>' +
 '' +
 '' +
 '    <div class="bb-modal--footer">' +
-'        <p>The Sunlight Foundation is a 501(c)(3) nonprofit, transpartisan organization. All contributions are tax deductible. Please review our <a href="http://sunlightfoundation.com/legal/gifts/" target="_blank" class="modal--link">gift acceptance policy</a> for contributions over $250.</p>' +
+'        <p>The Sunlight Foundation is a 501(c)(3) nonprofit, transpartisan organization. All contributions are tax deductible. Please review our <a href="http://sunlightfoundation.com/legal/gifts/" target="_blank" class="bb-modal--link">gift acceptance policy</a> for contributions over $250.</p>' +
 '    </div>' +
 '' +
 '</div>' +
