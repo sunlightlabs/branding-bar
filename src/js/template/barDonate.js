@@ -1,17 +1,17 @@
 'use strict';
 
-// Default branding bar template
+// Donation bar template
 var template = '' +
-'<div class="branding-bar_container">' +
-'   <div class="branding-bar_links">' +
-'        <span>' +
-'            <strong>It\'s Sunshine Week!</strong>' +
+'<div class="bb-donation-bar_container">' +
+'   <div class="bb-donation-message">' +
+'        <span class="bb-donation-message_text">' +
+'            <strong class="bb-strong">It\'s Sunshine Week!</strong>' +
 '            Show your support for transparency!' +
 '        </span>' +
-'        <button class="donate-cta-button">Make a Donation &raquo;</button>' +
+'        <button class="bb-button_cta--donate js-modal-open">Make a Donation &raquo;</button>' +
 '    </div>' +
-'   <div class="branding-bar_logo">' +
-'       <a class="branding-bar_sunlight-logo" href="https://www.sunlightfoundation.com">Sunlight Foundation</a>' +
+'   <div class="bb-donation-bar_logo">' +
+'       <a class="bb-donation-bar_sunlight-logo" href="https://www.sunlightfoundation.com">Sunlight Foundation</a>' +
 '   </div>' +
 '</div>' +
 '';
