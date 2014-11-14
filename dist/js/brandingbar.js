@@ -21,7 +21,7 @@ function namespace() {
 }
 
 function version() {
-  return '0.3.4';
+  return '0.4.0';
 }
 
 function s3Version() {
