@@ -1,6 +1,6 @@
 # Sunlight Branding Bar
 
-The branding bar for Sunlight's tools and projects sits at the top of each site, and includes social media icons, an "About Sunlight" panel, and the Sunlight Foundation logo.
+The branding bar for Sunlight's tools and projects sits at the top of each site. This injects the branding bar and includes default styles.
 
 ![Demo](example/demo-brandingbar.gif)
 
@@ -41,80 +41,34 @@ or just `bower install sunlightlabs/branding-bar`
     <![endif]-->
     ```
 
-**Note:**
-
-The files in `src/` are not production-ready! Your code will break if you try to use them. Use the files in `dist/`.
 
 ## Usage
 
-First, add the class `bb_wrapper` to your html tag:
+1. Add the class `bb_wrapper` to your html tag:
 
-```html
-<html class="bb_wrapper">
-```
+    ```html
+    <html class="bb_wrapper">
+    ```
 
-
-### Quick Setup
-Ideal for *new sites* that do not already have a branding bar. This injects the contents of the branding bar from a template and includes default styles.
-![Default Branding Bar](example/screenshot-brandingbar-default.png)
-
-1. Add this html where you want the branding bar injected (ie. as the first element in the body tag):
+2. Add this html where you want the branding bar injected (ie. as the first element in the body tag):
 
     ```html
     <div class="branding-bar" data-bb-brandingbar="true" data-bb-property-id="sunlightlabs-awesome"></div>
     ```
     If a light version of the Sunlight Foundation logo is needed, add this class: `sflogo-light`.
 
-2. Add additional branding styles as needed.
+3. Add additional branding styles and fonts as needed.
 
 
+###Design 
 
-### Custom Branding Bar
-For sites that *already* have custom implementations of the branding bar. To avoid conflicts, you'll need to manually include the contents of the branding bar.
-
-1. Add these two data attributes `data-bb-brandingbar="true"` `data-bb-property-id="sunlightlabs-awesome"` to the root element of the existing branding bar.
-
-    ```html
-    <div class="my-custom-branding-bar" data-bb-brandingbar="true" data-bb-property-id="sunlightlabs-awesome">
-        ...
-    </div>
-    ```
-
-2. Include or replace the contents of the branding bar as needed. Include social media icons, branding bar toggle, and Sunlight logo.
-
-    ```html
-    <div class="branding-bar_container">
-        <div class="branding-bar_links">
-
-            <!-- Social Media Icons -->
-            <a class="social" href="https://www.facebook.com/sunlightfoundation"><span class="sficon-facebook"></span></a>
-            <a class="social" href="https://twitter.com/sunfoundation"><span class="sficon-twitter"></span></a>
-            <a class="social" href="https://plus.google.com/+sunlightfoundation"><span class="sficon-google-plus"></span></a>
-
-            <!-- Branding Bar Toggle -->
-            <a class="branding-bar_trigger" data-bb-toggle=".bb_wrapper" href="http://sunlightfoundation.com/about/">About Sunlight Foundation</a>
-        </div>
-
-        <!-- Sunlight Logo -->
-        <div class="branding-bar_logo">
-            <span class="branding-bar_productof">a product of </span>
-            <a class="branding-bar_sunlight-logo" href="http://www.sunlightfoundation.com">Sunlight Foundation</a>
-        </div>
-    </div>
-    ```
-
-3. To style the contents of the branding bar (based on above html), use css from the [default branding bar stylesheet](dist/css/brandingbar-default.css). You may need to override global styles set by the site's stylesheets.
-
-
----
-
-##Design Tips
-
-#####Fonts: Helvetica and Franklin Gothic
-The fallback font for the branding bar is Helvetica and then Arial, but the preferred font is Franklin Gothic. If the site has a Typekit kit, [Franklin Gothic URW, 400](https://typekit.com/fonts/franklin-gothic-urw) can be added as necessary.
+#####Typography
+Include Franklin Gothic. If the site has a Typekit kit, add [Franklin Gothic URW, 400 and 500](https://typekit.com/fonts/franklin-gothic-urw) if those are not already included. The fallback font for the branding bar is Helvetica, then Arial.
 
 #####CSS: To vertically center branding bar content
 Set line-height of `.branding-bar_links` and `.branding-bar_logo` equal to the height of the branding bar
+
+---
 
 ## Development
 
