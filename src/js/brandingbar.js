@@ -184,13 +184,20 @@ function loadBrandingBar() {
   }
 }
 
-function loadDonationBar() {
+function loadDonationBar(stripeKey) {
   var bar = document.querySelector('[data-' + namespace() + '-brandingbar]');
   var body = document.querySelector('body');
   if (bar) {
     // var panel = document.querySelector('#' + namespace() + '_panel');
-    var url = 'https://sunlightfoundation.com/brandingbar/';
     // var propertyId = bar.getAttribute('data-' + namespace() + '-property-id');
+
+    var stripeTag = document.createElement('script');
+    document.querySelector('head').appendChild(stripeTag);
+    stripeTag.onload = function(e) {
+      Stripe.setPublishableKey(stripeKey);
+    };
+    stripeTag.src = 'https://js.stripe.com/v2/';
+
     var loadingStylesheet = ajax.conditionalGet('link', '//localhost:4000/dist/css/donatebar.min.css', ['donatebar.css', 'donatebar.min.css', 'donatebar.min.css.gz']);
     var loadingDefaultStylesheet = false;
     // // comment this line in to load the twitter widgets platform
@@ -202,10 +209,10 @@ function loadDonationBar() {
     }
 
     // Set up modal
-    
+
     modal = document.createElement('div');
     bar.parentElement.insertBefore(modal, bar);
-    
+
     modal.innerHTML = render(modalTemplate);
 
 
@@ -260,18 +267,18 @@ function loadDonationBar() {
 
     // proceed to next step
     event.on(nextFrame1, 'click', function(e) {
-      toggle(step1, {toggle: 'is-active'}); 
-      toggle(step2, {toggle: 'is-active'}); 
+      toggle(step1, {toggle: 'is-active'});
+      toggle(step2, {toggle: 'is-active'});
     });
 
     event.on(nextFrame2, 'click', function(e) {
-      toggle(step2, {toggle: 'is-active'}); 
-      toggle(step3, {toggle: 'is-active'}); 
+      toggle(step2, {toggle: 'is-active'});
+      toggle(step3, {toggle: 'is-active'});
     });
 
     event.on(prevFrame2, 'click', function(e) {
-      toggle(step2, {toggle: 'is-active'}); 
-      toggle(step1, {toggle: 'is-active'}); 
+      toggle(step2, {toggle: 'is-active'});
+      toggle(step1, {toggle: 'is-active'});
     });
 
 
@@ -285,26 +292,20 @@ function loadDonationBar() {
   }
 }
 
-// Determine which bar to render
-var type = getBarType();
-loadBar(type);
-
-function getBarType() {
-  // TODO: Fetch what bar to render from the endpoint. hardcoded now
-  return 'DONATION';
+function loadBar() {
+  var url = 'https://sunlightfoundation.com/engage/brandingbar/config/?src=IE';
+  ajax.get(url, function(err, content) {
+    if (content && content !== '') {
+      var data = JSON.parse(content);
+      if (data.type === 'donation') {
+        loadDonationBar(data.stripe.key);
+      } else {
+        loadBrandingBar();
+      }
+    } else {
+      loadBrandingBar();
+    }
+  });
 }
 
-function loadBar(type) {
-  switch (type) {
-    case 'BRANDING':
-      loadBrandingBar();
-      break;
-    case 'DONATION':
-      loadDonationBar();
-      break;
-    default:
-      // By default,
-      loadBrandingBar();
-      break;
-  }
-}
+loadBar();

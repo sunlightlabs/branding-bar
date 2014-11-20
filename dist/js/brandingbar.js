@@ -185,13 +185,20 @@ function loadBrandingBar() {
   }
 }
 
-function loadDonationBar() {
+function loadDonationBar(stripeKey) {
   var bar = document.querySelector('[data-' + namespace() + '-brandingbar]');
   var body = document.querySelector('body');
   if (bar) {
     // var panel = document.querySelector('#' + namespace() + '_panel');
-    var url = 'https://sunlightfoundation.com/brandingbar/';
     // var propertyId = bar.getAttribute('data-' + namespace() + '-property-id');
+
+    var stripeTag = document.createElement('script');
+    document.querySelector('head').appendChild(stripeTag);
+    stripeTag.onload = function(e) {
+      Stripe.setPublishableKey(stripeKey);
+    };
+    stripeTag.src = 'https://js.stripe.com/v2/';
+
     var loadingStylesheet = ajax.conditionalGet('link', '//localhost:4000/dist/css/donatebar.min.css', ['donatebar.css', 'donatebar.min.css', 'donatebar.min.css.gz']);
     var loadingDefaultStylesheet = false;
     // // comment this line in to load the twitter widgets platform
@@ -203,10 +210,10 @@ function loadDonationBar() {
     }
 
     // Set up modal
-    
+
     modal = document.createElement('div');
     bar.parentElement.insertBefore(modal, bar);
-    
+
     modal.innerHTML = render(modalTemplate);
 
 
@@ -261,18 +268,18 @@ function loadDonationBar() {
 
     // proceed to next step
     event.on(nextFrame1, 'click', function(e) {
-      toggle(step1, {toggle: 'is-active'}); 
-      toggle(step2, {toggle: 'is-active'}); 
+      toggle(step1, {toggle: 'is-active'});
+      toggle(step2, {toggle: 'is-active'});
     });
 
     event.on(nextFrame2, 'click', function(e) {
-      toggle(step2, {toggle: 'is-active'}); 
-      toggle(step3, {toggle: 'is-active'}); 
+      toggle(step2, {toggle: 'is-active'});
+      toggle(step3, {toggle: 'is-active'});
     });
 
     event.on(prevFrame2, 'click', function(e) {
-      toggle(step2, {toggle: 'is-active'}); 
-      toggle(step1, {toggle: 'is-active'}); 
+      toggle(step2, {toggle: 'is-active'});
+      toggle(step1, {toggle: 'is-active'});
     });
 
 
@@ -286,29 +293,23 @@ function loadDonationBar() {
   }
 }
 
-// Determine which bar to render
-var type = getBarType();
-loadBar(type);
-
-function getBarType() {
-  // TODO: Fetch what bar to render from the endpoint. hardcoded now
-  return 'DONATION';
+function loadBar() {
+  var url = 'https://sunlightfoundation.com/engage/brandingbar/config/?src=IE';
+  ajax.get(url, function(err, content) {
+    if (content && content !== '') {
+      var data = JSON.parse(content);
+      if (data.type === 'donation') {
+        loadDonationBar(data.stripe.key);
+      } else {
+        loadBrandingBar();
+      }
+    } else {
+      loadBrandingBar();
+    }
+  });
 }
 
-function loadBar(type) {
-  switch (type) {
-    case 'BRANDING':
-      loadBrandingBar();
-      break;
-    case 'DONATION':
-      loadDonationBar();
-      break;
-    default:
-      // By default,
-      loadBrandingBar();
-      break;
-  }
-}
+loadBar();
 
 },{"./template/bar":3,"./template/barDonate":4,"./template/modalDonate":5,"./template/panel":6,"./util/ajax":7,"./util/dom":8,"./util/event":9,"es5-shim":2}],2:[function(require,module,exports){
 /*!
@@ -1832,17 +1833,18 @@ var template = '' +
 '    ' +
 '    <div class="bb-modal--content">' +
 '' +
+'        <form action="https://sunlightfoundation.com/engage/brandingbar/remote/" method="post" id="bb-transaction-form">' +
 '        <div class="bb-modal-form-step-1">' +
 '' +
 '            <div class="bb-form-fieldset_donation">' +
-'                <label class="bb-label_radio"><input class="bb-input" type="radio" name="bb-donation-amount">$10</input></label>' +
-'                <label class="bb-label_radio"><input class="bb-input" type="radio" name="bb-donation-amount">$25</input></label>' +
-'                <label class="bb-label_radio"><input class="bb-input" type="radio" name="bb-donation-amount">$50</input></label>' +
-'                <label class="bb-label_radio"><input class="bb-input" type="radio" name="bb-donation-amount">$100</input></label>' +
+'                <label class="bb-label_radio"><input class="bb-input" type="radio" name="amount">$10</input></label>' +
+'                <label class="bb-label_radio"><input class="bb-input" type="radio" name="amount">$25</input></label>' +
+'                <label class="bb-label_radio"><input class="bb-input" type="radio" name="amount">$50</input></label>' +
+'                <label class="bb-label_radio"><input class="bb-input" type="radio" name="amount">$100</input></label>' +
 '                <label class="bb-label_radio">' +
-'                    <input class="bb-input" type="radio" name="bb-donation-amount">' +
+'                    <input class="bb-input" type="radio" name="amount">' +
 '                    <span class="bb-other-amount-prefix">$</span>' +
-'                    <input class="bb-input_other-amount" type="text" placeholder="Other Amount"></input>' +
+'                    <input class="bb-input_other-amount" type="text" name="amount-other" placeholder="Other Amount"></input>' +
 '                </label>' +
 '            </div>' +
 '            <hr class="bb-divider">' +
@@ -1850,14 +1852,14 @@ var template = '' +
 '                <div class="bb-form-group fg-5">' +
 '                    <label class="bb-label">' +
 '                        <span>First Name</span>' +
-'                        <input class="bb-input"></input>' +
+'                        <input class="bb-input" name="first_name"></input>' +
 '                    </label>' +
 '                </div>' +
 '' +
 '                <div class="bb-form-group fg-5">            ' +
 '                    <label class="bb-label">' +
 '                        <span>Last Name</span>' +
-'                        <input class="bb-input_no-border-left"></input>' +
+'                        <input class="bb-input_no-border-left" name="last_name"></input>' +
 '                    </label>' +
 '                </div>' +
 '            </div>' +
@@ -1867,14 +1869,14 @@ var template = '' +
 '' +
 '                    <label class="bb-label">' +
 '                        <span>Street Address</span>' +
-'                        <input class="bb-input"></input>' +
+'                        <input class="bb-input" name="address"></input>' +
 '                    </label>' +
 '                </div>' +
 '' +
 '                <div class="bb-form-group fg-2">' +
 '                    <label class="bb-label">' +
 '                        <span>Apt/Suite</span>' +
-'                        <input class="bb-input_no-border-left"></input>' +
+'                        <input class="bb-input_no-border-left" name="unit"></input>' +
 '                    </label>' +
 '                </div>' +
 '            </div>' +
@@ -1883,28 +1885,28 @@ var template = '' +
 '                <div class="bb-form-group fg-4">' +
 '                    <label class="bb-label">' +
 '                        <span>City</span>' +
-'                        <input class="bb-input"></input>' +
+'                        <input class="bb-input" name="city"></input>' +
 '                    </label>' +
 '                </div>' +
 '' +
 '                <div class="bb-form-group fg-4">' +
 '                    <label class="bb-label">' +
 '                        <span>State</span>' +
-'                        <input class="bb-input_no-border-left"></input>' +
+'                        <input class="bb-input_no-border-left" name="state"></input>' +
 '                    </label>' +
 '                </div>' +
 '' +
 '                <div class="bb-form-group fg-2">' +
 '                    <label class="bb-label">' +
 '                        <span>Zip</span>' +
-'                        <input class="bb-input_no-border-left"></input>' +
+'                        <input class="bb-input_no-border-left" name="zipcode"></input>' +
 '                    </label>' +
 '                </div>' +
 '            </div>' +
 '' +
 '            <div class="bb-form-fieldset_btns js-next-frame">' +
 '                <a class="bb-modal--link-alt js-modal-close" href="">Cancel</a>' +
-'                <button class="bb-button_cta--next">Next: Payment Info &raquo;</button>' +
+'                <button class="bb-button_cta--next" type="button">Next: Payment Info &raquo;</button>' +
 '            </div>' +
 '' +
 '        </div> <!-- step1 -->' +
@@ -1915,7 +1917,7 @@ var template = '' +
 '                <div class="bb-form-group fg-10">' +
 '                    <label class="bb-label">' +
 '                        <span>Email Address</span>' +
-'                        <input class="bb-input"></input>' +
+'                        <input class="bb-input" name="email"></input>' +
 '                    </label>' +
 '                </div>' +
 '            </div>' +
@@ -1924,21 +1926,21 @@ var template = '' +
 '                <div class="bb-form-group fg-6">' +
 '                    <label class="bb-label">' +
 '                        <span>Card Number</span>' +
-'                        <input class="bb-input"></input>' +
+'                        <input class="bb-input" data-stripe="number"></input>' +
 '                    </label>' +
 '                </div>' +
 '' +
 '                <div class="bb-form-group fg-2">' +
 '                    <label class="bb-label">' +
 '                        <span>Expires</span>' +
-'                        <input class="bb-input_no-border-left" placeholder="MM/YY"></input>' +
+'                        <input class="bb-input_no-border-left" placeholder="MM/YY" data-stripe="exp-month"></input>' +
 '                    </label>' +
 '                </div>' +
 '' +
 '                <div class="bb-form-group fg-2">' +
 '                    <label class="bb-label">' +
 '                        <span>CVC</span>' +
-'                        <input class="bb-input_no-border-left"></input>' +
+'                        <input class="bb-input_no-border-left" data-stripe="cvc"></input>' +
 '                    </label>' +
 '                </div>' +
 '            </div>' +
@@ -1957,7 +1959,7 @@ var template = '' +
 '                    <div class="bb-form-group fg-10">' +
 '                        <label class="bb-label">' +
 '                            <span>Note (optional)</span>' +
-'                            <textarea class="bb-input_note bb-modal--link" placeholder="Write a note"></textarea>' +
+'                            <textarea class="bb-input_note bb-modal--link" placeholder="Write a note" name="note"></textarea>' +
 '                        </label>' +
 '                    </div>' +
 '                </div>' +
@@ -1966,13 +1968,13 @@ var template = '' +
 '                    <div class="bb-form-group fg-5">' +
 '                        <label class="bb-label">' +
 '                            <span>Phone Number (optional)</span>' +
-'                            <input class="bb-input"></input>' +
+'                            <input class="bb-input" name="phone"></input>' +
 '                        </label>' +
 '                    </div>' +
 '                    <div class="bb-form-group fg-5">' +
 '                        <label class="bb-label">' +
 '                            <span>Occupation (optional)</span>' +
-'                            <input class="bb-input_no-border-left"></input>' +
+'                            <input class="bb-input_no-border-left" name="occupation"></input>' +
 '                        </label>' +
 '                    </div>' +
 '                </div>' +
@@ -1980,11 +1982,12 @@ var template = '' +
 '' +
 '            <div class="bb-form-fieldset_btns">' +
 '                <a class="bb-modal--link-alt js-prev-frame" href="#">Go Back</a>' +
-'                <button class="bb-button_cta--next js-next-frame">Complete Donation &raquo;</button>' +
+'                <button class="bb-button_cta--next js-next-frame" type="button">Complete Donation &raquo;</button>' +
 '            </div>' +
 '            ' +
 '        </div> <!-- end step 2 -->' +
 '' +
+'        </form>' +
 '        <div class="bb-modal-form-step-3">' +
 '            <p>We\'ve sent an email confirmation and reciept to <strong class="bb-strong">name@example.com</strong> that you can keep for your records. </p>' +
 '            <hr class="bb-divider">' +
