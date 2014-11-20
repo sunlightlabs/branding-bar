@@ -59,9 +59,6 @@ or just `bower install sunlightlabs/branding-bar`
 
 3. Add additional branding styles and fonts as needed.
 
-
-###Design 
-
 #####Typography
 Include Franklin Gothic. If the site has a Typekit kit, add [Franklin Gothic URW, 400 and 500](https://typekit.com/fonts/franklin-gothic-urw) if those are not already included. The fallback font for the branding bar is Helvetica, then Arial.
 
