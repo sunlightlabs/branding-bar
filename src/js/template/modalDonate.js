@@ -142,10 +142,17 @@ var template = '' +
 '                    </label>' +
 '                </div>' +
 '' +
-'                <div class="bb-form-group fg-2">' +
+'                <div class="bb-form-group fg-1">' +
 '                    <label class="bb-label">' +
 '                        <span>Expires</span>' +
-'                        <input class="bb-input_no-border-left" placeholder="MM/YY" data-stripe="exp-month"></input>' +
+'                        <input class="bb-input_no-border-left" placeholder="MM" data-stripe="exp-month"></input>' +
+'                    </label>' +
+'                </div>' +
+'' +
+'                <div class="bb-form-group fg-1">' +
+'                    <label class="bb-label">' +
+'                        <span>&nbsp;</span>' +
+'                        <input class="bb-input_no-border-left" placeholder="YY" data-stripe="exp-month"></input>' +
 '                    </label>' +
 '                </div>' +
 '' +
