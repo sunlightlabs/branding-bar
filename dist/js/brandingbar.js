@@ -1807,10 +1807,10 @@ var template = '' +
 '<div class="bb-donation-bar_container">' +
 '   <div class="bb-donation-message">' +
 '        <span class="bb-donation-message_text">' +
-'            <strong class="bb-strong">It\'s Sunshine Week!</strong>' +
-'            Show your support for transparency!' +
+'            <strong class="bb-strong">It\'s #GivingTuesday!</strong>' +
+'            This year, give a little sunlight.' +
 '        </span>' +
-'        <button class="bb-button_cta--donate js-modal-open">Make a Donation &raquo;</button>' +
+'        <button class="bb-button_cta--donate js-modal-open">Donate Today &raquo;</button>' +
 '    </div>' +
 '   <div class="bb-donation-bar_logo">' +
 '       <a class="bb-donation-bar_sunlight-logo" href="https://www.sunlightfoundation.com">Sunlight Foundation</a>' +
@@ -1832,8 +1832,8 @@ var template = '' +
 '        <div class="bb-modal--action js-modal-close">' +
 '            <span class="bb-modal--action-icon">&times;</span>' +
 '        </div>' +
-'        <span class="bb-modal--title">Have you found Influence Explorer useful?</span>' +
-'        <p>If so, please consider making a small donation! Donations from users like you help Sunlight Foundation continue to maintain and improve this site!</p>' +
+'        <span class="bb-modal--title">Give a little sunlight</span>' +
+'        <p class="bb-modal--description">If so, please consider making a small donation! Donations from users like you help Sunlight Foundation continue to maintain and improve this site!</p>' +
 '        <button class="bb-button_cta--large js-modal-open">Donate &raquo;</button>' +
 '        <br>' +
 '        <a class="bb-modal--link js-modal-close" href="#">Not right now</a>' +
@@ -1846,8 +1846,8 @@ var template = '' +
 '            <div class="bb-modal--action js-modal-close">' +
 '                <span class="bb-modal--action-icon">&times;</span>' +
 '            </div>' +
-'            <span class="bb-modal--title">Have you found Influence Explorer useful?</span>' +
-'            <p>A small donation from users like you will help Sunlight Foundation <br> continue to maintain and update this site!</p>' +
+'            <span class="bb-modal--title">This year, give a little sunlight.</span>' +
+'            <p>For #GivingTuesday, help us put the "giving" back into the giving season by supporting Sunlight Foundation!</p>' +
 '        </div>' +
 '' +
 '        <div class="bb-modal-form-step-2">' +
@@ -1939,9 +1939,10 @@ var template = '' +
 '                </div>' +
 '            </div>' +
 '' +
-'            <div class="bb-form-fieldset_btns js-next-frame">' +
+'            <div class="bb-form-fieldset_btns">' +
+'                <div class="bb-error-message">Error Message</div>' +
 '                <a class="bb-modal--link-alt js-modal-close" href="">Cancel</a>' +
-'                <button class="bb-button_cta--next" type="button">Next: Payment Info &raquo;</button>' +
+'                <button class="bb-button_cta--next js-next-frame" type="button">Next: Payment Info &raquo;</button>' +
 '            </div>' +
 '' +
 '        </div> <!-- step1 -->' +
@@ -1987,7 +1988,14 @@ var template = '' +
 '                </div>' +
 '            </div>' +
 '' +
-'            <div class="bb-form-fieldset">' +
+'            <div class="bb-form-fieldset_checkmark">' +
+'                <label class="bb-label">' +
+'                    <input class="bb-input" type="checkbox">I would like email updates from the Sunlight Foundation</input>' +
+'                </label>' +
+'            </div>' +
+'' +
+'' +
+'            <div class="bb-form-fieldset_checkmark">' +
 '                <label class="bb-label">' +
 '                    <input class="bb-input js-trigger-note" type="checkbox">Leave a note and other info with my donation</input>' +
 '                </label>' +
@@ -2023,6 +2031,7 @@ var template = '' +
 '            </div>' +
 '' +
 '            <div class="bb-form-fieldset_btns">' +
+'                <div class="bb-error-message">Error Message</div>' +
 '                <a class="bb-modal--link-alt js-prev-frame" href="#">Go Back</a>' +
 '                <button class="bb-button_cta--next js-next-frame" type="button">Complete Donation &raquo;</button>' +
 '            </div>' +
@@ -2031,9 +2040,17 @@ var template = '' +
 '' +
 '        </form>' +
 '        <div class="bb-modal-form-step-3">' +
-'            <p>We\'ve sent an email confirmation and reciept to <strong class="bb-strong">name@example.com</strong> that you can keep for your records. </p>' +
-'            <hr class="bb-divider">' +
-'            <p>If you have any questions about your donation, feel free give us a call at <br>(202)742-1520, or email us at <a href="mailto:donors@sunlightfoundation.com" class="bb-modal--link">donors@sunlightfoundation.com</a></p>' +
+'           <div class="bb-modal-message-progress">' +
+'                <svg class="bb-progress_icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 8 8"><path d="M4 0c-2.2 0-4 1.8-4 4s1.8 4 4 4c1.1 0 2.12-.43 2.84-1.16l-.72-.72c-.54.54-1.29.88-2.13.88-1.66 0-3-1.34-3-3s1.34-3 3-3c.83 0 1.55.36 2.09.91l-1.09 1.09h3v-3l-1.19 1.19c-.72-.72-1.71-1.19-2.81-1.19z"></path></svg>' +
+'                <p class="bb-progress_text">Processing your donation…</p>' +
+'           </div>' +
+'' +
+'            <div class="bb-modal-message-thankyou">' +
+'                <p class="bb-thankyou-thankyou_text">{{Thank you for choosing to support the Sunlight Foundation and participating in the #GivingTuesday movement.}}</p>' +
+'                <p>We\'ve sent an email confirmation and reciept to <strong class="bb-strong">name@example.com</strong> that you can keep for your records. </p>' +
+'                <hr class="bb-divider">' +
+'                <p>If you have any questions about your donation, feel free give us a call at <br>(202)742-1520, or email us at <a href="mailto:donors@sunlightfoundation.com" class="bb-modal--link">donors@sunlightfoundation.com</a></p>' +
+'            </div>' +
 '        </div>' +
 '' +
 '    </div>' +

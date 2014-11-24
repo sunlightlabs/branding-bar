@@ -62,6 +62,9 @@ body {
   margin: 20px 0 15px;
   display: inline-block; }
 
+.bb-modal--description {
+  margin: 10px; }
+
 .bb-modal--footer {
   background-color: #f0eded;
   border-radius: 0 0 4px 4px;
@@ -130,6 +133,9 @@ a.bb-modal--link-alt {
 
 .bb-form-fieldset_donation {
   overflow: visible; }
+
+.bb-form-fieldset_checkmark {
+  margin-bottom: 5px; }
 
 .bb-form-fieldset_btns {
   margin-top: 30px;
@@ -218,6 +224,44 @@ a.bb-modal--link-alt {
   border-top: 1px dashed #e5e5e5;
   margin: 20px 0; }
 
+.bb-input_error {
+  border: 1px solid #b55300; }
+
+.bb-error-message {
+  width: 100%;
+  background: pink;
+  padding: 10px;
+  border: 1px solid red;
+  border-radius: 2px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+  text-align: left; }
+  .bb-error-message.is-hidden {
+    display: none; }
+
+.bb-modal-message, .bb-modal-message-progress, .bb-modal-message-thankyou {
+  margin-top: 20px;
+  margin-bottom: 40px; }
+
+.bb-modal-message-progress {
+  text-align: center; }
+
+.bb-modal-message-thankyou {
+  text-align: left;
+  display: none; }
+  .bb-modal-message-thankyou.is-active {
+    display: block; }
+
+.bb-progress_icon {
+  fill: #999;
+  -webkit-animation: spin 700ms infinite linear;
+  -moz-animation: spin 700ms infinite linear; }
+
+.bb-progress_text {
+  color: #999; }
+
 .branding-bar {
   font-family: 'franklin-gothic-urw', helvetica, arial, sans-serif;
   background: #f4ce2b;
@@ -304,3 +348,12 @@ a.bb-modal--link-alt {
   width: 175px;
   font-size: 18px;
   margin: 25px 25px 10px; }
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg); }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg); } }
