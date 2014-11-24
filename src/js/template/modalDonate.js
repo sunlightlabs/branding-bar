@@ -152,7 +152,7 @@ var template = '' +
 '                <div class="bb-form-group fg-1">' +
 '                    <label class="bb-label">' +
 '                        <span>&nbsp;</span>' +
-'                        <input class="bb-input_no-border-left" placeholder="YY" data-stripe="exp-month"></input>' +
+'                        <input class="bb-input_no-border-left" placeholder="YY" data-stripe="exp-year"></input>' +
 '                    </label>' +
 '                </div>' +
 '' +

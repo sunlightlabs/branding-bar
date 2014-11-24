@@ -96,6 +96,44 @@ var toggle = function (els, opts) {
   }
 };
 
+var stripeResponseHandler = function(status, response) {
+  var $form = document.querySelector('#bb-transaction-form');
+  if (response.error) {
+    // var buttons = $form.querySelectorAll('button');
+    // for (button in buttons) {
+    //   button.disabled = false;
+    // }
+    // $form.find('.payment-errors').text(response.error.message);
+    window.console && console.log(response.error.message);
+  } else {
+    var token = response.id;
+    var $input = document.createElement('input');
+    $input.type = 'hidden';
+    $input.name = 'stripe_token';
+    $input.value = token;
+    $form.appendChild($input);
+    alert('submitting form');
+
+    var data = {
+      email: 'jcarbaugh@gmail.com',
+      first_name: 'Jeremy',
+      last_name: 'Carbaugh',
+      stripe_token: $form.querySelector('[name=stripe_token]').value
+    };
+    var url = 'https://sunlightfoundation.com/engage/donate/remote/';
+    ajax.post(url, data, function() {
+
+      var step2 = document.querySelectorAll('.bb-modal-form-step-2');
+      var step3 = document.querySelectorAll('.bb-modal-form-step-2');
+
+      toggle(step2, {toggle: 'is-active'});
+      toggle(step3, {toggle: 'is-active'});
+
+    });
+
+  }
+};
+
 function loadBrandingBar() {
   var bar = document.querySelector('[data-' + namespace() + '-brandingbar]');
   if (bar) {
@@ -272,8 +310,19 @@ function loadDonationBar(stripeKey) {
     });
 
     event.on(nextFrame2, 'click', function(e) {
-      toggle(step2, {toggle: 'is-active'});
-      toggle(step3, {toggle: 'is-active'});
+
+      var $form = document.querySelector('#bb-transaction-form');
+
+      // var buttons = $form.querySelectorAll('button');
+      // for (button in buttons) {
+      //   button.disabled = true;
+      // }
+
+      Stripe.card.createToken($form, stripeResponseHandler);
+
+      // toggle(step2, {toggle: 'is-active'});
+      // toggle(step3, {toggle: 'is-active'});
+
     });
 
     event.on(prevFrame2, 'click', function(e) {
