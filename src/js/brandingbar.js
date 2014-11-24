@@ -219,8 +219,6 @@ function loadDonationBar(stripeKey) {
   if (bar) {
     // var panel = document.querySelector('#' + namespace() + '_panel');
 
-    window.console && console.log('propertyId: ' + propertyId);
-
     var stripeTag = document.createElement('script');
     document.querySelector('head').appendChild(stripeTag);
     stripeTag.onload = function(e) {
