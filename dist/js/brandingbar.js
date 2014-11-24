@@ -200,18 +200,6 @@ function loadBrandingBar() {
       });
     });
 
-    // Update featured tools based on current site
-    // if (propertyId) {
-    //   url += '?pid=' + propertyId;
-    //   ajax.getJSONP(url, function(data) {
-    //     var list = featuredTools.querySelector('ul');
-    //     list.innerHTML = '';
-    //     for (var i=0; i<data.length; i++) {
-    //       list.innerHTML += render(toolTemplate, data[i]);
-    //     }
-    //   });
-    // }
-
     // Ajax the signup form if cors support was detected
     if (ajax.supportsCORS()) {
       var form = document.querySelector('.' + namespace() + '_email-form');
@@ -231,7 +219,8 @@ function loadDonationBar(stripeKey) {
   var body = document.querySelector('body');
   if (bar) {
     // var panel = document.querySelector('#' + namespace() + '_panel');
-    // var propertyId = bar.getAttribute('data-' + namespace() + '-property-id');
+
+    window.console && console.log('propertyId: ' + propertyId);
 
     var stripeTag = document.createElement('script');
     document.querySelector('head').appendChild(stripeTag);
@@ -315,6 +304,14 @@ function loadDonationBar(stripeKey) {
 
     event.on(nextFrame2, 'click', function(e) {
       var $form = document.querySelector('#bb-transaction-form');
+      var propertyId = bar.getAttribute('data-' + namespace() + '-property-id');
+      if (propertyId) {
+        var $elem = document.createElement('input');
+        $elem.type = 'hidden';
+        $elem.name = 'source';
+        $elem.value = propertyId;
+        $form.appendChild($elem);
+      }
       Stripe.card.createToken($form, stripeResponseHandler);
     });
 
@@ -322,7 +319,6 @@ function loadDonationBar(stripeKey) {
       toggle(step2, {toggle: 'is-active'});
       toggle(step1, {toggle: 'is-active'});
     });
-
 
     var triggerAdditionalFields = document.querySelectorAll('.js-trigger-note');
     var additionalFields = document.querySelector('.bb-form-additional-fields');
