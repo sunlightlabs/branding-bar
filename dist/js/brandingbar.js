@@ -100,11 +100,6 @@ var toggle = function (els, opts) {
 var stripeResponseHandler = function(status, response) {
   var $form = document.querySelector('#bb-transaction-form');
   if (response.error) {
-    // var buttons = $form.querySelectorAll('button');
-    // for (button in buttons) {
-    //   button.disabled = false;
-    // }
-    // $form.find('.payment-errors').text(response.error.message);
     window.console && console.log(response.error.message);
   } else {
     var token = response.id;
@@ -113,7 +108,6 @@ var stripeResponseHandler = function(status, response) {
     $input.name = 'stripe_token';
     $input.value = token;
     $form.appendChild($input);
-    alert('submitting form');
 
     var data = {
       email: 'jcarbaugh@gmail.com',
@@ -121,11 +115,20 @@ var stripeResponseHandler = function(status, response) {
       last_name: 'Carbaugh',
       stripe_token: $form.querySelector('[name=stripe_token]').value
     };
+
+    var data = dom.serializeForm($form);
+    if (!data.amount) {
+      data.amount = data.amount_other;
+    }
+    delete data.amount_other;
+
+    window.console && console.log(data);
+
     var url = 'https://sunlightfoundation.com/engage/donate/remote/';
-    ajax.post(url, data, function() {
+    ajax.post(url, data, function(err, resp) {
 
       var step2 = document.querySelectorAll('.bb-modal-form-step-2');
-      var step3 = document.querySelectorAll('.bb-modal-form-step-2');
+      var step3 = document.querySelectorAll('.bb-modal-form-step-3');
 
       toggle(step2, {toggle: 'is-active'});
       toggle(step3, {toggle: 'is-active'});
@@ -311,19 +314,8 @@ function loadDonationBar(stripeKey) {
     });
 
     event.on(nextFrame2, 'click', function(e) {
-
       var $form = document.querySelector('#bb-transaction-form');
-
-      // var buttons = $form.querySelectorAll('button');
-      // for (button in buttons) {
-      //   button.disabled = true;
-      // }
-
       Stripe.card.createToken($form, stripeResponseHandler);
-
-      // toggle(step2, {toggle: 'is-active'});
-      // toggle(step3, {toggle: 'is-active'});
-
     });
 
     event.on(prevFrame2, 'click', function(e) {
@@ -1886,14 +1878,14 @@ var template = '' +
 '        <div class="bb-modal-form-step-1">' +
 '' +
 '            <div class="bb-form-fieldset_donation">' +
-'                <label class="bb-label_radio"><input class="bb-input" type="radio" name="amount">$10</input></label>' +
-'                <label class="bb-label_radio"><input class="bb-input" type="radio" name="amount">$25</input></label>' +
-'                <label class="bb-label_radio"><input class="bb-input" type="radio" name="amount">$50</input></label>' +
-'                <label class="bb-label_radio"><input class="bb-input" type="radio" name="amount">$100</input></label>' +
+'                <label class="bb-label_radio"><input class="bb-input" type="radio" name="amount" value="10.00">$10</input></label>' +
+'                <label class="bb-label_radio"><input class="bb-input" type="radio" name="amount" value="25.00">$25</input></label>' +
+'                <label class="bb-label_radio"><input class="bb-input" type="radio" name="amount" value="50.00">$50</input></label>' +
+'                <label class="bb-label_radio"><input class="bb-input" type="radio" name="amount" value="100.00">$100</input></label>' +
 '                <label class="bb-label_radio">' +
 '                    <input class="bb-input" type="radio" name="amount">' +
 '                    <span class="bb-other-amount-prefix">$</span>' +
-'                    <input class="bb-input_other-amount" type="text" name="amount-other" placeholder="Other Amount"></input>' +
+'                    <input class="bb-input_other-amount" type="text" name="amount_other" placeholder="Other Amount"></input>' +
 '                </label>' +
 '            </div>' +
 '            <hr class="bb-divider">' +
@@ -2297,7 +2289,7 @@ function removeClassHelper(el, className){
     el.classList.remove(className);
   } else {
     el.className = el.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
-  }  
+  }
 }
 
 function removeClass(el, className) {
@@ -2310,10 +2302,31 @@ function removeClass(el, className) {
   }
 }
 
+function serializeForm(form) {
+  var data = {};
+  var elems = form.elements;
+  for (var i = 0; i < elems.length; i++) {
+    var elem = elems[i];
+    if (elem.name) {
+      if (elem.type === 'button') {
+        // ignore
+      } else if (elem.type === 'radio') {
+        if (elem.checked) {
+          data[elem.name] = elem.value;
+        }
+      } else {
+        data[elem.name] = elem.value;
+      }
+    }
+  }
+  return data;
+};
+
 module.exports = {
   toggleClass: toggleClass,
   addClass: addClass,
-  removeClass: removeClass
+  removeClass: removeClass,
+  serializeForm: serializeForm,
 };
 
 },{}],9:[function(require,module,exports){

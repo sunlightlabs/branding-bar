@@ -49,14 +49,14 @@ var template = '' +
 '        <div class="bb-modal-form-step-1">' +
 '' +
 '            <div class="bb-form-fieldset_donation">' +
-'                <label class="bb-label_radio"><input class="bb-input" type="radio" name="amount">$10</input></label>' +
-'                <label class="bb-label_radio"><input class="bb-input" type="radio" name="amount">$25</input></label>' +
-'                <label class="bb-label_radio"><input class="bb-input" type="radio" name="amount">$50</input></label>' +
-'                <label class="bb-label_radio"><input class="bb-input" type="radio" name="amount">$100</input></label>' +
+'                <label class="bb-label_radio"><input class="bb-input" type="radio" name="amount" value="10.00">$10</input></label>' +
+'                <label class="bb-label_radio"><input class="bb-input" type="radio" name="amount" value="25.00">$25</input></label>' +
+'                <label class="bb-label_radio"><input class="bb-input" type="radio" name="amount" value="50.00">$50</input></label>' +
+'                <label class="bb-label_radio"><input class="bb-input" type="radio" name="amount" value="100.00">$100</input></label>' +
 '                <label class="bb-label_radio">' +
 '                    <input class="bb-input" type="radio" name="amount">' +
 '                    <span class="bb-other-amount-prefix">$</span>' +
-'                    <input class="bb-input_other-amount" type="text" name="amount-other" placeholder="Other Amount"></input>' +
+'                    <input class="bb-input_other-amount" type="text" name="amount_other" placeholder="Other Amount"></input>' +
 '                </label>' +
 '            </div>' +
 '            <hr class="bb-divider">' +

@@ -43,7 +43,7 @@ function removeClassHelper(el, className){
     el.classList.remove(className);
   } else {
     el.className = el.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
-  }  
+  }
 }
 
 function removeClass(el, className) {
@@ -56,8 +56,29 @@ function removeClass(el, className) {
   }
 }
 
+function serializeForm(form) {
+  var data = {};
+  var elems = form.elements;
+  for (var i = 0; i < elems.length; i++) {
+    var elem = elems[i];
+    if (elem.name) {
+      if (elem.type === 'button') {
+        // ignore
+      } else if (elem.type === 'radio') {
+        if (elem.checked) {
+          data[elem.name] = elem.value;
+        }
+      } else {
+        data[elem.name] = elem.value;
+      }
+    }
+  }
+  return data;
+};
+
 module.exports = {
   toggleClass: toggleClass,
   addClass: addClass,
-  removeClass: removeClass
+  removeClass: removeClass,
+  serializeForm: serializeForm,
 };
