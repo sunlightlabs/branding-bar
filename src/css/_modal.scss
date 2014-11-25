@@ -9,6 +9,9 @@ body {
     position: relative;
 }
 
+$font-family: 'franklin-gothic-urw', helvetica, arial, sans-serif;
+$font-size: 14px;
+
 .bb-overlay {
     @include background-rgba(rgba(0,0,0,0.75));
     position: fixed;
@@ -44,8 +47,8 @@ body {
     box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.25);
     transition: all 300ms;
     font: {
-        family: 'franklin-gothic-urw', helvetica, arial, sans-serif;
-        size: 14px;
+        family: $font-family;
+        size: $font-size;
     }
     color: #333;
 
@@ -65,16 +68,18 @@ body {
     position: relative;
     text-align: center;
 }
- 
+
 .bb-modal--title {
     @extend .bb-strong;
     font-size: 19px;
     margin: 20px 0 15px;
     display: inline-block;
+    line-height: 19px;
 }
 
 .bb-modal--description {
     margin: 0 10px 10px 10px;
+    line-height: inherit;
 }
 
 .bb-modal--footer {
@@ -84,6 +89,11 @@ body {
     font-size: 12px;
     text-align: center;
     color: #777;
+
+    > p {
+        line-height: $font-size;
+        margin: 12px 0;
+    }
 }
 
 .bb-modal--content {
@@ -104,36 +114,33 @@ body {
 }
 
 .bb-modal--action-icon {
-    vertical-align: middle;
+    line-height: 20px;
+    font-size: 14px;
+
+    > svg {
+        position: relative;
+        display: inline-block;
+        text-align: center;
+    }
 }
 
 a.bb-modal--link {
     color: #488293;
+    text-decoration: underline;
 }
 
 a.bb-modal--link-alt {
     margin-top: 10px;
     margin-right: 10px;
     color: #999;
+    text-decoration: underline;
 }
 
-/* Modal: Initial Prompt */
+/* Modal: Donation  Form*/
 
-.bb-modal_initial-prompt {
-    @extend .bb-modal;
-
-    &.is-active {
-        opacity: 1;
-        visibility: visible;
-    }
-
-    .bb-modal--header {
-        border-radius: 4px;
-        padding-bottom: 30px;
-    }
+#bb-transaction-form {
+    margin: 0;
 }
-
-/* Modal: Donation */
 
 .bb-modal_donation {
     @extend .bb-modal;
@@ -213,10 +220,16 @@ a.bb-modal--link-alt {
 
 .bb-label {
     cursor: pointer;
+    display: inline;
+    font-family: $font-family;
+    font-size: $font-size;
+    margin-bottom: 0;
+    line-height: $font-size;
 
     > span {
         display: block;
         margin-left: 2px;
+        margin-bottom: 0;
 
         &.other-amount-prefix {
             font-size: 15px;
@@ -229,24 +242,79 @@ a.bb-modal--link-alt {
     margin-right: 23px;
 }
 
-.bb-input {
+
+// input:focus:invalid:focus, textarea:focus:invalid:focus,
+
+.bb-input,
+.bb-input[type="text"],
+.bb-input[type="email"] {
     box-sizing: border-box;
     padding: 5px 6px;
     border: 1px solid #ccc;
     font-size: 15px;
     color: #444;
     margin-top: 5px;
+    margin-bottom: 0;
+    border-radius: 0;
+    height: auto;
+    font-family: $font-family;
+    vertical-align: baseline;
+    height: 30px;
+    box-shadow: none;
+    -webkit-box-shadow: none;
 
     &[type="radio"] {
         margin-left: 0;
+        margin-top: 0;
         margin-right: 7px;
         cursor: pointer;
+        height: auto;
     }
 
     &[type="checkbox"] {
         margin-left: 0;
         margin-right: 8px;
         cursor: pointer;
+        height: auto;
+    }
+
+    &:focus {
+        outline: none;
+        border: 1px solid #999;
+        box-shadow: none;
+        -webkit-box-shadow: none;
+    }
+
+    &:focus:invalid:focus {
+        outline: none;
+        border: 1px solid #e9322d;
+        box-shadow: none;
+        -webkit-box-shadow: none;
+    }
+
+    &::-webkit-input-placeholder {
+        font-family: $font-family;
+        font-size: $font-size;
+        padding-top: 2px;
+        text-align: center;
+    }
+    &::-moz-placeholder {
+        font-family: $font-family;
+        font-size: $font-size;
+        padding-top: 3px;
+        text-align: center;
+    }
+    &:-ms-input-placeholder {
+        font-family: $font-family;
+        font-size: $font-size;
+        padding-top: 3px;
+        text-align: center;
+    }
+    &::input-placeholder {
+        font-family: $font-family;
+        font-size: $font-size;
+        padding-top: 3px;
+        text-align: center;
     }
 }
 
@@ -259,12 +327,37 @@ a.bb-modal--link-alt {
     @extend .bb-input;
     font-size: 13px;
     height: 70px;
+
+    &::-webkit-input-placeholder {
+        font-family: $font-family;
+        font-size: $font-size;
+        text-align: left;
+    }
+    &::-moz-placeholder {
+        font-family: $font-family;
+        font-size: $font-size;
+        text-align: left;
+    }
+    &:-ms-input-placeholder {
+        font-family: $font-family;
+        font-size: $font-size;
+        text-align: left;
+    }
+    &::input-placeholder {
+        font-family: $font-family;
+        font-size: $font-size;
+        text-align: left;
+    }
 }
 
 .bb-input_no-border-left {
     @extend .bb-input;
-    
+
     border-left: 0;
+}
+
+.bb-input_error {
+    border: 1px solid #b55300;
 }
 
 .bb-divider {
@@ -273,9 +366,6 @@ a.bb-modal--link-alt {
     margin: 20px 0;
 }
 
-.bb-input_error {
-    border: 1px solid #b55300;
-}
 
 .bb-error-message {
     width: 100%;
