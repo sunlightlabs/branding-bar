@@ -1810,7 +1810,11 @@ var template = '' +
 '            <strong class="bb-strong">It\'s #GivingTuesday!</strong>' +
 '            This year, give a little sunlight.' +
 '        </span>' +
-'        <button class="bb-button_cta--donate js-modal-open">Donate Today &raquo;</button>' +
+'        <button class="bb-button_cta--donate js-modal-open">' +
+'           Donate Today' +
+'           <svg class="bb-chevron_pulse" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8"><path d="M1.5 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z" transform="translate(1)" /></svg>' +
+'        </button>' +
+'        <img class="bb-sunlight-rings" src="/dist/img/sunlight-rings.svg">' +
 '    </div>' +
 '   <div class="bb-donation-bar_logo">' +
 '       <a class="bb-donation-bar_sunlight-logo" href="https://www.sunlightfoundation.com">Sunlight Foundation</a>' +
@@ -1827,39 +1831,26 @@ module.exports = template;
 var template = '' +
 '<div class="bb-overlay"></div>' +
 '' +
-'<div class="bb-modal_initial-prompt">' +
-'    <div class="bb-modal--header">' +
-'        <div class="bb-modal--action js-modal-close">' +
-'            <span class="bb-modal--action-icon">&times;</span>' +
-'        </div>' +
-'        <span class="bb-modal--title">Give a little sunlight</span>' +
-'        <p class="bb-modal--description">If so, please consider making a small donation! Donations from users like you help Sunlight Foundation continue to maintain and improve this site!</p>' +
-'        <button class="bb-button_cta--large js-modal-open">Donate &raquo;</button>' +
-'        <br>' +
-'        <a class="bb-modal--link js-modal-close" href="#">Not right now</a>' +
-'    </div>' +
-'</div>' +
-'' +
 '<div class="bb-modal_donation">' +
 '    <div class="bb-modal_donation--header">' +
 '        <div class="bb-modal-form-step-1">' +
 '            <div class="bb-modal--action js-modal-close">' +
-'                <span class="bb-modal--action-icon">&times;</span>' +
+'                <span class="bb-modal--action-icon"><svg class="bb-icon_close" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8"><path d="M1.41 0l-1.41 1.41.72.72 1.78 1.81-1.78 1.78-.72.69 1.41 1.44.72-.72 1.81-1.81 1.78 1.81.69.72 1.44-1.44-.72-.69-1.81-1.78 1.81-1.81.72-.72-1.44-1.41-.69.72-1.78 1.78-1.81-1.78-.72-.72z" /></svg></span>' +
 '            </div>' +
 '            <span class="bb-modal--title">This year, give a little sunlight.</span>' +
-'            <p>For #GivingTuesday, help us put the "giving" back into the giving season by supporting Sunlight Foundation!</p>' +
+'            <p class="bb-modal--description">For #GivingTuesday, help us put the "giving" back into the giving season by supporting Sunlight Foundation!</p>' +
 '        </div>' +
 '' +
 '        <div class="bb-modal-form-step-2">' +
 '            <div class="bb-modal--action js-prev-frame">' +
-'                <span class="bb-modal--action-icon"><</span>' +
+'                <span class="bb-modal--action-icon"><svg class="bb-icon_chevron-left" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8"><path d="M4 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z" transform="translate(1)" /></svg></span>' +
 '            </div>' +
 '            <span class="bb-modal--title">You\'re donating $25 to Sunlight Foundation</span>' +
 '        </div>' +
 '' +
 '        <div class="bb-modal-form-step-3">' +
 '            <div class="bb-modal--action js-modal-close">' +
-'                <span class="bb-modal--action-icon">&times;</span>' +
+'                <span class="bb-modal--action-icon"><svg class="bb-icon_close" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8"><path d="M1.41 0l-1.41 1.41.72.72 1.78 1.81-1.78 1.78-.72.69 1.41 1.44.72-.72 1.81-1.81 1.78 1.81.69.72 1.44-1.44-.72-.69-1.81-1.78 1.81-1.81.72-.72-1.44-1.41-.69.72-1.78 1.78-1.81-1.78-.72-.72z" /></svg></span>' +
 '            </div>' +
 '            <span class="bb-modal--title">Thank you for your $25 donation!</span>' +
 '        </div>' +
@@ -1942,7 +1933,10 @@ var template = '' +
 '            <div class="bb-form-fieldset_btns">' +
 '                <div class="bb-error-message">Error Message</div>' +
 '                <a class="bb-modal--link-alt js-modal-close" href="">Cancel</a>' +
-'                <button class="bb-button_cta--next js-next-frame" type="button">Next: Payment Info &raquo;</button>' +
+'                <button class="bb-button_cta--next js-next-frame" type="button">' +
+'                   Next' +
+'                   <svg class="bb-chevron" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8"><path d="M1.5 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z" transform="translate(1)" /></svg>' +
+'                </button>' +
 '            </div>' +
 '' +
 '        </div> <!-- step1 -->' +
@@ -2033,7 +2027,10 @@ var template = '' +
 '            <div class="bb-form-fieldset_btns">' +
 '                <div class="bb-error-message">Error Message</div>' +
 '                <a class="bb-modal--link-alt js-prev-frame" href="#">Go Back</a>' +
-'                <button class="bb-button_cta--next js-next-frame" type="button">Complete Donation &raquo;</button>' +
+'                <button class="bb-button_cta--next js-next-frame" type="button">' +
+'                    Complete Donation' +
+'                    <svg class="bb-chevron" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8"><path d="M1.5 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z" transform="translate(1)" /></svg>' +
+'                </button>' +
 '            </div>' +
 '            ' +
 '        </div> <!-- end step 2 -->' +

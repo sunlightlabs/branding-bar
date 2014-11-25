@@ -5,8 +5,9 @@
     font-family: 'franklin-gothic-urw', helvetica, arial, sans-serif;
     background: #f4ce2b;
     height: 65px;
-    z-index: 1000;
+    z-index: 999;
     position: relative;
+    overflow: hidden;
 }
 
 .bb-donation-bar_container {
@@ -17,6 +18,16 @@
 .bb-donation-message {
     float: left;
     line-height: 65px;
+    position: relative;
+}
+
+.bb-sunlight-rings {
+    left: -50px;
+    top: -10px;
+    position: absolute;
+    -webkit-animation: spin 20s infinite linear;
+    -moz-animation: spin 20s infinite linear;
+    animation: spin 20s infinite linear;
 }
 
 .bb-donation-message_text {
@@ -61,7 +72,6 @@
     font-size: 13px;
     height: 30px;
     outline: none;
-    padding: 6px 2px;
     text-indent: 0;
     text-shadow: none;
     -webkit-user-select: none;
@@ -70,7 +80,7 @@
     -o-user-select: none;
     user-select: none;
     vertical-align: middle;
-    width: 125px;
+    width: auto;
     }
 
 .bb-button_cta--donate {
@@ -78,7 +88,7 @@
 
     background: #b55300;
     margin: 0 10px;
-    padding: 6px 3px;
+    padding: 6px 10px;
     
     &:hover {
         background: #DF6601;
@@ -90,10 +100,12 @@
 
     background: #53afc9;
     margin: auto;
-    width: 175px;
+    width: auto;
+    padding-left: 15px;
+    padding-right: 15px;
     height: 40px;
     font-size: 16px;
-    border-bottom: 4px #488293 solid;
+    border-radius: 3px;
 
     &:hover {
         background: #53BBD8;
@@ -108,6 +120,25 @@
     font-size: 18px;
     margin: 25px 25px 10px;
 }
+
+.bb-chevron {
+    fill: #fff;
+    margin-left: 5px;
+    margin-right: -2px;
+}
+
+.bb-chevron_pulse {
+    @extend .bb-chevron;
+    -webkit-animation: pulse 800ms infinite ease-in-out;
+    -moz-animation: pulse 800ms infinite ease-in-out;
+    animation: pulse 800ms infinite ease-in-out;
+}
+
+.bb-icon_close,
+.bb-icon_chevron-left {
+    fill: #fff;
+}
+
 
 @-webkit-keyframes spin {
     0% {
@@ -126,5 +157,16 @@
 
     100% {
         transform: rotate(360deg);
+    };
+}
+
+
+@-webkit-keyframes pulse {
+    0%, 100% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(2px);
     };
 }

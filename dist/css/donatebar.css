@@ -8,15 +8,15 @@ body {
 
 .bb-overlay {
   background: transparent;
-  background: rgba(0, 0, 0, 0.5);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#80000000');
+  background: rgba(0, 0, 0, 0.75);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#BF000000', endColorstr='#BF000000');
   zoom: 1;
   position: absolute;
   top: 0;
   left: 0;
   height: 100%;
   width: 100%;
-  z-index: 10;
+  z-index: 1000;
   visibility: hidden;
   opacity: 0; }
   .bb-overlay.is-active {
@@ -35,7 +35,7 @@ body {
   margin-left: -250px;
   background-color: #eee;
   border-radius: 4px;
-  z-index: 999;
+  z-index: 1001;
   opacity: 0;
   visibility: hidden;
   -webkit-box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.25);
@@ -63,7 +63,7 @@ body {
   display: inline-block; }
 
 .bb-modal--description {
-  margin: 10px; }
+  margin: 0 10px 10px 10px; }
 
 .bb-modal--footer {
   background-color: #f0eded;
@@ -266,8 +266,9 @@ a.bb-modal--link-alt {
   font-family: 'franklin-gothic-urw', helvetica, arial, sans-serif;
   background: #f4ce2b;
   height: 65px;
-  z-index: 1000;
-  position: relative; }
+  z-index: 999;
+  position: relative;
+  overflow: hidden; }
 
 .bb-donation-bar_container {
   width: 960px;
@@ -275,7 +276,15 @@ a.bb-modal--link-alt {
 
 .bb-donation-message {
   float: left;
-  line-height: 65px; }
+  line-height: 65px;
+  position: relative; }
+
+.bb-sunlight-rings {
+  left: -50px;
+  top: -10px;
+  position: absolute;
+  -webkit-animation: spin 20s infinite linear;
+  animation: spin 20s infinite linear; }
 
 .bb-donation-message_text {
   max-width: 525px;
@@ -315,7 +324,6 @@ a.bb-modal--link-alt {
   font-size: 13px;
   height: 30px;
   outline: none;
-  padding: 6px 2px;
   text-indent: 0;
   text-shadow: none;
   -webkit-user-select: none;
@@ -324,22 +332,24 @@ a.bb-modal--link-alt {
   -o-user-select: none;
   user-select: none;
   vertical-align: middle;
-  width: 125px; }
+  width: auto; }
 
 .bb-button_cta--donate {
   background: #b55300;
   margin: 0 10px;
-  padding: 6px 3px; }
+  padding: 6px 10px; }
   .bb-button_cta--donate:hover {
     background: #DF6601; }
 
 .bb-button_cta--next {
   background: #53afc9;
   margin: auto;
-  width: 175px;
+  width: auto;
+  padding-left: 15px;
+  padding-right: 15px;
   height: 40px;
   font-size: 16px;
-  border-bottom: 4px #488293 solid; }
+  border-radius: 3px; }
   .bb-button_cta--next:hover {
     background: #53BBD8; }
 
@@ -349,6 +359,18 @@ a.bb-modal--link-alt {
   font-size: 18px;
   margin: 25px 25px 10px; }
 
+.bb-chevron, .bb-chevron_pulse {
+  fill: #fff;
+  margin-left: 5px;
+  margin-right: -2px; }
+
+.bb-chevron_pulse {
+  -webkit-animation: pulse 800ms infinite ease-in-out;
+  animation: pulse 800ms infinite ease-in-out; }
+
+.bb-icon_close, .bb-icon_chevron-left {
+  fill: #fff; }
+
 @-webkit-keyframes spin {
   0% {
     -webkit-transform: rotate(0deg);
@@ -357,3 +379,12 @@ a.bb-modal--link-alt {
   100% {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg); } }
+
+@-webkit-keyframes pulse {
+  0%, 100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0); }
+
+  50% {
+    -webkit-transform: translateX(2px);
+    transform: translateX(2px); } }

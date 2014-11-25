@@ -10,13 +10,13 @@ body {
 }
 
 .bb-overlay {
-    @include background-rgba(rgba(0,0,0,0.5));
+    @include background-rgba(rgba(0,0,0,0.75));
     position: absolute;
     top: 0;
     left: 0;
     height: 100%;
     width: 100%;
-    z-index: 10;
+    z-index: 1000;
     visibility: hidden;
     opacity: 0;
 
@@ -38,7 +38,7 @@ body {
     margin-left: -250px;
     background-color: #eee;
     border-radius: 4px;
-    z-index: 999;
+    z-index: 1001;
     opacity: 0;
     visibility: hidden;
     box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.25);
@@ -72,7 +72,7 @@ body {
 }
 
 .bb-modal--description {
-    margin: 10px;
+    margin: 0 10px 10px 10px;
 }
 
 .bb-modal--footer {
