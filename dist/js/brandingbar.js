@@ -311,7 +311,7 @@ function loadDonationBar(stripeKey) {
       for (var i = 0; i < donationRadios.length; i++) {
           if (donationRadios[i].checked) {
               var donationValue = donationRadios[i].value;
-              
+
               var donationUpdate = document.querySelectorAll('.js-val-donation');
               for (var i = 0; i < donationUpdate.length; i++) {
                 donationUpdate[i].innerHTML = '$' + parseFloat(donationValue).toFixed(2);
@@ -324,7 +324,7 @@ function loadDonationBar(stripeKey) {
       toggle(step2, {toggle: 'is-active'});
     });
 
-    // step 2 
+    // step 2
     event.on(nextFrame2, 'click', function(e) {
       // grab email address to populate message
       var emailAddress = document.querySelector('.bb-input[data-input-email]').value;
@@ -1899,7 +1899,7 @@ var template = '' +
 '                <label class="bb-label_radio">' +
 '                    <input class="bb-input" type="radio" name="amount" required data-radio-custom>' +
 '                    <span class="bb-other-amount-prefix">$</span>' +
-'                    <input class="bb-input_other-amount" type="text" name="amount_other" placeholder="Other Amount" onkeypress="return event.charCode >= 48 && event.charCode <= 57"></input>' +
+'                    <input class="bb-input bb-input_other-amount" type="text" name="amount_other" placeholder="Other Amount" onkeypress="return event.charCode >= 48 && event.charCode <= 57"></input>' +
 '                </label>' +
 '            </div>' +
 '            <hr class="bb-divider">' +
@@ -1914,7 +1914,7 @@ var template = '' +
 '                <div class="bb-form-group fg-5">            ' +
 '                    <label class="bb-label">' +
 '                        <span>Last Name</span>' +
-'                        <input class="bb-input_no-border-left" name="last_name" required></input>' +
+'                        <input class="bb-input bb-input_no-border-left" name="last_name" required></input>' +
 '                    </label>' +
 '                </div>' +
 '            </div>' +
@@ -1931,7 +1931,7 @@ var template = '' +
 '                <div class="bb-form-group fg-2">' +
 '                    <label class="bb-label">' +
 '                        <span>Apt/Suite</span>' +
-'                        <input class="bb-input_no-border-left" name="unit"></input>' +
+'                        <input class="bb-input bb-input_no-border-left" name="unit"></input>' +
 '                    </label>' +
 '                </div>' +
 '            </div>' +
@@ -1947,14 +1947,14 @@ var template = '' +
 '                <div class="bb-form-group fg-4">' +
 '                    <label class="bb-label">' +
 '                        <span>State</span>' +
-'                        <input class="bb-input_no-border-left" name="state" required></input>' +
+'                        <input class="bb-input bb-input_no-border-left" name="state" required></input>' +
 '                    </label>' +
 '                </div>' +
 '' +
 '                <div class="bb-form-group fg-2">' +
 '                    <label class="bb-label">' +
 '                        <span>Zip</span>' +
-'                        <input class="bb-input_no-border-left" name="zipcode" required></input>' +
+'                        <input class="bb-input bb-input_no-border-left" name="zipcode" required></input>' +
 '                    </label>' +
 '                </div>' +
 '            </div>' +
@@ -1992,21 +1992,21 @@ var template = '' +
 '                <div class="bb-form-group fg-1">' +
 '                    <label class="bb-label">' +
 '                        <span>Expires</span>' +
-'                        <input class="bb-input_no-border-left" placeholder="MM" data-stripe="exp-month"></input>' +
+'                        <input class="bb-input bb-input_no-border-left" placeholder="MM" data-stripe="exp-month"></input>' +
 '                    </label>' +
 '                </div>' +
 '' +
 '                <div class="bb-form-group fg-1">' +
 '                    <label class="bb-label">' +
 '                        <span>&nbsp;</span>' +
-'                        <input class="bb-input_no-border-left" placeholder="YY" data-stripe="exp-year"></input>' +
+'                        <input class="bb-input bb-input_no-border-left" placeholder="YY" data-stripe="exp-year"></input>' +
 '                    </label>' +
 '                </div>' +
 '' +
 '                <div class="bb-form-group fg-2">' +
 '                    <label class="bb-label">' +
 '                        <span>CVC</span>' +
-'                        <input class="bb-input_no-border-left" data-stripe="cvc"></input>' +
+'                        <input class="bb-input bb-input_no-border-left" data-stripe="cvc"></input>' +
 '                    </label>' +
 '                </div>' +
 '            </div>' +
@@ -2032,7 +2032,7 @@ var template = '' +
 '                    <div class="bb-form-group fg-10">' +
 '                        <label class="bb-label">' +
 '                            <span>Note (optional)</span>' +
-'                            <textarea class="bb-input_note bb-modal--link" placeholder="Write a note" name="note"></textarea>' +
+'                            <textarea class="bb-input bb-input_note bb-modal--link" placeholder="Write a note" name="note"></textarea>' +
 '                        </label>' +
 '                    </div>' +
 '                </div>' +
@@ -2047,7 +2047,7 @@ var template = '' +
 '                    <div class="bb-form-group fg-5">' +
 '                        <label class="bb-label">' +
 '                            <span>Occupation (optional)</span>' +
-'                            <input class="bb-input_no-border-left" name="occupation"></input>' +
+'                            <input class="bb-input bb-input_no-border-left" name="occupation"></input>' +
 '                        </label>' +
 '                    </div>' +
 '                </div>' +
