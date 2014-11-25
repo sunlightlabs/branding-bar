@@ -40,8 +40,10 @@ var template = '' +
 '                <label class="bb-label_radio"><input class="bb-input" type="radio" name="amount" value="25.00" required checked>$25</input></label>' +
 '                <label class="bb-label_radio"><input class="bb-input" type="radio" name="amount" value="50.00" required>$50</input></label>' +
 '                <label class="bb-label_radio"><input class="bb-input" type="radio" name="amount" value="100.00" required>$100</input></label>' +
-'                <label class="bb-label_radio">' +
+'                <label class="bb-label_radio_custom">' +
 '                    <input class="bb-input" type="radio" name="amount" required data-radio-custom>' +
+'                </label>' +
+'                <label class="bb-label_radio_custom">' +
 '                    <span class="bb-other-amount-prefix">$</span>' +
 '                    <input class="bb-input bb-input_other-amount" type="text" name="amount_other" placeholder="Other Amount"></input>' +
 '                </label>' +

@@ -140,25 +140,7 @@ var displayErrors = function($container, errors) {
 var formatAmount = function() {
   var $amountOther = document.querySelector('input[name=amount_other]');
   if ($amountOther.value) {
-    var substrs = $amountOther.value.split('.');
-    if (substrs.length > 0) {
-      var formatted = '';
-      var dollars = parseInt(substrs[0]);
-      formatted += dollars + '.';
-      if (substrs.length > 1) {
-        var cents = parseInt(substrs[1]);
-        if (cents < 10) {
-          formatted += '0' + cents;
-        } else if (cents > 100) {
-          formatted += '99';
-        } else {
-          formatted += cents;
-        }
-      }
-      $amountOther.value = formatted;
-    } else {
-      $amountOther.value = '';
-    }
+    $amountOther.value = parseFloat($amountOther.value).toFixed(2);
   }
 };
 
@@ -369,14 +351,14 @@ function loadDonationBar(stripeKey) {
     });
 
     // select radio button for custom amount
-    var customAmount = document.querySelector('.bb-input_other-amount');
+    var customAmount = document.querySelectorAll('.bb-input_other-amount');
+
     event.on(customAmount, 'click', function(e){
       document.querySelector('.bb-input[data-radio-custom]').checked = true;
-      customAmount.focus();
     });
 
+    // format value in custom amount field
     event.on(customAmount, 'change', function(e) {
-      alert(1);
       formatAmount();
     });
 
