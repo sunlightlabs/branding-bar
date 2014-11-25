@@ -11,7 +11,7 @@ body {
 
 .bb-overlay {
     @include background-rgba(rgba(0,0,0,0.75));
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     height: 100%;
@@ -53,7 +53,9 @@ body {
         display: block;
         visibility: visible;
         opacity: 1;
-        top: 85px;
+        top: 0px;
+        margin-top: 50px;
+        margin-bottom: 50px;
     }
 }
 
@@ -181,6 +183,7 @@ a.bb-modal--link-alt {
     @extend .form-fieldset;
 
     margin-top: 30px;
+    margin-bottom: 10px;
     text-align: right;
 }
 
@@ -236,7 +239,7 @@ a.bb-modal--link-alt {
 
     &[type="radio"] {
         margin-left: 0;
-        margin-right: 8px;
+        margin-right: 7px;
         cursor: pointer;
     }
 
@@ -283,12 +286,12 @@ a.bb-modal--link-alt {
     box-sizing: border-box;
     margin-bottom: 15px;
     text-align: left;
+    display: none;
 
-    &.is-hidden {
-        display: none;
+    &.is-active {
+        display: block;
     }
 }
-
 
 .bb-modal-message {
     margin-top: 20px;
@@ -298,6 +301,21 @@ a.bb-modal--link-alt {
 .bb-modal-message-progress {
     @extend .bb-modal-message;
     text-align: center;
+
+    &.is-hidden {
+        display: none;
+    }
+}
+
+.bb-progress_icon {
+    fill: #999;
+    -webkit-animation: spin 700ms infinite linear;
+    -moz-animation: spin 700ms infinite linear;
+    animation: spin 700ms infinite linear;
+}
+
+.bb-progress_text {
+    color: #999;
 }
 
 .bb-modal-message-thankyou {
@@ -308,14 +326,4 @@ a.bb-modal--link-alt {
     &.is-active {
         display: block;
     }
-}
-
-.bb-progress_icon {
-    fill: #999;
-    -webkit-animation: spin 700ms infinite linear;
-    -moz-animation: spin 700ms infinite linear;
-}
-
-.bb-progress_text {
-    color: #999;
 }

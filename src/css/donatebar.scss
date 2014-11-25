@@ -49,8 +49,8 @@
 }
 
 .bb-donation-bar_sunlight-logo {
-    background: url('https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.3/img/sunlight-logo.png') no-repeat 50% 50%;
-    background: rgba(0, 0, 0, 0) url('https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.3/img/sunlight-logo.svg') no-repeat 50% 50%;
+    background: url('https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.4/img/sunlight-logo.png') no-repeat 50% 50%;
+    background: rgba(0, 0, 0, 0) url('https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.4/img/sunlight-logo.svg') no-repeat 50% 50%;
     -webkit-background-size: 100% 100%;
     background-size: 100% 100%;
     color: transparent;
@@ -160,8 +160,38 @@
     };
 }
 
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    };
+}
+
 
 @-webkit-keyframes pulse {
+    0%, 100% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(2px);
+    };
+}
+
+@-moz-keyframes pulse {
+    0%, 100% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(2px);
+    };
+}
+
+@keyframes pulse {
     0%, 100% {
         transform: translateX(0);
     }

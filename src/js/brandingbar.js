@@ -1,4 +1,4 @@
-'use strict';
+
 
 require('es5-shim');
 
@@ -226,10 +226,9 @@ function loadDonationBar(stripeKey) {
     };
     stripeTag.src = 'https://js.stripe.com/v2/';
 
+    // var loadingStylesheet = ajax.conditionalGet('link', 'https://s3.amazonaws.com/sunlight-cdn/brandingbar/' + s3Version() + '/css/donatebar.min.css.gz', ['brandingbar.css', 'brandingbar.min.css', 'brandingbar.min.css.gz']);
     var loadingStylesheet = ajax.conditionalGet('link', '//localhost:4000/dist/css/donatebar.min.css', ['donatebar.css', 'donatebar.min.css', 'donatebar.min.css.gz']);
     var loadingDefaultStylesheet = false;
-    // // comment this line in to load the twitter widgets platform
-    // var loadingTwitter = ajax.conditionalGet('script', 'https://platform.twitter.com/widgets.js', 'platform.twitter.com/widgets.js');
 
     // Set up bar
     if(!bar.innerHTML) {
@@ -288,18 +287,48 @@ function loadDonationBar(stripeKey) {
       e.preventDefault ? e.preventDefault() : e.returnValue = false;
       dom.removeClass(overlay, 'is-active');
       dom.removeClass(modal, 'is-active');
-      dom.removeClass(modalPrompt, 'is-active');
 
       resetDonationForm();
     });
 
-    // proceed to next step
+    // select radio button for custom amount
+    var customAmount = document.querySelectorAll('.bb-input_other-amount');
+
+    event.on(customAmount, 'click', function(e){
+      document.querySelector('.bb-input[data-radio-custom]').checked = true;
+    });
+
+    // proceed to next steps
+
+    // step 1
     event.on(nextFrame1, 'click', function(e) {
+
+      // grab donation amount
+      document.querySelector('.bb-input[data-radio-custom]').value = customAmount[0].value;
+      var donationRadios = document.getElementsByName('amount');
+      // update donation ampunt in messages
+      for (var i = 0; i < donationRadios.length; i++) {
+          if (donationRadios[i].checked) {
+              var donationValue = donationRadios[i].value;
+              
+              var donationUpdate = document.querySelectorAll('.js-val-donation');
+              for (var i = 0; i < donationUpdate.length; i++) {
+                donationUpdate[i].innerHTML = '$' + parseFloat(donationValue).toFixed(2);
+              }
+              break;
+          }
+      }
+
       toggle(step1, {toggle: 'is-active'});
       toggle(step2, {toggle: 'is-active'});
     });
 
+    // step 2 
     event.on(nextFrame2, 'click', function(e) {
+      // grab email address to populate message
+      var emailAddress = document.querySelector('.bb-input[data-input-email]').value;
+      document.querySelector('.js-val-email').innerHTML = emailAddress.toString();
+
       var $form = document.querySelector('#bb-transaction-form');
       var propertyId = bar.getAttribute('data-' + namespace() + '-property-id');
       if (propertyId) {
