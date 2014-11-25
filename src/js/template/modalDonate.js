@@ -37,13 +37,13 @@ var template = '' +
 '' +
 '            <div class="bb-form-fieldset_donation">' +
 '                <label class="bb-label_radio"><input class="bb-input" type="radio" name="amount" value="10.00" required>$10</input></label>' +
-'                <label class="bb-label_radio"><input class="bb-input" type="radio" name="amount" value="25.00" required>$25</input></label>' +
+'                <label class="bb-label_radio"><input class="bb-input" type="radio" name="amount" value="25.00" required checked>$25</input></label>' +
 '                <label class="bb-label_radio"><input class="bb-input" type="radio" name="amount" value="50.00" required>$50</input></label>' +
 '                <label class="bb-label_radio"><input class="bb-input" type="radio" name="amount" value="100.00" required>$100</input></label>' +
 '                <label class="bb-label_radio">' +
 '                    <input class="bb-input" type="radio" name="amount" required data-radio-custom>' +
 '                    <span class="bb-other-amount-prefix">$</span>' +
-'                    <input class="bb-input_other-amount" type="text" name="amount_other" placeholder="Other Amount" onkeypress="return event.charCode >= 48 && event.charCode <= 57"></input>' +
+'                    <input class="bb-input_other-amount" type="text" name="amount_other" placeholder="Other Amount"></input>' +
 '                </label>' +
 '            </div>' +
 '            <hr class="bb-divider">' +
@@ -97,7 +97,7 @@ var template = '' +
 '' +
 '                <div class="bb-form-group fg-2">' +
 '                    <label class="bb-label">' +
-'                        <span>Zip</span>' +
+'                        <span>Zipcode</span>' +
 '                        <input class="bb-input_no-border-left" name="zipcode" required></input>' +
 '                    </label>' +
 '                </div>' +

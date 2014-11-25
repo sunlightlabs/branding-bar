@@ -97,11 +97,85 @@ var toggle = function (els, opts) {
   }
 };
 
-var stripeResponseHandler = function(status, response) {
-  var $form = document.querySelector('#bb-transaction-form');
-  if (response.error) {
-    window.console && console.log(response.error.message);
+var labelize = function(name) {
+  if (name === 'cvc') {
+    name = 'CVC';
   } else {
+    var properCase = function(txt) {
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    }
+    name = name.replace('_', ' ')
+               .replace('-', '. ')
+               .replace(/\w\S*/g, properCase);
+  }
+  return name;
+};
+
+var validateRequired = function($form, fieldNames, attr) {
+  attr = attr || 'name';
+  var errors = [];
+  for (var i = 0; i < fieldNames.length; i++) {
+    var fieldName = fieldNames[i];
+    var $elem = $form.querySelector('[' + attr + '=' + fieldName + ']');
+    if (!$elem.value) {
+      errors.push(labelize(fieldName) + ' is a required field');
+      dom.addClass($elem, 'bb-input_error');
+    } else {
+      dom.removeClass($elem, 'bb-input_error');
+    }
+  }
+  return errors;
+};
+
+var displayErrors = function($container, errors) {
+  var $list = document.createElement('ul');
+  for (var i = 0; i < errors.length; i++) {
+    var $item = document.createElement('li');
+    $item.innerHTML = errors[i];
+    $list.appendChild($item);
+  }
+  $container.appendChild($list);
+  dom.show($container);
+}
+
+var formatAmount = function() {
+  var $amountOther = document.querySelector('input[name=amount_other]');
+  if ($amountOther.value) {
+    var substrs = $amountOther.value.split('.');
+    if (substrs.length > 0) {
+      var formatted = '';
+      var dollars = parseInt(substrs[0]);
+      formatted += dollars + '.';
+      if (substrs.length > 1) {
+        var cents = parseInt(substrs[1]);
+        if (cents < 10) {
+          formatted += '0' + cents;
+        } else if (cents > 100) {
+          formatted += '99';
+        } else {
+          formatted += cents;
+        }
+      }
+      $amountOther.value = formatted;
+    } else {
+      $amountOther.value = '';
+    }
+  }
+};
+
+var stripeResponseHandler = function(status, response) {
+
+  var $form = document.querySelector('#bb-transaction-form');
+  var $errContainer = $form.querySelector('.bb-modal-form-step-2 .bb-error-message');
+  dom.empty($errContainer);
+
+  if (response.error) {
+
+    displayErrors($errContainer, [response.error.message]);
+    window.console && console.log(response.error.message);
+
+  } else {
+
     var token = response.id;
     var $input = document.createElement('input');
     $input.type = 'hidden';
@@ -126,6 +200,15 @@ var stripeResponseHandler = function(status, response) {
 
     var url = 'https://sunlightfoundation.com/engage/donate/remote/';
     ajax.post(url, data, function(err, resp) {
+
+      window.console && console.log(resp);
+
+      // if (errors.length > 0) {
+      //   displayErrors($errContainer, errors);
+      // } else {
+      // }
+
+      dom.hide($errContainer);
 
       var step2 = document.querySelectorAll('.bb-modal-form-step-2');
       var step3 = document.querySelectorAll('.bb-modal-form-step-3');
@@ -293,10 +376,14 @@ function loadDonationBar(stripeKey) {
     });
 
     // select radio button for custom amount
-    var customAmount = document.querySelectorAll('.bb-input_other-amount');
-
+    var customAmount = document.querySelector('.bb-input_other-amount');
     event.on(customAmount, 'click', function(e){
       document.querySelector('.bb-input[data-radio-custom]').checked = true;
+      customAmount.focus();
+    });
+
+    event.on(customAmount, 'blur', function(e) {
+      formatAmount();
     });
 
     // proceed to next steps
@@ -311,7 +398,7 @@ function loadDonationBar(stripeKey) {
       for (var i = 0; i < donationRadios.length; i++) {
           if (donationRadios[i].checked) {
               var donationValue = donationRadios[i].value;
-              
+
               var donationUpdate = document.querySelectorAll('.js-val-donation');
               for (var i = 0; i < donationUpdate.length; i++) {
                 donationUpdate[i].innerHTML = '$' + parseFloat(donationValue).toFixed(2);
@@ -320,11 +407,25 @@ function loadDonationBar(stripeKey) {
           }
       }
 
-      toggle(step1, {toggle: 'is-active'});
-      toggle(step2, {toggle: 'is-active'});
+      var errors = [];
+      var $form = document.querySelector('#bb-transaction-form');
+      var fieldNames = ['first_name', 'last_name', 'address', 'city', 'state', 'zipcode'];
+
+      errors = errors.concat(validateRequired($form, fieldNames));
+
+      var $errContainer = $form.querySelector('.bb-modal-form-step-1 .bb-error-message');
+      dom.empty($errContainer);
+      if (errors.length > 0) {
+        displayErrors($errContainer, errors);
+      } else {
+        dom.hide($errContainer);
+        toggle(step1, {toggle: 'is-active'});
+        toggle(step2, {toggle: 'is-active'});
+      }
+
     });
 
-    // step 2 
+    // step 2
     event.on(nextFrame2, 'click', function(e) {
       // grab email address to populate message
       var emailAddress = document.querySelector('.bb-input[data-input-email]').value;
@@ -339,7 +440,20 @@ function loadDonationBar(stripeKey) {
         $elem.value = propertyId;
         $form.appendChild($elem);
       }
-      Stripe.card.createToken($form, stripeResponseHandler);
+
+      var errors = [];
+      errors = errors.concat(validateRequired($form, ['email']));
+      errors = errors.concat(validateRequired($form, ['number', 'exp-month', 'exp-year', 'cvc'], 'data-stripe'));
+
+      var $errContainer = $form.querySelector('.bb-modal-form-step-2 .bb-error-message');
+      dom.empty($errContainer);
+      if (errors.length > 0) {
+        displayErrors($errContainer, errors);
+      } else {
+        dom.hide($errContainer);
+        Stripe.card.createToken($form, stripeResponseHandler);
+      }
+
     });
 
     event.on(prevFrame2, 'click', function(e) {
@@ -1893,13 +2007,13 @@ var template = '' +
 '' +
 '            <div class="bb-form-fieldset_donation">' +
 '                <label class="bb-label_radio"><input class="bb-input" type="radio" name="amount" value="10.00" required>$10</input></label>' +
-'                <label class="bb-label_radio"><input class="bb-input" type="radio" name="amount" value="25.00" required>$25</input></label>' +
+'                <label class="bb-label_radio"><input class="bb-input" type="radio" name="amount" value="25.00" required checked>$25</input></label>' +
 '                <label class="bb-label_radio"><input class="bb-input" type="radio" name="amount" value="50.00" required>$50</input></label>' +
 '                <label class="bb-label_radio"><input class="bb-input" type="radio" name="amount" value="100.00" required>$100</input></label>' +
 '                <label class="bb-label_radio">' +
 '                    <input class="bb-input" type="radio" name="amount" required data-radio-custom>' +
 '                    <span class="bb-other-amount-prefix">$</span>' +
-'                    <input class="bb-input_other-amount" type="text" name="amount_other" placeholder="Other Amount" onkeypress="return event.charCode >= 48 && event.charCode <= 57"></input>' +
+'                    <input class="bb-input_other-amount" type="text" name="amount_other" placeholder="Other Amount"></input>' +
 '                </label>' +
 '            </div>' +
 '            <hr class="bb-divider">' +
@@ -1953,7 +2067,7 @@ var template = '' +
 '' +
 '                <div class="bb-form-group fg-2">' +
 '                    <label class="bb-label">' +
-'                        <span>Zip</span>' +
+'                        <span>Zipcode</span>' +
 '                        <input class="bb-input_no-border-left" name="zipcode" required></input>' +
 '                    </label>' +
 '                </div>' +
@@ -2359,11 +2473,28 @@ function serializeForm(form) {
   return data;
 };
 
+function empty(node) {
+  while (node.hasChildNodes()) {
+    node.removeChild(node.lastChild);
+  }
+};
+
+function show(node) {
+  node.style.display = 'block';
+};
+
+function hide(node) {
+  node.style.display = 'none';
+};
+
 module.exports = {
   toggleClass: toggleClass,
   addClass: addClass,
   removeClass: removeClass,
   serializeForm: serializeForm,
+  empty: empty,
+  show: show,
+  hide: hide
 };
 
 },{}],9:[function(require,module,exports){

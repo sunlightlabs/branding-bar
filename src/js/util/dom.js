@@ -76,9 +76,26 @@ function serializeForm(form) {
   return data;
 };
 
+function empty(node) {
+  while (node.hasChildNodes()) {
+    node.removeChild(node.lastChild);
+  }
+};
+
+function show(node) {
+  node.style.display = 'block';
+};
+
+function hide(node) {
+  node.style.display = 'none';
+};
+
 module.exports = {
   toggleClass: toggleClass,
   addClass: addClass,
   removeClass: removeClass,
   serializeForm: serializeForm,
+  empty: empty,
+  show: show,
+  hide: hide
 };
