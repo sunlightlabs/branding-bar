@@ -319,12 +319,20 @@ function loadDonationBar(stripeKey) {
     var prevFrame2 = document.querySelectorAll('.bb-modal-form-step-2 .js-prev-frame');
 
     function resetDonationForm() {
-      // clear form
+      // clear form input fields
       var formInput = document.querySelectorAll('.bb-input');
 
       for (var i = 0; i < formInput.length; i++) {
         formInput[i].value = '';
       }
+
+      // clear form input error styling
+      var formInputErrors = document.querySelectorAll('.bb-input_error');
+      dom.removeClass(formInputErrors, 'bb-input_error');
+
+      // clear form error message
+      var formErrorMessage = document.querySelector('.bb-error-message');
+      dom.hide(formErrorMessage);
 
       // reset form steps after modal is hidden
       setTimeout(function() {

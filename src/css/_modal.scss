@@ -373,9 +373,15 @@ a.bb-modal--link-alt {
 }
 
 .bb-error_list {
-    padding: 0;
-    margin: 0;
     list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    > li {
+        line-height: 17px;
+        margin: 0;
+        padding: 0;
+    }
 }
 
 .bb-error-message {
