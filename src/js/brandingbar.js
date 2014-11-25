@@ -195,26 +195,20 @@ var stripeResponseHandler = function(status, response) {
     }
     delete data.amount_other;
 
-    window.console && console.log(data);
+    dom.hide($errContainer);
+
+    var step2 = document.querySelectorAll('.bb-modal-form-step-2');
+    var step3 = document.querySelectorAll('.bb-modal-form-step-3');
+
+    toggle(step2, {toggle: 'is-active'});
+    toggle(step3, {toggle: 'is-active'});
 
     var url = 'https://sunlightfoundation.com/engage/donate/remote/';
     ajax.post(url, data, function(err, resp) {
-
-      window.console && console.log(resp);
-
-      // if (errors.length > 0) {
-      //   displayErrors($errContainer, errors);
-      // } else {
-      // }
-
-      dom.hide($errContainer);
-
-      var step2 = document.querySelectorAll('.bb-modal-form-step-2');
-      var step3 = document.querySelectorAll('.bb-modal-form-step-3');
-
-      toggle(step2, {toggle: 'is-active'});
-      toggle(step3, {toggle: 'is-active'});
-
+      var progress = document.querySelector('.bb-modal-message-progress');
+      var thanks = document.querySelector('.bb-modal-message-thankyou');
+      toggle(progress, {toggle: 'is-hidden'});
+      toggle(thanks, {toggle: 'is-active'});
     });
 
   }
@@ -381,7 +375,7 @@ function loadDonationBar(stripeKey) {
       customAmount.focus();
     });
 
-    event.on(customAmount, 'input', function(e) {
+    event.on(customAmount, 'change', function(e) {
       alert(1);
       formatAmount();
     });
