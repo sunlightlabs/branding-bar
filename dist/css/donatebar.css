@@ -307,6 +307,11 @@ a.bb-modal--link-alt {
   border-top: 1px dashed #e5e5e5;
   margin: 20px 0; }
 
+.bb-error_list {
+  padding: 0;
+  margin: 0;
+  list-style-type: none; }
+
 .bb-error-message {
   width: 100%;
   background: pink;

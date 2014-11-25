@@ -128,6 +128,7 @@ var validateRequired = function($form, fieldNames, attr) {
 
 var displayErrors = function($container, errors) {
   var $list = document.createElement('ul');
+  dom.addClass($list, 'bb-error_list');
   for (var i = 0; i < errors.length; i++) {
     var $item = document.createElement('li');
     $item.innerHTML = errors[i];
