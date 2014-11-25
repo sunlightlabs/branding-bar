@@ -381,7 +381,8 @@ function loadDonationBar(stripeKey) {
       customAmount.focus();
     });
 
-    event.on(customAmount, 'blur', function(e) {
+    event.on(customAmount, 'input', function(e) {
+      alert(1);
       formatAmount();
     });
 
@@ -391,7 +392,7 @@ function loadDonationBar(stripeKey) {
     event.on(nextFrame1, 'click', function(e) {
 
       // grab donation amount
-      document.querySelector('.bb-input[data-radio-custom]').value = customAmount[0].value;
+      document.querySelector('.bb-input[data-radio-custom]').value = customAmount.value;
       var donationRadios = document.getElementsByName('amount');
       // update donation ampunt in messages
       for (var i = 0; i < donationRadios.length; i++) {

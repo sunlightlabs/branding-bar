@@ -382,7 +382,8 @@ function loadDonationBar(stripeKey) {
       customAmount.focus();
     });
 
-    event.on(customAmount, 'blur', function(e) {
+    event.on(customAmount, 'input', function(e) {
+      alert(1);
       formatAmount();
     });
 
@@ -392,7 +393,7 @@ function loadDonationBar(stripeKey) {
     event.on(nextFrame1, 'click', function(e) {
 
       // grab donation amount
-      document.querySelector('.bb-input[data-radio-custom]').value = customAmount[0].value;
+      document.querySelector('.bb-input[data-radio-custom]').value = customAmount.value;
       var donationRadios = document.getElementsByName('amount');
       // update donation ampunt in messages
       for (var i = 0; i < donationRadios.length; i++) {
@@ -2013,11 +2014,7 @@ var template = '' +
 '                <label class="bb-label_radio">' +
 '                    <input class="bb-input" type="radio" name="amount" required data-radio-custom>' +
 '                    <span class="bb-other-amount-prefix">$</span>' +
-<<<<<<< HEAD
-'                    <input class="bb-input_other-amount" type="text" name="amount_other" placeholder="Other Amount"></input>' +
-=======
-'                    <input class="bb-input bb-input_other-amount" type="text" name="amount_other" placeholder="Other Amount" onkeypress="return event.charCode >= 48 && event.charCode <= 57"></input>' +
->>>>>>> donation-bar
+'                    <input class="bb-input bb-input_other-amount" type="text" name="amount_other" placeholder="Other Amount"></input>' +
 '                </label>' +
 '            </div>' +
 '            <hr class="bb-divider">' +
@@ -2071,13 +2068,8 @@ var template = '' +
 '' +
 '                <div class="bb-form-group fg-2">' +
 '                    <label class="bb-label">' +
-<<<<<<< HEAD
 '                        <span>Zipcode</span>' +
-'                        <input class="bb-input_no-border-left" name="zipcode" required></input>' +
-=======
-'                        <span>Zip</span>' +
 '                        <input class="bb-input bb-input_no-border-left" name="zipcode" required></input>' +
->>>>>>> donation-bar
 '                    </label>' +
 '                </div>' +
 '            </div>' +
