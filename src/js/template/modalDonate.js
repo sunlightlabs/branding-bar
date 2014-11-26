@@ -159,7 +159,7 @@ var template = '' +
 '' +
 '            <div class="bb-form-fieldset_checkmark">' +
 '                <label class="bb-label">' +
-'                    <input class="bb-input" type="checkbox">I would like email updates from the Sunlight Foundation</input>' +
+'                    <input class="bb-input" type="checkbox" name="signup">I would like email updates from the Sunlight Foundation</input>' +
 '                </label>' +
 '            </div>' +
 '' +
