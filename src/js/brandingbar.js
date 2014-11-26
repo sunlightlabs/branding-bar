@@ -99,6 +99,8 @@ var toggle = function (els, opts) {
 var labelize = function(name) {
   if (name === 'cvc') {
     name = 'CVC';
+  } else if (name === 'amount_other') {
+    name = 'Amount';
   } else {
     var properCase = function(txt) {
       return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
@@ -401,7 +403,13 @@ function loadDonationBar(stripeKey) {
 
       var errors = [];
       var $form = document.querySelector('#bb-transaction-form');
+      var $amountOther = document.querySelector('.bb-input_other-amount');
       var fieldNames = ['first_name', 'last_name', 'address', 'city', 'state', 'zipcode'];
+
+      dom.removeClass($amountOther, 'bb-input_error');
+      if ($form.elements['amount'].value === 'custom') {
+        fieldNames.push('amount_other')
+      }
 
       errors = errors.concat(validateRequired($form, fieldNames));
 
