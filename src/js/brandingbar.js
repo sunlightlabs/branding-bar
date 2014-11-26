@@ -138,10 +138,10 @@ var displayErrors = function($container, errors) {
   dom.show($container);
 }
 
-var formatAmount = function() {
-  var $amountOther = document.querySelector('input[name=amount_other]');
-  if ($amountOther.value) {
-    $amountOther.value = parseFloat($amountOther.value).toFixed(2);
+var formatAmount = function(amount) {f
+  if (amount.value) {
+    amount.value = parseFloat(amount.value).toFixed(2);
+    return amount.value;
   }
 };
 
@@ -359,34 +359,41 @@ function loadDonationBar(stripeKey) {
       resetDonationForm();
     });
 
-    // select radio button for custom amount
-    var customAmount = document.querySelectorAll('.bb-input_other-amount');
+    // custom donation amount setup
+    var customAmountField = document.querySelectorAll('.bb-input_other-amount');
+    var customAmountRadio = document.querySelector('.bb-input[data-radio-custom]');
 
-    event.on(customAmount, 'click', function(e){
-      document.querySelector('.bb-input[data-radio-custom]').checked = true;
+    // select correct radio button when custom amount is clicked
+    event.on(customAmountField, 'click', function(e){
+      customAmountRadio.checked = true;
     });
 
     // format value in custom amount field
-    event.on(customAmount, 'change', function(e) {
-      formatAmount();
+    event.on(customAmountField, 'change', function(e) {
+      var amount = document.querySelector('input[name=amount_other]');
+      formatAmount(amount);
+
+    // set radio value to formatted value
+      customAmountRadio.value = formatAmount(amount);
     });
+
 
     // proceed to next steps
 
     // step 1
     event.on(nextFrame1, 'click', function(e) {
 
-      // grab donation amount
-      document.querySelector('.bb-input[data-radio-custom]').value = customAmount.value;
+      // grab donation amount from checked radio
       var donationRadios = document.getElementsByName('amount');
-      // update donation ampunt in messages
+
       for (var i = 0; i < donationRadios.length; i++) {
           if (donationRadios[i].checked) {
               var donationValue = donationRadios[i].value;
 
+              // update donation amount in messages
               var donationUpdate = document.querySelectorAll('.js-val-donation');
               for (var i = 0; i < donationUpdate.length; i++) {
-                donationUpdate[i].innerHTML = '$' + parseFloat(donationValue).toFixed(2);
+                donationUpdate[i].innerHTML = '$' + donationValue;
               }
               break;
           }
