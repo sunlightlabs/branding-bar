@@ -2464,7 +2464,7 @@ function serializeForm(form) {
     if (elem.name) {
       if (elem.type === 'button') {
         // ignore
-      } else if (elem.type === 'radio') {
+      } else if (elem.type === 'radio' || elem.type === 'checkbox') {
         if (elem.checked) {
           data[elem.name] = elem.value;
         }
