@@ -412,6 +412,7 @@ a.bb-modal--link-alt {
   box-shadow: none;
   color: #fff;
   cursor: pointer;
+  display: inline-block;
   font-family: inherit;
   font-size: 13px;
   height: 30px;
