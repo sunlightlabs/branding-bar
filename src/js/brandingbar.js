@@ -288,7 +288,7 @@ function loadDonationBar(stripeKey) {
     };
     stripeTag.src = 'https://js.stripe.com/v2/';
 
-    var loadingStylesheet = ajax.conditionalGet('link', 'https://s3.amazonaws.com/sunlight-cdn/brandingbar/' + s3Version() + '/css/donatebar.min.css.gz', ['brandingbar.css', 'brandingbar.min.css', 'brandingbar.min.css.gz']);
+    var loadingStylesheet = ajax.conditionalGet('link', 'https://s3.amazonaws.com/sunlight-cdn/brandingbar/' + s3Version() + '/css/donatebar.min.css.gz', ['donatebar.css', 'donatebar.min.css', 'donatebar.min.css.gz']);
     var loadingDefaultStylesheet = false;
 
     // Set up bar
