@@ -61,7 +61,10 @@
     vertical-align: middle;
 }
 
-.bb-button_cta {
+.bb-button_cta,
+.bb-button_cta:visited,
+.bb-button_cta:hover,
+.bb-button_cta:active {
     background: #b55300;
     border: none;
     -webkit-box-shadow: none;
@@ -71,10 +74,12 @@
     display: inline-block;
     font-family: inherit;
     font-size: 13px;
+    font-weight: normal;
     height: 30px;
     outline: none;
     text-indent: 0;
     text-shadow: none;
+    text-transform: normal;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -84,7 +89,10 @@
     width: auto;
     }
 
-.bb-button_cta--donate {
+.bb-button_cta--donate,
+.bb-button_cta--donate:visited,
+.bb-button_cta--donate:hover,
+.bb-button_cta--donate:active {
     @extend .bb-button_cta;
 
     background: #b55300;
@@ -96,7 +104,10 @@
     }
 }
 
-.bb-button_cta--next {
+.bb-button_cta--next,
+.bb-button_cta--next:visited,
+.bb-button_cta--next:hover,
+.bb-button_cta--next:active {
     @extend .bb-button_cta;
 
     background: #53afc9;
@@ -110,16 +121,9 @@
 
     &:hover {
         background: #53BBD8;
+        font-size: 16px;
+        height: 40px;
     }
-}
-
-.bb-button_cta--large {
-    @extend .bb-button_cta;
-
-    height: 50px;
-    width: 175px;
-    font-size: 18px;
-    margin: 25px 25px 10px;
 }
 
 .bb-chevron {

@@ -195,6 +195,7 @@ a.bb-modal--link-alt {
   display: inline;
   font-family: 'franklin-gothic-urw', helvetica, arial, sans-serif;
   font-size: 14px;
+  font-weight: normal;
   margin-bottom: 0;
   line-height: 14px; }
   .bb-label > span, .bb-label > .bb-label_radio, .bb-label > .bb-label_radio_custom {
@@ -405,7 +406,7 @@ a.bb-modal--link-alt {
   width: 160px;
   vertical-align: middle; }
 
-.bb-button_cta, .bb-button_cta--donate, .bb-button_cta--next, .bb-button_cta--large {
+.bb-button_cta, .bb-button_cta--donate, .bb-button_cta--donate:visited, .bb-button_cta--donate:hover, .bb-button_cta--donate:active, .bb-button_cta--next, .bb-button_cta--next:visited, .bb-button_cta--next:hover, .bb-button_cta--next:active, .bb-button_cta:visited, .bb-button_cta--donate:visited, .bb-button_cta--donate:visited, .bb-button_cta--donate:visited:hover, .bb-button_cta--donate:visited:active, .bb-button_cta--next:visited, .bb-button_cta--next:visited, .bb-button_cta--next:visited:hover, .bb-button_cta--next:visited:active, .bb-button_cta:hover, .bb-button_cta--donate:hover, .bb-button_cta--donate:hover:visited, .bb-button_cta--donate:hover, .bb-button_cta--donate:hover:active, .bb-button_cta--next:hover, .bb-button_cta--next:hover:visited, .bb-button_cta--next:hover, .bb-button_cta--next:hover:active, .bb-button_cta:active, .bb-button_cta--donate:active, .bb-button_cta--donate:active:visited, .bb-button_cta--donate:active:hover, .bb-button_cta--donate:active, .bb-button_cta--next:active, .bb-button_cta--next:active:visited, .bb-button_cta--next:active:hover, .bb-button_cta--next:active {
   background: #b55300;
   border: none;
   -webkit-box-shadow: none;
@@ -415,10 +416,12 @@ a.bb-modal--link-alt {
   display: inline-block;
   font-family: inherit;
   font-size: 13px;
+  font-weight: normal;
   height: 30px;
   outline: none;
   text-indent: 0;
   text-shadow: none;
+  text-transform: normal;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -427,14 +430,14 @@ a.bb-modal--link-alt {
   vertical-align: middle;
   width: auto; }
 
-.bb-button_cta--donate {
+.bb-button_cta--donate, .bb-button_cta--donate:visited, .bb-button_cta--donate:hover, .bb-button_cta--donate:active {
   background: #b55300;
   margin: 0 10px;
   padding: 6px 10px; }
-  .bb-button_cta--donate:hover {
+  .bb-button_cta--donate:hover, .bb-button_cta--donate:visited:hover, .bb-button_cta--donate:hover:hover, .bb-button_cta--donate:active:hover {
     background: #DF6601; }
 
-.bb-button_cta--next {
+.bb-button_cta--next, .bb-button_cta--next:visited, .bb-button_cta--next:hover, .bb-button_cta--next:active {
   background: #53afc9;
   margin: auto;
   width: auto;
@@ -443,14 +446,10 @@ a.bb-modal--link-alt {
   height: 40px;
   font-size: 16px;
   border-radius: 3px; }
-  .bb-button_cta--next:hover {
-    background: #53BBD8; }
-
-.bb-button_cta--large {
-  height: 50px;
-  width: 175px;
-  font-size: 18px;
-  margin: 25px 25px 10px; }
+  .bb-button_cta--next:hover, .bb-button_cta--next:visited:hover, .bb-button_cta--next:hover:hover, .bb-button_cta--next:active:hover {
+    background: #53BBD8;
+    font-size: 16px;
+    height: 40px; }
 
 .bb-chevron, .bb-chevron_pulse {
   fill: #fff;
