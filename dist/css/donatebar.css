@@ -249,6 +249,7 @@ a.bb-modal--link-alt {
     -webkit-box-shadow: none; }
   .bb-input:focus:invalid:focus, .bb-input_other-amount:focus:invalid:focus, .bb-input_note:focus:invalid:focus, .bb-input_no-border-left:focus:invalid:focus, .bb-input[type="text"]:focus:invalid:focus, [type="text"].bb-input_other-amount:focus:invalid:focus, [type="text"].bb-input_note:focus:invalid:focus, [type="text"].bb-input_no-border-left:focus:invalid:focus, .bb-input[type="email"]:focus:invalid:focus, [type="email"].bb-input_other-amount:focus:invalid:focus, [type="email"].bb-input_note:focus:invalid:focus, [type="email"].bb-input_no-border-left:focus:invalid:focus {
     outline: none;
+    background: #fff;
     border: 1px solid #e9322d;
     -webkit-box-shadow: none;
     box-shadow: none;
@@ -380,6 +381,7 @@ a.bb-modal--link-alt {
   animation: spin 20s infinite linear; }
 
 .bb-donation-message_text {
+  font-size: 16px;
   max-width: 525px;
   white-space: nowrap;
   overflow: hidden;
@@ -421,7 +423,7 @@ a.bb-modal--link-alt {
   outline: none;
   text-indent: 0;
   text-shadow: none;
-  text-transform: normal;
+  text-transform: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;

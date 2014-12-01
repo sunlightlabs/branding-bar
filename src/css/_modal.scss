@@ -248,9 +248,6 @@ a.bb-modal--link-alt {
     margin-right: 0px;
 }
 
-
-// input:focus:invalid:focus, textarea:focus:invalid:focus,
-
 .bb-input,
 .bb-input[type="text"],
 .bb-input[type="email"] {
@@ -294,6 +291,7 @@ a.bb-modal--link-alt {
 
     &:focus:invalid:focus {
         outline: none;
+        background: #fff;
         border: 1px solid #e9322d;
         box-shadow: none;
         -webkit-box-shadow: none;

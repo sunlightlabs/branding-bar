@@ -31,6 +31,7 @@
 }
 
 .bb-donation-message_text {
+  font-size: 16px;
   max-width: 525px;
   white-space: nowrap;
   overflow: hidden;
@@ -79,7 +80,7 @@
     outline: none;
     text-indent: 0;
     text-shadow: none;
-    text-transform: normal;
+    text-transform: none;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
