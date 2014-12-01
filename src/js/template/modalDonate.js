@@ -4,7 +4,7 @@
 var template = '' +
 '<div class="bb-overlay"></div>' +
 '' +
-'<div class="bb-modal_donation">' +
+'<div class="bb-modal_donation" style="visibility:hidden;">' +
 '    <div class="bb-modal_donation--header">' +
 '        <div class="bb-modal-form-step-1">' +
 '            <div class="bb-modal--action js-modal-close">' +

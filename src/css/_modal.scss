@@ -78,6 +78,7 @@ $font-size: 14px;
 }
 
 .bb-modal--description {
+    font-family: $font-family;
     margin: 0 10px 10px 10px;
     line-height: inherit;
 }
@@ -91,6 +92,7 @@ $font-size: 14px;
     color: #777;
 
     > p {
+        font-family: $font-family;
         line-height: $font-size;
         margin: 12px 0;
     }
@@ -251,6 +253,7 @@ a.bb-modal--link-alt {
 .bb-input,
 .bb-input[type="text"],
 .bb-input[type="email"] {
+    background: #fff;
     box-sizing: border-box;
     padding: 5px 6px;
     border: 1px solid #ccc;
@@ -289,6 +292,9 @@ a.bb-modal--link-alt {
         -webkit-box-shadow: none;
     }
 
+    &:invalid {
+        background: #fff;
+    }
     &:focus:invalid:focus {
         outline: none;
         background: #fff;

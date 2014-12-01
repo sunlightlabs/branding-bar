@@ -66,6 +66,7 @@ body {
   line-height: 19px; }
 
 .bb-modal--description {
+  font-family: 'franklin-gothic-urw', helvetica, arial, sans-serif;
   margin: 0 10px 10px 10px;
   line-height: inherit; }
 
@@ -77,6 +78,7 @@ body {
   text-align: center;
   color: #777; }
   .bb-modal--footer > p {
+    font-family: 'franklin-gothic-urw', helvetica, arial, sans-serif;
     line-height: 14px;
     margin: 12px 0; }
 
@@ -212,6 +214,7 @@ a.bb-modal--link-alt {
   margin-right: 0px; }
 
 .bb-input, .bb-input_other-amount, .bb-input_note, .bb-input_no-border-left, .bb-input[type="text"], [type="text"].bb-input_other-amount, [type="text"].bb-input_note, [type="text"].bb-input_no-border-left, .bb-input[type="email"], [type="email"].bb-input_other-amount, [type="email"].bb-input_note, [type="email"].bb-input_no-border-left {
+  background: #fff;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -247,6 +250,8 @@ a.bb-modal--link-alt {
     -webkit-box-shadow: none;
     box-shadow: none;
     -webkit-box-shadow: none; }
+  .bb-input:invalid, .bb-input_other-amount:invalid, .bb-input_note:invalid, .bb-input_no-border-left:invalid, .bb-input[type="text"]:invalid, [type="text"].bb-input_other-amount:invalid, [type="text"].bb-input_note:invalid, [type="text"].bb-input_no-border-left:invalid, .bb-input[type="email"]:invalid, [type="email"].bb-input_other-amount:invalid, [type="email"].bb-input_note:invalid, [type="email"].bb-input_no-border-left:invalid {
+    background: #fff; }
   .bb-input:focus:invalid:focus, .bb-input_other-amount:focus:invalid:focus, .bb-input_note:focus:invalid:focus, .bb-input_no-border-left:focus:invalid:focus, .bb-input[type="text"]:focus:invalid:focus, [type="text"].bb-input_other-amount:focus:invalid:focus, [type="text"].bb-input_note:focus:invalid:focus, [type="text"].bb-input_no-border-left:focus:invalid:focus, .bb-input[type="email"]:focus:invalid:focus, [type="email"].bb-input_other-amount:focus:invalid:focus, [type="email"].bb-input_note:focus:invalid:focus, [type="email"].bb-input_no-border-left:focus:invalid:focus {
     outline: none;
     background: #fff;
@@ -358,8 +363,8 @@ a.bb-modal--link-alt {
 
 .branding-bar {
   font-family: 'franklin-gothic-urw', helvetica, arial, sans-serif;
-  background: #f4ce2b;
-  height: 65px;
+  background: #f4ce2b !important;
+  height: 50px;
   z-index: 999;
   position: relative;
   overflow: hidden; }
@@ -370,7 +375,7 @@ a.bb-modal--link-alt {
 
 .bb-donation-message {
   float: left;
-  line-height: 65px;
+  line-height: 50px;
   position: relative; }
 
 .bb-sunlight-rings {
@@ -394,7 +399,7 @@ a.bb-modal--link-alt {
 
 .bb-donation-bar_logo {
   float: right;
-  line-height: 65px; }
+  line-height: 50px; }
 
 .bb-donation-bar_sunlight-logo {
   background: url('https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.4/img/sunlight-logo.png') no-repeat 50% 50%;

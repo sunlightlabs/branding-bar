@@ -3,8 +3,8 @@
 
 .branding-bar {
     font-family: 'franklin-gothic-urw', helvetica, arial, sans-serif;
-    background: #f4ce2b;
-    height: 65px;
+    background: #f4ce2b !important;
+    height: 50px;
     z-index: 999;
     position: relative;
     overflow: hidden;
@@ -17,7 +17,7 @@
 
 .bb-donation-message {
     float: left;
-    line-height: 65px;
+    line-height: 50px;
     position: relative;
 }
 
@@ -46,7 +46,7 @@
 
 .bb-donation-bar_logo {
     float: right;
-    line-height: 65px;
+    line-height: 50px;
 }
 
 .bb-donation-bar_sunlight-logo {

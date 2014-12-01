@@ -321,7 +321,7 @@ function loadDonationBar(stripeKey) {
 
     function resetDonationForm() {
       // clear form input fields
-      var formInput = document.querySelectorAll('.bb-input');
+      var formInput = document.querySelectorAll('.bb-input:not([type="radio"])');
 
       for (var i = 0; i < formInput.length; i++) {
         formInput[i].value = '';
@@ -346,6 +346,7 @@ function loadDonationBar(stripeKey) {
     // open donate modal
     event.on(donateButton, 'click', function(e){
       e.preventDefault ? e.preventDefault() : e.returnValue = false;
+      modal.style.visibility = '';
       dom.addClass(overlay, 'is-active');
       dom.addClass(modal, 'is-active');
       dom.addClass(step1, 'is-active');

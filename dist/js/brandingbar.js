@@ -322,7 +322,7 @@ function loadDonationBar(stripeKey) {
 
     function resetDonationForm() {
       // clear form input fields
-      var formInput = document.querySelectorAll('.bb-input');
+      var formInput = document.querySelectorAll('.bb-input:not([type="radio"])');
 
       for (var i = 0; i < formInput.length; i++) {
         formInput[i].value = '';
@@ -347,6 +347,7 @@ function loadDonationBar(stripeKey) {
     // open donate modal
     event.on(donateButton, 'click', function(e){
       e.preventDefault ? e.preventDefault() : e.returnValue = false;
+      modal.style.visibility = '';
       dom.addClass(overlay, 'is-active');
       dom.addClass(modal, 'is-active');
       dom.addClass(step1, 'is-active');
@@ -396,6 +397,7 @@ function loadDonationBar(stripeKey) {
               var donationUpdate = document.querySelectorAll('.js-val-donation');
               for (var i = 0; i < donationUpdate.length; i++) {
                 donationUpdate[i].innerHTML = '$' + donationValue;
+                console.log('amount updated: ' + donationValue);
               }
               break;
           }
@@ -1974,7 +1976,7 @@ module.exports = template;
 var template = '' +
 '<div class="bb-overlay"></div>' +
 '' +
-'<div class="bb-modal_donation">' +
+'<div class="bb-modal_donation" style="visibility:hidden;">' +
 '    <div class="bb-modal_donation--header">' +
 '        <div class="bb-modal-form-step-1">' +
 '            <div class="bb-modal--action js-modal-close">' +
