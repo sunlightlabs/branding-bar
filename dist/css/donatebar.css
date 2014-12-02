@@ -198,6 +198,7 @@ a.bb-modal--link-alt {
   color: #333;
   cursor: pointer;
   display: inline;
+  float: none;
   font-family: 'franklin-gothic-urw-1', 'franklin-gothic-urw-2', 'franklin-gothic-urw', helvetica, arial, sans-serif;
   font-size: 14px;
   font-weight: normal;
