@@ -288,8 +288,7 @@ function loadDonationBar(stripeKey) {
       Stripe.setPublishableKey(stripeKey);
     };
     stripeTag.src = 'https://js.stripe.com/v2/';
-
-    var loadingStylesheet = ajax.conditionalGet('link', 'https://s3.amazonaws.com/sunlight-cdn/brandingbar/' + s3Version() + '/css/donatebar.min.css.gz', ['donatebar.css', 'donatebar.min.css', 'donatebar.min.css.gz']);
+    var loadingStylesheet = ajax.conditionalGet('link', 'https://s3.amazonaws.com/sunlight-cdn/brandingbar/' + s3Version() + '/css/donatebar.min.css.gz', ['dona/tebar.css', 'donatebar.min.css', 'donatebar.min.css.gz']);
     var loadingDefaultStylesheet = false;
 
     // Set up bar
@@ -397,7 +396,6 @@ function loadDonationBar(stripeKey) {
               var donationUpdate = document.querySelectorAll('.js-val-donation');
               for (var i = 0; i < donationUpdate.length; i++) {
                 donationUpdate[i].innerHTML = '$' + donationValue;
-                console.log('amount updated: ' + donationValue);
               }
               break;
           }
@@ -2186,7 +2184,7 @@ var template = '' +
 '        <div class="bb-modal-form-step-3">' +
 '           <div class="bb-modal-message-progress">' +
 '                <svg class="bb-progress_icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 8 8"><path d="M4 0c-2.2 0-4 1.8-4 4s1.8 4 4 4c1.1 0 2.12-.43 2.84-1.16l-.72-.72c-.54.54-1.29.88-2.13.88-1.66 0-3-1.34-3-3s1.34-3 3-3c.83 0 1.55.36 2.09.91l-1.09 1.09h3v-3l-1.19 1.19c-.72-.72-1.71-1.19-2.81-1.19z"></path></svg>' +
-'                <p class="bb-progress_text">Processing your donation…</p>' +
+'                <p class="bb-progress_text">Processing your donation&hellip;</p>' +
 '           </div>' +
 '' +
 '            <div class="bb-modal-message-thankyou">' +

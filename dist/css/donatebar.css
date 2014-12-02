@@ -42,7 +42,7 @@ body {
   box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.25);
   -webkit-transition: all 300ms;
   transition: all 300ms;
-  font-family: 'franklin-gothic-urw', helvetica, arial, sans-serif;
+  font-family: 'franklin-gothic-urw-1', 'franklin-gothic-urw-2', 'franklin-gothic-urw', helvetica, arial, sans-serif;
   font-size: 14px;
   color: #333; }
   .bb-modal.is-active, .is-active.bb-modal_donation {
@@ -66,7 +66,8 @@ body {
   line-height: 19px; }
 
 .bb-modal--description {
-  font-family: 'franklin-gothic-urw', helvetica, arial, sans-serif;
+  font-family: 'franklin-gothic-urw-1', 'franklin-gothic-urw-2', 'franklin-gothic-urw', helvetica, arial, sans-serif;
+  font-size: 14px;
   margin: 0 10px 10px 10px;
   line-height: inherit; }
 
@@ -78,7 +79,8 @@ body {
   text-align: center;
   color: #777; }
   .bb-modal--footer > p {
-    font-family: 'franklin-gothic-urw', helvetica, arial, sans-serif;
+    font-family: 'franklin-gothic-urw-1', 'franklin-gothic-urw-2', 'franklin-gothic-urw', helvetica, arial, sans-serif;
+    font-size: 12px;
     line-height: 14px;
     margin: 12px 0; }
 
@@ -193,9 +195,10 @@ a.bb-modal--link-alt {
   width: 45px; }
 
 .bb-label, .bb-label_radio, .bb-label_radio_custom {
+  color: #333;
   cursor: pointer;
   display: inline;
-  font-family: 'franklin-gothic-urw', helvetica, arial, sans-serif;
+  font-family: 'franklin-gothic-urw-1', 'franklin-gothic-urw-2', 'franklin-gothic-urw', helvetica, arial, sans-serif;
   font-size: 14px;
   font-weight: normal;
   margin-bottom: 0;
@@ -226,7 +229,8 @@ a.bb-modal--link-alt {
   margin-bottom: 0;
   border-radius: 0;
   height: auto;
-  font-family: 'franklin-gothic-urw', helvetica, arial, sans-serif;
+  font-family: 'franklin-gothic-urw-1', 'franklin-gothic-urw-2', 'franklin-gothic-urw', helvetica, arial, sans-serif;
+  font-style: normal;
   vertical-align: baseline;
   height: 30px;
   -webkit-box-shadow: none;
@@ -238,12 +242,15 @@ a.bb-modal--link-alt {
     margin-right: 8px;
     cursor: pointer;
     height: auto;
+    vertical-align: baseline;
     width: 13px; }
   .bb-input[type="checkbox"], [type="checkbox"].bb-input_other-amount, [type="checkbox"].bb-input_note, [type="checkbox"].bb-input_no-border-left, .bb-input[type="text"][type="checkbox"], [type="text"][type="checkbox"].bb-input_other-amount, [type="text"][type="checkbox"].bb-input_note, [type="text"][type="checkbox"].bb-input_no-border-left, .bb-input[type="email"][type="checkbox"], [type="email"][type="checkbox"].bb-input_other-amount, [type="email"][type="checkbox"].bb-input_note, [type="email"][type="checkbox"].bb-input_no-border-left {
+    cursor: pointer;
     margin-left: 0;
     margin-right: 7px;
-    cursor: pointer;
-    height: auto; }
+    height: auto;
+    width: auto;
+    vertical-align: baseline; }
   .bb-input:focus, .bb-input_other-amount:focus, .bb-input_note:focus, .bb-input_no-border-left:focus, .bb-input[type="text"]:focus, [type="text"].bb-input_other-amount:focus, [type="text"].bb-input_note:focus, [type="text"].bb-input_no-border-left:focus, .bb-input[type="email"]:focus, [type="email"].bb-input_other-amount:focus, [type="email"].bb-input_note:focus, [type="email"].bb-input_no-border-left:focus {
     outline: none;
     border: 1px solid #999;
@@ -251,7 +258,10 @@ a.bb-modal--link-alt {
     box-shadow: none;
     -webkit-box-shadow: none; }
   .bb-input:invalid, .bb-input_other-amount:invalid, .bb-input_note:invalid, .bb-input_no-border-left:invalid, .bb-input[type="text"]:invalid, [type="text"].bb-input_other-amount:invalid, [type="text"].bb-input_note:invalid, [type="text"].bb-input_no-border-left:invalid, .bb-input[type="email"]:invalid, [type="email"].bb-input_other-amount:invalid, [type="email"].bb-input_note:invalid, [type="email"].bb-input_no-border-left:invalid {
-    background: #fff; }
+    background: #fff;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -webkit-box-shadow: none; }
   .bb-input:focus:invalid:focus, .bb-input_other-amount:focus:invalid:focus, .bb-input_note:focus:invalid:focus, .bb-input_no-border-left:focus:invalid:focus, .bb-input[type="text"]:focus:invalid:focus, [type="text"].bb-input_other-amount:focus:invalid:focus, [type="text"].bb-input_note:focus:invalid:focus, [type="text"].bb-input_no-border-left:focus:invalid:focus, .bb-input[type="email"]:focus:invalid:focus, [type="email"].bb-input_other-amount:focus:invalid:focus, [type="email"].bb-input_note:focus:invalid:focus, [type="email"].bb-input_no-border-left:focus:invalid:focus {
     outline: none;
     background: #fff;
@@ -260,22 +270,22 @@ a.bb-modal--link-alt {
     box-shadow: none;
     -webkit-box-shadow: none; }
   .bb-input::-webkit-input-placeholder, .bb-input_other-amount::-webkit-input-placeholder, .bb-input_note::-webkit-input-placeholder, .bb-input_no-border-left::-webkit-input-placeholder, .bb-input[type="text"]::-webkit-input-placeholder, [type="text"].bb-input_other-amount::-webkit-input-placeholder, [type="text"].bb-input_note::-webkit-input-placeholder, [type="text"].bb-input_no-border-left::-webkit-input-placeholder, .bb-input[type="email"]::-webkit-input-placeholder, [type="email"].bb-input_other-amount::-webkit-input-placeholder, [type="email"].bb-input_note::-webkit-input-placeholder, [type="email"].bb-input_no-border-left::-webkit-input-placeholder {
-    font-family: 'franklin-gothic-urw', helvetica, arial, sans-serif;
+    font-family: 'franklin-gothic-urw-1', 'franklin-gothic-urw-2', 'franklin-gothic-urw', helvetica, arial, sans-serif;
     font-size: 14px;
     padding-top: 2px;
     text-align: center; }
   .bb-input::-moz-placeholder, .bb-input_other-amount::-moz-placeholder, .bb-input_note::-moz-placeholder, .bb-input_no-border-left::-moz-placeholder, .bb-input[type="text"]::-moz-placeholder, [type="text"].bb-input_other-amount::-moz-placeholder, [type="text"].bb-input_note::-moz-placeholder, [type="text"].bb-input_no-border-left::-moz-placeholder, .bb-input[type="email"]::-moz-placeholder, [type="email"].bb-input_other-amount::-moz-placeholder, [type="email"].bb-input_note::-moz-placeholder, [type="email"].bb-input_no-border-left::-moz-placeholder {
-    font-family: 'franklin-gothic-urw', helvetica, arial, sans-serif;
+    font-family: 'franklin-gothic-urw-1', 'franklin-gothic-urw-2', 'franklin-gothic-urw', helvetica, arial, sans-serif;
     font-size: 14px;
     padding-top: 3px;
     text-align: center; }
   .bb-input:-ms-input-placeholder, .bb-input_other-amount:-ms-input-placeholder, .bb-input_note:-ms-input-placeholder, .bb-input_no-border-left:-ms-input-placeholder, .bb-input[type="text"]:-ms-input-placeholder, [type="text"].bb-input_other-amount:-ms-input-placeholder, [type="text"].bb-input_note:-ms-input-placeholder, [type="text"].bb-input_no-border-left:-ms-input-placeholder, .bb-input[type="email"]:-ms-input-placeholder, [type="email"].bb-input_other-amount:-ms-input-placeholder, [type="email"].bb-input_note:-ms-input-placeholder, [type="email"].bb-input_no-border-left:-ms-input-placeholder {
-    font-family: 'franklin-gothic-urw', helvetica, arial, sans-serif;
+    font-family: 'franklin-gothic-urw-1', 'franklin-gothic-urw-2', 'franklin-gothic-urw', helvetica, arial, sans-serif;
     font-size: 14px;
     padding-top: 3px;
     text-align: center; }
   .bb-input::input-placeholder, .bb-input_other-amount::input-placeholder, .bb-input_note::input-placeholder, .bb-input_no-border-left::input-placeholder, .bb-input[type="text"]::input-placeholder, [type="text"].bb-input_other-amount::input-placeholder, [type="text"].bb-input_note::input-placeholder, [type="text"].bb-input_no-border-left::input-placeholder, .bb-input[type="email"]::input-placeholder, [type="email"].bb-input_other-amount::input-placeholder, [type="email"].bb-input_note::input-placeholder, [type="email"].bb-input_no-border-left::input-placeholder {
-    font-family: 'franklin-gothic-urw', helvetica, arial, sans-serif;
+    font-family: 'franklin-gothic-urw-1', 'franklin-gothic-urw-2', 'franklin-gothic-urw', helvetica, arial, sans-serif;
     font-size: 14px;
     padding-top: 3px;
     text-align: center; }
@@ -287,19 +297,19 @@ a.bb-modal--link-alt {
   font-size: 13px;
   height: 70px; }
   .bb-input_note::-webkit-input-placeholder {
-    font-family: 'franklin-gothic-urw', helvetica, arial, sans-serif;
+    font-family: 'franklin-gothic-urw-1', 'franklin-gothic-urw-2', 'franklin-gothic-urw', helvetica, arial, sans-serif;
     font-size: 14px;
     text-align: left; }
   .bb-input_note::-moz-placeholder {
-    font-family: 'franklin-gothic-urw', helvetica, arial, sans-serif;
+    font-family: 'franklin-gothic-urw-1', 'franklin-gothic-urw-2', 'franklin-gothic-urw', helvetica, arial, sans-serif;
     font-size: 14px;
     text-align: left; }
   .bb-input_note:-ms-input-placeholder {
-    font-family: 'franklin-gothic-urw', helvetica, arial, sans-serif;
+    font-family: 'franklin-gothic-urw-1', 'franklin-gothic-urw-2', 'franklin-gothic-urw', helvetica, arial, sans-serif;
     font-size: 14px;
     text-align: left; }
   .bb-input_note::input-placeholder {
-    font-family: 'franklin-gothic-urw', helvetica, arial, sans-serif;
+    font-family: 'franklin-gothic-urw-1', 'franklin-gothic-urw-2', 'franklin-gothic-urw', helvetica, arial, sans-serif;
     font-size: 14px;
     text-align: left; }
 
@@ -312,6 +322,7 @@ a.bb-modal--link-alt {
 .bb-divider {
   border: 0;
   border-top: 1px dashed #e5e5e5;
+  display: block;
   margin: 20px 0; }
 
 .bb-error_list {
@@ -362,7 +373,7 @@ a.bb-modal--link-alt {
     display: block; }
 
 .branding-bar {
-  font-family: 'franklin-gothic-urw', helvetica, arial, sans-serif;
+  font-family: 'franklin-gothic-urw-1', 'franklin-gothic-urw-2', 'franklin-gothic-urw', helvetica, arial, sans-serif;
   background: #f4ce2b !important;
   height: 50px;
   z-index: 999;
@@ -386,6 +397,7 @@ a.bb-modal--link-alt {
   animation: spin 20s infinite linear; }
 
 .bb-donation-message_text {
+  color: #000;
   font-size: 16px;
   max-width: 525px;
   white-space: nowrap;
@@ -413,7 +425,7 @@ a.bb-modal--link-alt {
   width: 160px;
   vertical-align: middle; }
 
-.bb-button_cta, .bb-button_cta--donate, .bb-button_cta--donate:visited, .bb-button_cta--donate:hover, .bb-button_cta--donate:active, .bb-button_cta--next, .bb-button_cta--next:visited, .bb-button_cta--next:hover, .bb-button_cta--next:active, .bb-button_cta:visited, .bb-button_cta--donate:visited, .bb-button_cta--donate:visited, .bb-button_cta--donate:visited:hover, .bb-button_cta--donate:visited:active, .bb-button_cta--next:visited, .bb-button_cta--next:visited, .bb-button_cta--next:visited:hover, .bb-button_cta--next:visited:active, .bb-button_cta:hover, .bb-button_cta--donate:hover, .bb-button_cta--donate:hover:visited, .bb-button_cta--donate:hover, .bb-button_cta--donate:hover:active, .bb-button_cta--next:hover, .bb-button_cta--next:hover:visited, .bb-button_cta--next:hover, .bb-button_cta--next:hover:active, .bb-button_cta:active, .bb-button_cta--donate:active, .bb-button_cta--donate:active:visited, .bb-button_cta--donate:active:hover, .bb-button_cta--donate:active, .bb-button_cta--next:active, .bb-button_cta--next:active:visited, .bb-button_cta--next:active:hover, .bb-button_cta--next:active {
+button.bb-button_cta, button.bb-button_cta--donate, button.bb-button_cta--donate:visited, button.bb-button_cta--donate:hover, button.bb-button_cta--donate:active, button.bb-button_cta--next, button.bb-button_cta--next:visited, button.bb-button_cta--next:hover, button.bb-button_cta--next:active, button.bb-button_cta:visited, button.bb-button_cta--donate:visited, button.bb-button_cta--donate:visited, button.bb-button_cta--donate:visited:hover, button.bb-button_cta--donate:visited:active, button.bb-button_cta--next:visited, button.bb-button_cta--next:visited, button.bb-button_cta--next:visited:hover, button.bb-button_cta--next:visited:active, button.bb-button_cta:hover, button.bb-button_cta--donate:hover, button.bb-button_cta--donate:hover:visited, button.bb-button_cta--donate:hover, button.bb-button_cta--donate:hover:active, button.bb-button_cta--next:hover, button.bb-button_cta--next:hover:visited, button.bb-button_cta--next:hover, button.bb-button_cta--next:hover:active, button.bb-button_cta:active, button.bb-button_cta--donate:active, button.bb-button_cta--donate:active:visited, button.bb-button_cta--donate:active:hover, button.bb-button_cta--donate:active, button.bb-button_cta--next:active, button.bb-button_cta--next:active:visited, button.bb-button_cta--next:active:hover, button.bb-button_cta--next:active {
   background: #b55300;
   border: none;
   -webkit-box-shadow: none;
@@ -426,6 +438,7 @@ a.bb-modal--link-alt {
   font-weight: normal;
   height: 30px;
   outline: none;
+  opacity: 1;
   text-indent: 0;
   text-shadow: none;
   text-transform: none;
@@ -437,14 +450,14 @@ a.bb-modal--link-alt {
   vertical-align: middle;
   width: auto; }
 
-.bb-button_cta--donate, .bb-button_cta--donate:visited, .bb-button_cta--donate:hover, .bb-button_cta--donate:active {
+button.bb-button_cta--donate, button.bb-button_cta--donate:visited, button.bb-button_cta--donate:hover, button.bb-button_cta--donate:active {
   background: #b55300;
   margin: 0 10px;
   padding: 6px 10px; }
-  .bb-button_cta--donate:hover, .bb-button_cta--donate:visited:hover, .bb-button_cta--donate:hover:hover, .bb-button_cta--donate:active:hover {
+  button.bb-button_cta--donate:hover, button.bb-button_cta--donate:visited:hover, button.bb-button_cta--donate:hover:hover, button.bb-button_cta--donate:active:hover {
     background: #DF6601; }
 
-.bb-button_cta--next, .bb-button_cta--next:visited, .bb-button_cta--next:hover, .bb-button_cta--next:active {
+button.bb-button_cta--next, button.bb-button_cta--next:visited, button.bb-button_cta--next:hover, button.bb-button_cta--next:active {
   background: #53afc9;
   margin: auto;
   width: auto;
@@ -453,7 +466,7 @@ a.bb-modal--link-alt {
   height: 40px;
   font-size: 16px;
   border-radius: 3px; }
-  .bb-button_cta--next:hover, .bb-button_cta--next:visited:hover, .bb-button_cta--next:hover:hover, .bb-button_cta--next:active:hover {
+  button.bb-button_cta--next:hover, button.bb-button_cta--next:visited:hover, button.bb-button_cta--next:hover:hover, button.bb-button_cta--next:active:hover {
     background: #53BBD8;
     font-size: 16px;
     height: 40px; }

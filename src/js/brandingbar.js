@@ -287,8 +287,7 @@ function loadDonationBar(stripeKey) {
       Stripe.setPublishableKey(stripeKey);
     };
     stripeTag.src = 'https://js.stripe.com/v2/';
-
-    var loadingStylesheet = ajax.conditionalGet('link', 'https://s3.amazonaws.com/sunlight-cdn/brandingbar/' + s3Version() + '/css/donatebar.min.css.gz', ['donatebar.css', 'donatebar.min.css', 'donatebar.min.css.gz']);
+    var loadingStylesheet = ajax.conditionalGet('link', 'https://s3.amazonaws.com/sunlight-cdn/brandingbar/' + s3Version() + '/css/donatebar.min.css.gz', ['dona/tebar.css', 'donatebar.min.css', 'donatebar.min.css.gz']);
     var loadingDefaultStylesheet = false;
 
     // Set up bar

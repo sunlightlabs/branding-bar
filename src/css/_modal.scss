@@ -9,7 +9,7 @@ body {
     position: relative;
 }
 
-$font-family: 'franklin-gothic-urw', helvetica, arial, sans-serif;
+$font-family: 'franklin-gothic-urw-1', 'franklin-gothic-urw-2', 'franklin-gothic-urw', helvetica, arial, sans-serif;
 $font-size: 14px;
 
 .bb-overlay {
@@ -79,6 +79,7 @@ $font-size: 14px;
 
 .bb-modal--description {
     font-family: $font-family;
+    font-size: $font-size;
     margin: 0 10px 10px 10px;
     line-height: inherit;
 }
@@ -93,6 +94,7 @@ $font-size: 14px;
 
     > p {
         font-family: $font-family;
+        font-size: 12px;
         line-height: $font-size;
         margin: 12px 0;
     }
@@ -221,6 +223,7 @@ a.bb-modal--link-alt {
 .bb-form-group.fg-1 .bb-input { width: 45px ;}
 
 .bb-label {
+    color: #333;
     cursor: pointer;
     display: inline;
     font-family: $font-family;
@@ -264,6 +267,7 @@ a.bb-modal--link-alt {
     border-radius: 0;
     height: auto;
     font-family: $font-family;
+    font-style: normal;
     vertical-align: baseline;
     height: 30px;
     box-shadow: none;
@@ -275,14 +279,17 @@ a.bb-modal--link-alt {
         margin-right: 8px;
         cursor: pointer;
         height: auto;
+        vertical-align: baseline;
         width: 13px;
     }
 
     &[type="checkbox"] {
+        cursor: pointer;
         margin-left: 0;
         margin-right: 7px;
-        cursor: pointer;
         height: auto;
+        width: auto;
+        vertical-align: baseline;
     }
 
     &:focus {
@@ -294,6 +301,8 @@ a.bb-modal--link-alt {
 
     &:invalid {
         background: #fff;
+        box-shadow: none;
+        -webkit-box-shadow: none;
     }
     &:focus:invalid:focus {
         outline: none;
@@ -374,6 +383,7 @@ a.bb-modal--link-alt {
 .bb-divider {
     border: 0;
     border-top: 1px dashed #e5e5e5;
+    display: block;
     margin: 20px 0;
 }
 

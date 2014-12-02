@@ -2,7 +2,7 @@
 @import 'modal';
 
 .branding-bar {
-    font-family: 'franklin-gothic-urw', helvetica, arial, sans-serif;
+    font-family: $font-family;
     background: #f4ce2b !important;
     height: 50px;
     z-index: 999;
@@ -31,13 +31,14 @@
 }
 
 .bb-donation-message_text {
-  font-size: 16px;
-  max-width: 525px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: inline-block;
-  float: left;
+    color: #000;
+    font-size: 16px;
+    max-width: 525px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    float: left;
 }
 
 .bb-strong {
@@ -62,10 +63,10 @@
     vertical-align: middle;
 }
 
-.bb-button_cta,
-.bb-button_cta:visited,
-.bb-button_cta:hover,
-.bb-button_cta:active {
+button.bb-button_cta,
+button.bb-button_cta:visited,
+button.bb-button_cta:hover,
+button.bb-button_cta:active {
     background: #b55300;
     border: none;
     -webkit-box-shadow: none;
@@ -78,6 +79,7 @@
     font-weight: normal;
     height: 30px;
     outline: none;
+    opacity: 1;
     text-indent: 0;
     text-shadow: none;
     text-transform: none;
@@ -90,10 +92,10 @@
     width: auto;
     }
 
-.bb-button_cta--donate,
-.bb-button_cta--donate:visited,
-.bb-button_cta--donate:hover,
-.bb-button_cta--donate:active {
+button.bb-button_cta--donate,
+button.bb-button_cta--donate:visited,
+button.bb-button_cta--donate:hover,
+button.bb-button_cta--donate:active {
     @extend .bb-button_cta;
 
     background: #b55300;
@@ -105,10 +107,10 @@
     }
 }
 
-.bb-button_cta--next,
-.bb-button_cta--next:visited,
-.bb-button_cta--next:hover,
-.bb-button_cta--next:active {
+button.bb-button_cta--next,
+button.bb-button_cta--next:visited,
+button.bb-button_cta--next:hover,
+button.bb-button_cta--next:active {
     @extend .bb-button_cta;
 
     background: #53afc9;
