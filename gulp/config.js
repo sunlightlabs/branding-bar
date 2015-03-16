@@ -1,5 +1,6 @@
 module.exports = {
   paths: {
+    donation : 'src/donation/*.html',
     js  : 'src/js/**/*.js',
     css : 'src/css/*.scss',
     img : 'src/img/**/*',

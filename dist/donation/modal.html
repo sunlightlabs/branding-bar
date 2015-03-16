@@ -3,17 +3,37 @@
 
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <link rel="stylesheet" href="modal.css">
+    <link rel="stylesheet" href="../dist/css/modal.css">
     <link rel="stylesheet" href="http://sunlight-cdn.s3.amazonaws.com/sf-icons/0.2/css/sf-icons.css">
     <script src="//use.typekit.net/vbr3fow.js"></script>
     <script>try{Typekit.load();}catch(e){}</script>
 </head>
 
-<div class="bb-overlay is-active"></div>
+<div class="bb-overlay"></div>
 
-<div class="bb-modal_donation is-active">
+<div class="bb-modal_prompt">
     <div class="bb-modal_donation--header">
-        <div class="bb-modal-form-step-1 is-active">
+        <div class="bb-modal--action js-modal-close">
+            <span class="bb-modal--action-icon"><svg class="bb-icon_close" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8"><path d="M1.41 0l-1.41 1.41.72.72 1.78 1.81-1.78 1.78-.72.69 1.41 1.44.72-.72 1.81-1.81 1.78 1.81.69.72 1.44-1.44-.72-.69-1.81-1.78 1.81-1.81.72-.72-1.44-1.41-.69.72-1.78 1.78-1.81-1.78-.72-.72z" /></svg></span>
+        </div>
+        <div>
+            <img class="bb-sunlight-rings" src="https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.4/img/sunlight-rings.svg">
+        </div>
+        <span class="bb-modal--title"><strong>It's Sunshine Week!</strong><br>Help support OpenGov and Transparency!</span>
+        <div>
+            <button class="bb-button_cta--next js-open-form" type="button">
+                Donate Now
+                <svg class="bb-chevron_pulse" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8"><path d="M1.5 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z" transform="translate(1)" /></svg>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="bb-modal_donation">
+
+    <div class="bb-modal_donation--header">
+
+        <div class="bb-modal-form-step-1">
             <div class="bb-modal--action js-modal-close">
                 <span class="bb-modal--action-icon"><svg class="bb-icon_close" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8"><path d="M1.41 0l-1.41 1.41.72.72 1.78 1.81-1.78 1.78-.72.69 1.41 1.44.72-.72 1.81-1.81 1.78 1.81.69.72 1.44-1.44-.72-.69-1.81-1.78 1.81-1.81.72-.72-1.44-1.41-.69.72-1.78 1.78-1.81-1.78-.72-.72z" /></svg></span>
             </div>
@@ -40,7 +60,7 @@
     <div class="bb-modal--content">
 
         <form action="https://sunlightfoundation.com/engage/brandingbar/remote/" method="post" id="bb-transaction-form">
-        <div class="bb-modal-form-step-1 is-active">
+        <div class="bb-modal-form-step-1">
 
             <div class="bb-form-fieldset_donation">
                 <label class="bb-label_radio"><input class="bb-input" type="radio" name="amount" value="10.00" required>$10</input></label>
@@ -241,7 +261,7 @@
 
 </div>
 
-    <script src="modal.js"></script>
+    <script src="../dist/js/donation.js"></script>
     <!--[if IE 8]>
         <script src="https://s3.amazonaws.com/sf-icons/js/sf-icons.js"></script>
     <![endif]-->

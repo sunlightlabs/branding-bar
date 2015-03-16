@@ -1,4 +1,5 @@
-/* Modal */
+@import 'mixins';
+@import 'shared';
 
 html, body {
     margin: 0;
@@ -9,8 +10,6 @@ body {
     position: relative;
 }
 
-$font-family: 'franklin-gothic-urw-1', 'franklin-gothic-urw-2', 'franklin-gothic-urw', helvetica, arial, sans-serif;
-$font-size: 14px;
 
 .bb-overlay {
     @include background-rgba(rgba(0,0,0,0.75));
@@ -22,12 +21,12 @@ $font-size: 14px;
     z-index: 1000;
     visibility: hidden;
     opacity: 0;
+    transition: opacity 300ms;
 
     &.is-active {
         display: block;
         visibility: visible;
         opacity: 1;
-        transition: opacity 300ms;
     }
 }
 
@@ -140,12 +139,13 @@ a.bb-modal--link-alt {
     text-decoration: underline;
 }
 
-/* Modal: Donation  Form*/
+/* Modals Setup */
 
 #bb-transaction-form {
     margin: 0;
 }
 
+.bb-modal_prompt,
 .bb-modal_donation {
     @extend .bb-modal;
 
@@ -153,6 +153,41 @@ a.bb-modal--link-alt {
         background-color: #f3da74;
     }
 }
+
+/* Modal: Prompt */
+
+.bb-modal_prompt {
+    visibility: visible;
+    
+    .bb-modal_donation--header {
+        padding: 20px 20px 50px;
+        border-radius: 4px;
+    }
+
+    .bb-sunlight-rings {
+        margin: 5px auto;
+        height: 50px;
+        position: static;
+        width: 50px;
+    }
+    
+    .bb-modal--title {
+        font-size: 24px;
+        line-height: 32px;
+        margin: 10px 0 35px;
+    }
+    
+    button.bb-button_cta--next,
+    button.bb-button_cta--next:hover {
+        background: #b55300;
+    }
+
+    button.bb-button_cta--next:hover {
+        background: #DF6601;
+    }
+}
+
+/* Modal: Donation Form */
 
 .bb-modal_donation--header {
     @extend .bb-modal--header;

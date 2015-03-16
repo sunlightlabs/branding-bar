@@ -96,110 +96,9 @@ var toggle = function (els, opts) {
   }
 };
 
-var labelize = function(name) {
-  if (name === 'cvc') {
-    name = 'CVC';
-  } else if (name === 'amount_other') {
-    name = 'Amount';
-  } else {
-    var properCase = function(txt) {
-      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-    }
-    name = name.replace('_', ' ')
-               .replace('-', '. ')
-               .replace(/\w\S*/g, properCase);
-  }
-  return name;
-};
-
-var validateRequired = function($form, fieldNames, attr) {
-  attr = attr || 'name';
-  var errors = [];
-  for (var i = 0; i < fieldNames.length; i++) {
-    var fieldName = fieldNames[i];
-    var $elem = $form.querySelector('[' + attr + '=' + fieldName + ']');
-    if (!$elem.value) {
-      errors.push(labelize(fieldName) + ' is a required field');
-      dom.addClass($elem, 'bb-input_error');
-    } else {
-      dom.removeClass($elem, 'bb-input_error');
-    }
-  }
-  return errors;
-};
-
-var displayErrors = function($container, errors) {
-  var $list = document.createElement('ul');
-  dom.addClass($list, 'bb-error_list');
-  for (var i = 0; i < errors.length; i++) {
-    var $item = document.createElement('li');
-    $item.innerHTML = errors[i];
-    $list.appendChild($item);
-  }
-  $container.appendChild($list);
-  dom.show($container);
-}
-
-var formatAmount = function(amount) {f
-  if (amount.value) {
-    amount.value = parseFloat(amount.value).toFixed(2);
-    return amount.value;
-  }
-};
-
-var stripeResponseHandler = function(status, response) {
-
-  var $form = document.querySelector('#bb-transaction-form');
-  var $errContainer = $form.querySelector('.bb-modal-form-step-2 .bb-error-message');
-  dom.empty($errContainer);
-
-  if (response.error) {
-
-    displayErrors($errContainer, [response.error.message]);
-    window.console && console.log(response.error.message);
-
-  } else {
-
-    var token = response.id;
-    var $input = document.createElement('input');
-    $input.type = 'hidden';
-    $input.name = 'stripe_token';
-    $input.value = token;
-    $form.appendChild($input);
-
-    var data = {
-      email: 'jcarbaugh@gmail.com',
-      first_name: 'Jeremy',
-      last_name: 'Carbaugh',
-      stripe_token: $form.querySelector('[name=stripe_token]').value
-    };
-
-    var data = dom.serializeForm($form);
-    if (!data.amount) {
-      data.amount = data.amount_other;
-    }
-    delete data.amount_other;
-
-    dom.hide($errContainer);
-
-    var step2 = document.querySelectorAll('.bb-modal-form-step-2');
-    var step3 = document.querySelectorAll('.bb-modal-form-step-3');
-
-    toggle(step2, {toggle: 'is-active'});
-    toggle(step3, {toggle: 'is-active'});
-
-    var url = 'https://sunlightfoundation.com/engage/donate/remote/';
-    ajax.post(url, data, function(err, resp) {
-      var progress = document.querySelector('.bb-modal-message-progress');
-      var thanks = document.querySelector('.bb-modal-message-thankyou');
-      toggle(progress, {toggle: 'is-hidden'});
-      toggle(thanks, {toggle: 'is-active'});
-    });
-
-  }
-};
 
 function loadBrandingBar() {
+
   var bar = document.querySelector('[data-' + namespace() + '-brandingbar]');
   if (bar) {
     var panel = document.querySelector('#' + namespace() + '_panel');
@@ -275,19 +174,16 @@ function loadBrandingBar() {
   }
 }
 
-function loadDonationBar(stripeKey) {
+var CURRENT_CAMPAIGN = 'state-sunshineWeek2015';
+
+function loadDonationBar() {
+
   var bar = document.querySelector('[data-' + namespace() + '-brandingbar]');
   var body = document.querySelector('body');
   if (bar) {
     // var panel = document.querySelector('#' + namespace() + '_panel');
 
-    var stripeTag = document.createElement('script');
-    document.querySelector('head').appendChild(stripeTag);
-    stripeTag.onload = function(e) {
-      Stripe.setPublishableKey(stripeKey);
-    };
-    stripeTag.src = 'https://js.stripe.com/v2/';
-    var loadingStylesheet = ajax.conditionalGet('link', 'https://s3.amazonaws.com/sunlight-cdn/brandingbar/' + s3Version() + '/css/donatebar.min.css.gz', ['dona/tebar.css', 'donatebar.min.css', 'donatebar.min.css.gz']);
+    var loadingStylesheet = ajax.conditionalGet('link', 'https://s3.amazonaws.com/sunlight-cdn/brandingbar/' + s3Version() + '/css/donatebar.min.css.gz', ['donatebar.css', 'donatebar.min.css', 'donatebar.min.css.gz']);
     var loadingDefaultStylesheet = false;
 
     // Set up bar
@@ -295,13 +191,19 @@ function loadDonationBar(stripeKey) {
       bar.innerHTML = render(donationTemplate);
     }
 
-    // Set up modal
+    // Set up donation modal
 
-    modal = document.createElement('div');
-    bar.parentElement.insertBefore(modal, bar);
+    function newDonation() {
+      var iframe = document.createElement("iframe");
 
-    modal.innerHTML = render(modalTemplate);
-
+      iframe.setAttribute('class', 'bb-donation-modal');
+      // iframe.setAttribute('src', 'http://localhost:4000/modal/modal.html');
+      iframe.setAttribute('src', 'https://s3.amazonaws.com/sunlight-cdn/brandingbar/' + s3Version() + '/donation/modal.html');
+      iframe.setAttribute("style", "z-index: 9999; display: block; border: 0px none transparent; overflow-x: hidden; overflow-y: auto; visibility: visible; margin: 0px; padding: 0px; -webkit-tap-highlight-color: transparent; position: fixed; left: 0px; top: 0px; width: 100%; height: 100%;");
+      iframe.allowtransparency = true;
+      iframe.frameBorder = 0;
+      document.body.appendChild(iframe);
+    }
 
     var donateButton = document.querySelectorAll('.js-modal-open');
     var modalClose = document.querySelectorAll('.js-modal-close');
@@ -309,181 +211,107 @@ function loadDonationBar(stripeKey) {
     var modal = document.querySelector('.bb-modal_donation');
     var modalPrompt = document.querySelector('.bb-modal_initial-prompt');
 
-    var step1 = document.querySelectorAll('.bb-modal-form-step-1');
-    var step2 = document.querySelectorAll('.bb-modal-form-step-2');
-    var step3 = document.querySelectorAll('.bb-modal-form-step-3');
-
-    var nextFrame1 = document.querySelectorAll('.bb-modal-form-step-1 .js-next-frame');
-    var nextFrame2 = document.querySelectorAll('.bb-modal-form-step-2 .js-next-frame');
-
-    var prevFrame2 = document.querySelectorAll('.bb-modal-form-step-2 .js-prev-frame');
-
-    function resetDonationForm() {
-      // clear form input fields
-      var formInput = document.querySelectorAll('.bb-input:not([type="radio"])');
-
-      for (var i = 0; i < formInput.length; i++) {
-        formInput[i].value = '';
-      }
-
-      // clear form input error styling
-      var formInputErrors = document.querySelectorAll('.bb-input_error');
-      dom.removeClass(formInputErrors, 'bb-input_error');
-
-      // clear form error message
-      var formErrorMessage = document.querySelector('.bb-error-message');
-      dom.hide(formErrorMessage);
-
-      // reset form steps after modal is hidden
-      setTimeout(function() {
-        dom.removeClass(step1, 'is-active');
-        dom.removeClass(step2, 'is-active');
-        dom.removeClass(step3, 'is-active');
-      }, 300);
-    }
-
     // open donate modal
     event.on(donateButton, 'click', function(e){
       e.preventDefault ? e.preventDefault() : e.returnValue = false;
-      modal.style.visibility = '';
-      dom.addClass(overlay, 'is-active');
-      dom.addClass(modal, 'is-active');
-      dom.addClass(step1, 'is-active');
+      newDonation();
     });
+  }
 
-    // close donate modal
-    event.on(modalClose, 'click', function(e){
-      e.preventDefault ? e.preventDefault() : e.returnValue = false;
-      dom.removeClass(overlay, 'is-active');
-      dom.removeClass(modal, 'is-active');
+  window.addEventListener('message', receiveMessage, false);
 
-      resetDonationForm();
-    });
+  if (isNewToCampaign(CURRENT_CAMPAIGN)) {
+    newDonation();
+  }
+}
 
-    // custom donation amount setup
-    var customAmountField = document.querySelectorAll('.bb-input_other-amount');
-    var customAmountRadio = document.querySelector('.bb-input[data-radio-custom]');
-
-    // select correct radio button when custom amount is clicked
-    event.on(customAmountField, 'click', function(e){
-      customAmountRadio.checked = true;
-    });
-
-    // format value in custom amount field
-    event.on(customAmountField, 'change', function(e) {
-      var amount = document.querySelector('input[name=amount_other]');
-      formatAmount(amount);
-
-    // set radio value to formatted value
-      customAmountRadio.value = formatAmount(amount);
-    });
-
-
-    // proceed to next steps
-
-    // step 1
-    event.on(nextFrame1, 'click', function(e) {
-
-      // grab donation amount from checked radio
-      var donationRadios = document.getElementsByName('amount');
-
-      for (var i = 0; i < donationRadios.length; i++) {
-          if (donationRadios[i].checked) {
-              var donationValue = donationRadios[i].value;
-
-              // update donation amount in messages
-              var donationUpdate = document.querySelectorAll('.js-val-donation');
-              for (var i = 0; i < donationUpdate.length; i++) {
-                donationUpdate[i].innerHTML = '$' + donationValue;
-              }
-              break;
-          }
+/**
+ * Checks whether the visitor is new to the specified campaign.
+ * If yes, then this also sets the campaign property so that the next time
+ * the user visits, this function will return false.
+ */
+function isNewToCampaign(campaign, markVisited) {
+  if (supportsLocalStorage()) {
+    var userState = localStorage.getItem('CAMPAIGN_PROPERTY');
+    
+    if (userState !== campaign) {
+      if (markVisited) {
+        localStorage.setItem('CAMPAIGN_PROPERTY', campaign);
       }
+      
+      return true;
+    }
+  }
 
-      var errors = [];
-      var $form = document.querySelector('#bb-transaction-form');
-      var $amountOther = document.querySelector('.bb-input_other-amount');
-      var fieldNames = ['first_name', 'last_name', 'address', 'city', 'state', 'zipcode'];
+  return false;
+}
 
-      dom.removeClass($amountOther, 'bb-input_error');
-      if ($form.elements['amount'].value === 'custom') {
-        fieldNames.push('amount_other')
-      }
+function receiveMessage(event) {
+    // if (event.origin !== "http://localhost:4000") {
+    if (event.origin !== "https://sunlight-cdn.s3.amazonaws.com") {
+      return false;
+    }
 
-      errors = errors.concat(validateRequired($form, fieldNames));
+    var modal = document.querySelector('.bb-donation-modal');
 
-      var $errContainer = $form.querySelector('.bb-modal-form-step-1 .bb-error-message');
-      dom.empty($errContainer);
-      if (errors.length > 0) {
-        displayErrors($errContainer, errors);
-      } else {
-        dom.hide($errContainer);
-        toggle(step1, {toggle: 'is-active'});
-        toggle(step2, {toggle: 'is-active'});
-      }
+    console.warn(event.data);
 
-    });
+    if (event.data === 'donation:ready' && isNewToCampaign(CURRENT_CAMPAIGN, true)) {
+      modal.contentWindow.postMessage('donation:newVisitor', '*');
+      postPropertyId();
+    } else if (event.data === 'donation:ready') {
+      modal.contentWindow.postMessage('donation:open', '*');
+      postPropertyId();
+    } else if (event.data === 'donation:remove') {
+      window.setTimeout(function () {
+        modal.parentNode.removeChild(modal);
+      }, 300);
+    }
+}
 
-    // step 2
-    event.on(nextFrame2, 'click', function(e) {
-      // grab email address to populate message
-      var emailAddress = document.querySelector('.bb-input[data-input-email]').value;
-      document.querySelector('.js-val-email').innerHTML = emailAddress.toString();
+function postPropertyId() {
+  var bar = document.querySelector('[data-' + namespace() + '-brandingbar]'),
+      propertyId = bar.getAttribute('data-' + namespace() + '-property-id'),
+      modal = document.querySelector('.bb-donation-modal');
 
-      var $form = document.querySelector('#bb-transaction-form');
-      var propertyId = bar.getAttribute('data-' + namespace() + '-property-id');
-      if (propertyId) {
-        var $elem = document.createElement('input');
-        $elem.type = 'hidden';
-        $elem.name = 'source';
-        $elem.value = propertyId;
-        $form.appendChild($elem);
-      }
+  modal.contentWindow.postMessage('donation:propertyId:' + propertyId, '*');
+}
 
-      var errors = [];
-      errors = errors.concat(validateRequired($form, ['email']));
-      errors = errors.concat(validateRequired($form, ['number', 'exp-month', 'exp-year', 'cvc'], 'data-stripe'));
-
-      var $errContainer = $form.querySelector('.bb-modal-form-step-2 .bb-error-message');
-      dom.empty($errContainer);
-      if (errors.length > 0) {
-        displayErrors($errContainer, errors);
-      } else {
-        dom.hide($errContainer);
-        Stripe.card.createToken($form, stripeResponseHandler);
-      }
-
-    });
-
-    event.on(prevFrame2, 'click', function(e) {
-      toggle(step2, {toggle: 'is-active'});
-      toggle(step1, {toggle: 'is-active'});
-    });
-
-    var triggerAdditionalFields = document.querySelectorAll('.js-trigger-note');
-    var additionalFields = document.querySelector('.bb-form-additional-fields');
-
-    event.on(triggerAdditionalFields, 'change', function() {
-        toggle(additionalFields, {toggle: 'is-active'});
-    });
-
+// test for local storage support
+function supportsLocalStorage() {
+  var test = 'test';
+  try {
+    localStorage.setItem(test, test);
+    localStorage.removeItem(test);
+    return true;
+  } catch(e) {
+    return false;
   }
 }
 
 function loadBar() {
-  var url = 'https://sunlightfoundation.com/engage/brandingbar/config/';
-  ajax.get(url, function(err, content) {
-    if (content && content !== '') {
-      var data = JSON.parse(content);
-      if (data.type === 'donation') {
-        loadDonationBar(data.stripe.key);
-      } else {
-        loadBrandingBar();
-      }
-    } else {
-      loadBrandingBar();
-    }
-  });
+  // var url = 'https://sunlightfoundation.com/engage/brandingbar/config/';
+  // ajax.get(url, function(err, content) {
+  //   if (content && content !== '') {
+  //     var data = JSON.parse(content);
+  //     if (data.type === 'donation') {
+  //       loadDonationBar();
+  //     } else {
+  //       loadBrandingBar();
+  //     }
+  //   } else {
+  //     loadBrandingBar();
+  //   }
+  // });
+
+  if(location.hostname == "congress.sunlightfoundation.com"){
+    loadDonationBar();
+  } else {
+    loadBrandingBar();
+  }
 }
 
 loadBar();
+
+// Uncomment to clear local storage for testing
+// localStorage.removeItem('CAMPAIGN_PROPERTY');
