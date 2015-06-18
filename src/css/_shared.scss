@@ -1,0 +1,160 @@
+$font-family: 'franklin-gothic-urw-1', 'franklin-gothic-urw-2', 'franklin-gothic-urw', helvetica, arial, sans-serif;
+$font-size: 14px;
+
+.bb-sunlight-rings {
+    left: -50px;
+    top: -10px;
+    position: absolute;
+    -webkit-animation: spin 20s infinite linear;
+    -moz-animation: spin 20s infinite linear;
+    animation: spin 20s infinite linear;
+}
+
+.bb-strong {
+    font-weight: 500;
+}
+
+button.bb-button_cta,
+button.bb-button_cta:visited,
+button.bb-button_cta:hover,
+button.bb-button_cta:active {
+    background: #b55300;
+    border: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: normal;
+    height: 30px;
+    outline: none;
+    opacity: 1;
+    text-indent: 0;
+    text-shadow: none;
+    text-transform: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    vertical-align: middle;
+    width: auto;
+    }
+
+button.bb-button_cta--donate,
+button.bb-button_cta--donate:visited,
+button.bb-button_cta--donate:hover,
+button.bb-button_cta--donate:active {
+    @extend .bb-button_cta;
+
+    background: #b55300;
+    margin: 0 10px;
+    padding: 6px 10px;
+
+    &:hover {
+        background: #DF6601;
+    }
+}
+
+button.bb-button_cta--next,
+button.bb-button_cta--next:visited,
+button.bb-button_cta--next:hover,
+button.bb-button_cta--next:active {
+    @extend .bb-button_cta;
+
+    background: #53afc9;
+    margin: auto;
+    width: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    height: 40px;
+    font-size: 16px;
+    border-radius: 3px;
+
+    &:hover {
+        background: #53BBD8;
+        font-size: 16px;
+        height: 40px;
+    }
+}
+
+.bb-chevron {
+    fill: #fff;
+    margin-left: 5px;
+    margin-right: -2px;
+}
+
+.bb-chevron_pulse {
+    @extend .bb-chevron;
+    -webkit-animation: pulse 800ms infinite ease-in-out;
+    -moz-animation: pulse 800ms infinite ease-in-out;
+    animation: pulse 800ms infinite ease-in-out;
+}
+
+.bb-icon_close,
+.bb-icon_chevron-left {
+    fill: #fff;
+}
+
+@-webkit-keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    };
+}
+
+@-moz-keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    };
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    };
+}
+
+
+@-webkit-keyframes pulse {
+    0%, 100% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(2px);
+    };
+}
+
+@-moz-keyframes pulse {
+    0%, 100% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(2px);
+    };
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(2px);
+    };
+}

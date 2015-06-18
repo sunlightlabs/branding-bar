@@ -1,0 +1,51 @@
+@import 'mixins';
+@import 'shared';
+
+.branding-bar {
+    font-family: $font-family;
+    background: #f4ce2b !important;
+    height: 50px;
+    z-index: 999;
+    position: relative;
+    overflow: hidden;
+}
+
+.bb-donation-bar_container {
+    width: 960px;
+    margin: auto;
+}
+
+.bb-donation-message {
+    float: left;
+    line-height: 50px;
+    position: relative;
+}
+
+.bb-donation-message_text {
+    color: #000;
+    font-size: 16px;
+    max-width: 525px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    float: left;
+}
+
+.bb-donation-bar_logo {
+    float: right;
+    line-height: 50px;
+}
+
+.bb-donation-bar_sunlight-logo {
+    background: url('https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.4/img/sunlight-logo.png') no-repeat 50% 50%;
+    background: rgba(0, 0, 0, 0) url('https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.4/img/sunlight-logo.svg') no-repeat 50% 50%;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+    color: transparent;
+    display: inline-block;
+    font-size: 0;
+    height: 30px;
+    width: 160px;
+    vertical-align: middle;
+}

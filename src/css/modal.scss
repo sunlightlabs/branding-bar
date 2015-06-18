@@ -1,0 +1,487 @@
+@import 'mixins';
+@import 'shared';
+
+html, body {
+    margin: 0;
+    min-height: 100%;
+}
+
+body {
+    position: relative;
+}
+
+
+.bb-overlay {
+    @include background-rgba(rgba(0,0,0,0.75));
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 300ms;
+
+    &.is-active {
+        display: block;
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+/* Modal Base */
+
+.bb-modal {
+    width: 550px;
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    margin-left: -250px;
+    background-color: #eee;
+    border-radius: 4px;
+    z-index: 1001;
+    opacity: 0;
+    visibility: hidden;
+    box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.25);
+    transition: all 300ms;
+    font: {
+        family: $font-family;
+        size: $font-size;
+    }
+    color: #333;
+
+    &.is-active {
+        display: block;
+        visibility: visible;
+        opacity: 1;
+        top: 0px;
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+}
+
+.bb-modal--header {
+    border-radius: 4px 4px 0 0;
+    padding: 10px 50px;
+    position: relative;
+    text-align: center;
+}
+
+.bb-modal--title {
+    @extend .bb-strong;
+    font-size: 19px;
+    margin: 20px 0 15px;
+    display: inline-block;
+    line-height: 19px;
+}
+
+.bb-modal--description {
+    font-family: $font-family;
+    font-size: $font-size;
+    margin: 0 10px 10px 10px;
+    line-height: inherit;
+}
+
+.bb-modal--footer {
+    background-color: #f0eded;
+    border-radius: 0 0 4px 4px;
+    padding: 10px 25px;
+    font-size: 12px;
+    text-align: center;
+    color: #777;
+
+    > p {
+        font-family: $font-family;
+        font-size: 12px;
+        line-height: $font-size;
+        margin: 12px 0;
+    }
+}
+
+.bb-modal--content {
+    padding: 30px 50px 10px;
+    background-color: #f8f8f8;
+}
+
+.bb-modal--action {
+    @include background-rgba(rgba(0,0,0,0.15));
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    color: #fff;
+    cursor: pointer;
+}
+
+.bb-modal--action-icon {
+    line-height: 20px;
+    font-size: 14px;
+
+    > svg {
+        position: relative;
+        display: inline-block;
+        text-align: center;
+    }
+}
+
+a.bb-modal--link {
+    color: #488293;
+    text-decoration: underline;
+}
+
+a.bb-modal--link-alt {
+    margin-top: 10px;
+    margin-right: 10px;
+    color: #999;
+    text-decoration: underline;
+}
+
+/* Modals Setup */
+
+#bb-transaction-form {
+    margin: 0;
+}
+
+.bb-modal_prompt,
+.bb-modal_donation {
+    @extend .bb-modal;
+
+    .bb-modal--header {
+        background-color: #f3da74;
+    }
+}
+
+/* Modal: Prompt */
+
+.bb-modal_prompt {
+    visibility: visible;
+    
+    .bb-modal_donation--header {
+        padding: 20px 20px 50px;
+        border-radius: 4px;
+    }
+
+    .bb-sunlight-rings {
+        margin: 5px auto;
+        height: 50px;
+        position: static;
+        width: 50px;
+    }
+    
+    .bb-modal--title {
+        font-size: 24px;
+        line-height: 32px;
+        margin: 10px 0 35px;
+    }
+    
+    button.bb-button_cta--next,
+    button.bb-button_cta--next:hover {
+        background: #b55300;
+    }
+
+    button.bb-button_cta--next:hover {
+        background: #DF6601;
+    }
+}
+
+/* Modal: Donation Form */
+
+.bb-modal_donation--header {
+    @extend .bb-modal--header;
+
+    background-color: #f3da74;
+}
+
+.bb-modal-form-step-1,
+.bb-modal-form-step-2,
+.bb-modal-form-step-3 {
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+
+    &.is-active {
+        display: block;
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+.bb-form-fieldset {
+    width: 450px;
+    margin-bottom: 15px;
+    overflow: auto;
+}
+
+.bb-form-fieldset_donation {
+    @extend .form-fieldset;
+    overflow: visible;
+}
+
+.bb-form-fieldset_checkmark {
+    @extend .form-fieldset;
+    margin-bottom: 5px;
+}
+
+.bb-form-fieldset_btns {
+    @extend .form-fieldset;
+
+    margin-top: 30px;
+    margin-bottom: 10px;
+    text-align: right;
+}
+
+.bb-form-additional-fields {
+    display: none;
+
+    &.is-active {
+        display: block;
+    }
+}
+
+.bb-form-group {
+    float: left;
+    display: inline-block;
+}
+
+.bb-form-group.fg-10 .bb-input { width: 450px ;}
+.bb-form-group.fg-9 .bb-input { width: 405px ;}
+.bb-form-group.fg-8 .bb-input { width: 360px ;}
+.bb-form-group.fg-7 .bb-input { width: 315px ;}
+.bb-form-group.fg-6 .bb-input { width: 270px ;}
+.bb-form-group.fg-5 .bb-input { width: 225px ;}
+.bb-form-group.fg-4 .bb-input { width: 180px ;}
+.bb-form-group.fg-3 .bb-input { width: 135px ;}
+.bb-form-group.fg-2 .bb-input { width: 90px ;}
+.bb-form-group.fg-1 .bb-input { width: 45px ;}
+
+.bb-label {
+    color: #333;
+    cursor: pointer;
+    display: inline;
+    float: none;
+    font-family: $font-family;
+    font-size: $font-size;
+    font-weight: normal;
+    margin-bottom: 0;
+    line-height: $font-size;
+
+    > span {
+        display: block;
+        margin-left: 2px;
+        margin-bottom: 0;
+
+        &.other-amount-prefix {
+            font-size: 15px;
+        }
+    }
+}
+
+.bb-label_radio {
+    @extend .bb-label;
+    margin-right: 23px;
+}
+
+.bb-label_radio_custom{
+    @extend .bb-label;
+    margin-right: 0px;
+}
+
+.bb-input,
+.bb-input[type="text"],
+.bb-input[type="email"] {
+    background: #fff;
+    box-sizing: border-box;
+    padding: 5px 6px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+    color: #444;
+    margin-top: 5px;
+    margin-bottom: 0;
+    border-radius: 0;
+    height: auto;
+    font-family: $font-family;
+    font-style: normal;
+    vertical-align: baseline;
+    height: 30px;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+
+    &[type="radio"] {
+        margin-left: 0;
+        margin-top: 0;
+        margin-right: 8px;
+        cursor: pointer;
+        height: auto;
+        vertical-align: baseline;
+        width: 13px;
+    }
+
+    &[type="checkbox"] {
+        cursor: pointer;
+        margin-left: 0;
+        margin-right: 7px;
+        height: auto;
+        width: auto;
+        vertical-align: baseline;
+    }
+
+    &:focus {
+        outline: none;
+        border: 1px solid #999;
+        box-shadow: none;
+        -webkit-box-shadow: none;
+    }
+
+    &:invalid {
+        background: #fff;
+        box-shadow: none;
+        -webkit-box-shadow: none;
+    }
+    &:focus:invalid:focus {
+        outline: none;
+        background: #fff;
+        border: 1px solid #e9322d;
+        box-shadow: none;
+        -webkit-box-shadow: none;
+    }
+
+    &::-webkit-input-placeholder {
+        font-family: $font-family;
+        font-size: $font-size;
+        padding-top: 2px;
+        text-align: center;
+    }
+    &::-moz-placeholder {
+        font-family: $font-family;
+        font-size: $font-size;
+        padding-top: 3px;
+        text-align: center;
+    }
+    &:-ms-input-placeholder {
+        font-family: $font-family;
+        font-size: $font-size;
+        padding-top: 3px;
+        text-align: center;
+    }
+    &::input-placeholder {
+        font-family: $font-family;
+        font-size: $font-size;
+        padding-top: 3px;
+        text-align: center;
+    }
+}
+
+.bb-input_other-amount {
+    @extend .bb-input;
+    width: 116px;
+}
+
+.bb-input_note {
+    @extend .bb-input;
+    font-size: 13px;
+    height: 70px;
+
+    &::-webkit-input-placeholder {
+        font-family: $font-family;
+        font-size: $font-size;
+        text-align: left;
+    }
+    &::-moz-placeholder {
+        font-family: $font-family;
+        font-size: $font-size;
+        text-align: left;
+    }
+    &:-ms-input-placeholder {
+        font-family: $font-family;
+        font-size: $font-size;
+        text-align: left;
+    }
+    &::input-placeholder {
+        font-family: $font-family;
+        font-size: $font-size;
+        text-align: left;
+    }
+}
+
+.bb-input_no-border-left {
+    @extend .bb-input;
+
+    border-left: 0;
+}
+
+.bb-input_error {
+    border: 1px solid #b55300;
+}
+
+.bb-divider {
+    border: 0;
+    border-top: 1px dashed #e5e5e5;
+    display: block;
+    margin: 20px 0;
+}
+
+.bb-error_list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    > li {
+        line-height: 17px;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+.bb-error-message {
+    width: 100%;
+    background: pink;
+    padding: 10px;
+    border: 1px solid red;
+    border-radius: 2px;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+    text-align: left;
+    display: none;
+
+    &.is-active {
+        display: block;
+    }
+}
+
+.bb-modal-message {
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.bb-modal-message-progress {
+    @extend .bb-modal-message;
+    text-align: center;
+
+    &.is-hidden {
+        display: none;
+    }
+}
+
+.bb-progress_icon {
+    fill: #999;
+    -webkit-animation: spin 700ms infinite linear;
+    -moz-animation: spin 700ms infinite linear;
+    animation: spin 700ms infinite linear;
+}
+
+.bb-progress_text {
+    color: #999;
+}
+
+.bb-modal-message-thankyou {
+    @extend .bb-modal-message;
+    text-align: left;
+    display: none;
+
+    &.is-active {
+        display: block;
+    }
+}

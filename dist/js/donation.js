@@ -1,21 +1,24 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-
-
 require('es5-shim');
 
 var event = require('./util/event'),
     dom = require('./util/dom'),
-    ajax = require('./util/ajax'),
-    panelTemplate = require('./template/panel'),
-    barTemplate = require('./template/bar'),
-    donationTemplate = require('./template/barDonate'),
-    modalTemplate = require('./template/modalDonate');
+    ajax = require('./util/ajax');
 
+// document ready
+function ready(fn) {
+  if (document.readyState != 'loading') {
+    fn();
+  } else {
+    document.addEventListener('DOMContentLoaded', fn);
+  }
+}
 
 /*
  * Return the namespace that all html, css and js should use
  * This is a function so as to be a little less mutable
  */
+
 function namespace() {
   return 'bb';
 }
@@ -26,54 +29,6 @@ function version() {
 
 function s3Version() {
   return parseFloat(version()).toString();
-}
-
-function render(tmpl, ctx) {
-  ctx || (ctx = {});
-  ctx.namespace = namespace();
-  ctx.version = version();
-  ctx.s3Version = s3Version();
-  return tmpl.replace(/\{\{ ?([\w\d_]+) ?\}\}/gi, function(tag, match) {
-    return ctx[match] || '';
-  });
-}
-
-function join(url, email, zipcode) {
-  var data = {
-    response: 'json',
-    email: email,
-    zipcode: zipcode
-  };
-  ajax.post('https://sunlightfoundation.com/join/', data, function(err, resp) {
-    if (err) {
-      // resp is a string of err message
-      var emailFormError = document.querySelector('.' + namespace() + '_email-form-fail');
-      toggle(emailFormError, {
-        add: 'is-true'
-      });
-    } else {
-      var respData = JSON.parse(resp);
-      var url = 'https://sunlightfoundation.com' + respData.redirect;
-
-      var emailForm = document.querySelector('.' + namespace() + '_email-form');
-      toggle(emailForm, {
-        add: 'is-hidden'
-      });
-
-      var emailFormError = document.querySelector('.' + namespace() + '_email-form-fail');
-      toggle(emailFormError, {
-        remove: 'is-true'
-      });
-
-      var emailFormSuccess = document.querySelector('.' + namespace() + '_email-form-success');
-      toggle(emailFormSuccess, {
-        add: 'is-true'
-      });
-
-      var emailSucceessUrl = document.querySelector('.bb_email-sucess-url');
-      emailSucceessUrl.href = url;
-    }
-  });
 }
 
 var toggle = function (els, opts) {
@@ -97,226 +52,315 @@ var toggle = function (els, opts) {
   }
 };
 
-
-function loadBrandingBar() {
-
-  var bar = document.querySelector('[data-' + namespace() + '-brandingbar]');
-  if (bar) {
-    var panel = document.querySelector('#' + namespace() + '_panel');
-    var url = 'https://sunlightfoundation.com/brandingbar/';
-    // var propertyId = bar.getAttribute('data-' + namespace() + '-property-id');
-    var loadingStylesheet = ajax.conditionalGet('link', 'https://s3.amazonaws.com/sunlight-cdn/brandingbar/' + s3Version() + '/css/brandingbar.min.css.gz', ['brandingbar.css', 'brandingbar.min.css', 'brandingbar.min.css.gz']);
-    var loadingDefaultStylesheet = false;
-    // // comment this line in to load the twitter widgets platform
-    // var loadingTwitter = ajax.conditionalGet('script', 'https://platform.twitter.com/widgets.js', 'platform.twitter.com/widgets.js');
-
-    // Set up bar
-    if(!bar.innerHTML) {
-      bar.innerHTML = render(barTemplate);
-      loadingDefaultStylesheet = ajax.conditionalGet('link', 'https://s3.amazonaws.com/sunlight-cdn/brandingbar/' + s3Version() + '/css/brandingbar-default.min.css.gz', ['brandingbar-default.css', 'brandingbar-default.min.css', 'brandingbar-default.min.css.gz']);
+var labelize = function(name) {
+  if (name === 'cvc') {
+    name = 'CVC';
+  } else if (name === 'amount_other') {
+    name = 'Amount';
+  } else {
+    var properCase = function(txt) {
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     }
-    // Set up panel
-    if (!panel) {
-      panel = document.createElement('div');
-      if (loadingStylesheet) {
-        panel.style.display = "none";
-        setTimeout(function(){
-          panel.style.display = "";
-        }, 750);
-      }
-      panel.id = namespace() + '_panel';
-      bar.parentElement.insertBefore(panel, bar);
-    }
-    if (!panel.innerHTML) {
-      panel.innerHTML = render(panelTemplate);
-    }
+    name = name.replace('_', ' ')
+               .replace('-', '. ')
+               .replace(/\w\S*/g, properCase);
+  }
+  return name;
+};
 
-    var brandingPane = document.querySelector('.' + namespace() + '_wrapper');
-    var brandingBarTriggers = document.querySelectorAll('[data-' + namespace() + '-toggle="' + '.' + namespace() + '_wrapper"]');
-    var panelTriggers = panel.querySelectorAll('.' + namespace() + '_tools-heading');
-    var panels = panel.querySelectorAll('.' + namespace() + '_tools-details');
-
-    // Bind events to show/hide the top panel
-    event.on(brandingBarTriggers, 'click', function(ev){
-      ev.preventDefault();
-      toggle(brandingPane, {toggle: 'is-active'});
-    });
-
-    // Bind events to show/hide the tools panels
-    event.on(panelTriggers, 'click', function(ev){
-      var panelToShow = document.querySelector(this.getAttribute('data-' + namespace() + '-toggle'));
-      ev.preventDefault();
-      if (typeof panelToShow === 'undefined') { return; }
-
-      toggle(panelTriggers, {
-        toggle: 'is-inactive'
-      });
-      toggle(panels, {
-        add: 'is-hidden',
-        remove: namespace() + '_fade-animation'
-      });
-      toggle(panelToShow, {
-        add: namespace() + '_fade-animation',
-        remove: 'is-hidden'
-      });
-    });
-
-    // Ajax the signup form if cors support was detected
-    if (ajax.supportsCORS()) {
-      var form = document.querySelector('.' + namespace() + '_email-form');
-      event.addEventListener(form, 'submit', function(ev) {
-        ev.preventDefault();
-        var email = form.querySelector('input[name=email]').value;
-        var zipcode = form.querySelector('input[name=zipcode]').value;
-        window.console && console.log(email + " " + zipcode);
-        join('https://sunlightfoundation.com/subscribe/', email, zipcode);
-      });
+var validateRequired = function($form, fieldNames, attr) {
+  attr = attr || 'name';
+  var errors = [];
+  for (var i = 0; i < fieldNames.length; i++) {
+    var fieldName = fieldNames[i];
+    var $elem = $form.querySelector('[' + attr + '=' + fieldName + ']');
+    if (!$elem.value) {
+      errors.push(labelize(fieldName) + ' is a required field');
+      dom.addClass($elem, 'bb-input_error');
+    } else {
+      dom.removeClass($elem, 'bb-input_error');
     }
   }
+  return errors;
+};
+
+var displayErrors = function($container, errors) {
+  var $list = document.createElement('ul');
+  dom.addClass($list, 'bb-error_list');
+  for (var i = 0; i < errors.length; i++) {
+    var $item = document.createElement('li');
+    $item.innerHTML = errors[i];
+    $list.appendChild($item);
+  }
+  $container.appendChild($list);
+  dom.show($container);
 }
 
-var CURRENT_CAMPAIGN = 'state-sunshineWeek2015';
-
-function loadDonationBar() {
-
-  var bar = document.querySelector('[data-' + namespace() + '-brandingbar]');
-  var body = document.querySelector('body');
-  if (bar) {
-    // var panel = document.querySelector('#' + namespace() + '_panel');
-
-    var loadingStylesheet = ajax.conditionalGet('link', 'https://s3.amazonaws.com/sunlight-cdn/brandingbar/' + s3Version() + '/css/donatebar.min.css.gz', ['donatebar.css', 'donatebar.min.css', 'donatebar.min.css.gz']);
-    var loadingDefaultStylesheet = false;
-
-    // Set up bar
-    if(!bar.innerHTML) {
-      bar.innerHTML = render(donationTemplate);
-    }
-
-    // Set up donation modal
-
-    function newDonation() {
-      var iframe = document.createElement("iframe");
-
-      iframe.setAttribute('class', 'bb-donation-modal');
-      // iframe.setAttribute('src', 'http://localhost:4000/modal/modal.html');
-      iframe.setAttribute('src', 'https://s3.amazonaws.com/sunlight-cdn/brandingbar/' + s3Version() + '/donation/modal.html');
-      iframe.setAttribute("style", "z-index: 9999; display: block; border: 0px none transparent; overflow-x: hidden; overflow-y: auto; visibility: visible; margin: 0px; padding: 0px; -webkit-tap-highlight-color: transparent; position: fixed; left: 0px; top: 0px; width: 100%; height: 100%;");
-      iframe.allowtransparency = true;
-      iframe.frameBorder = 0;
-      document.body.appendChild(iframe);
-    }
-
-    var donateButton = document.querySelectorAll('.js-modal-open');
-    var modalClose = document.querySelectorAll('.js-modal-close');
-    var overlay = document.querySelector('.bb-overlay');
-    var modal = document.querySelector('.bb-modal_donation');
-    var modalPrompt = document.querySelector('.bb-modal_initial-prompt');
-
-    // open donate modal
-    event.on(donateButton, 'click', function(e){
-      e.preventDefault ? e.preventDefault() : e.returnValue = false;
-      newDonation();
-    });
+var formatAmount = function(amount) {
+  if (amount.value) {
+    amount.value = parseFloat(amount.value).toFixed(2);
+    return amount.value;
   }
+};
+
+var stripeResponseHandler = function(status, response) {
+
+  var $form = document.querySelector('#bb-transaction-form');
+  var $errContainer = $form.querySelector('.bb-modal-form-step-2 .bb-error-message');
+  dom.empty($errContainer);
+
+  if (response.error) {
+
+    displayErrors($errContainer, [response.error.message]);
+    window.console && console.log(response.error.message);
+
+  } else {
+
+    var token = response.id;
+    var $input = document.createElement('input');
+    $input.type = 'hidden';
+    $input.name = 'stripe_token';
+    $input.value = token;
+    $form.appendChild($input);
+
+    var data = {
+      email: 'jcarbaugh@gmail.com',
+      first_name: 'Jeremy',
+      last_name: 'Carbaugh',
+      stripe_token: $form.querySelector('[name=stripe_token]').value
+    };
+
+    var data = dom.serializeForm($form);
+    if (!data.amount) {
+      data.amount = data.amount_other;
+    }
+    delete data.amount_other;
+
+    dom.hide($errContainer);
+
+    var step2 = document.querySelectorAll('.bb-modal-form-step-2');
+    var step3 = document.querySelectorAll('.bb-modal-form-step-3');
+
+    toggle(step2, {toggle: 'is-active'});
+    toggle(step3, {toggle: 'is-active'});
+
+    var url = 'https://sunlightfoundation.com/engage/donate/remote/';
+    ajax.post(url, data, function(err, resp) {
+      var progress = document.querySelector('.bb-modal-message-progress');
+      var thanks = document.querySelector('.bb-modal-message-thankyou');
+      toggle(progress, {toggle: 'is-hidden'});
+      toggle(thanks, {toggle: 'is-active'});
+    });
+
+  }
+};
+
+var donateButton = document.querySelectorAll('.js-modal-open');
+var modalClose = document.querySelectorAll('.js-modal-close');
+var overlay = document.querySelector('.bb-overlay');
+var modal = document.querySelector('.bb-modal_donation');
+var modalPrompt = document.querySelector('.bb-modal_prompt');
+
+var step1 = document.querySelectorAll('.bb-modal-form-step-1');
+var step2 = document.querySelectorAll('.bb-modal-form-step-2');
+var step3 = document.querySelectorAll('.bb-modal-form-step-3');
+
+var nextFrame1 = document.querySelectorAll('.bb-modal-form-step-1 .js-next-frame');
+var nextFrame2 = document.querySelectorAll('.bb-modal-form-step-2 .js-next-frame');
+
+var prevFrame2 = document.querySelectorAll('.bb-modal-form-step-2 .js-prev-frame');
+
+var openForm = document.querySelectorAll('.bb-modal_prompt .js-open-form');
+
+var propertyId;
+
+function loadDonationBar(stripeKey) {
+
+    var stripeTag = document.createElement('script');
+    document.querySelector('head').appendChild(stripeTag);
+    stripeTag.onload = function(e) {
+      Stripe.setPublishableKey(stripeKey);
+    };
+    stripeTag.src = 'https://js.stripe.com/v2/';
+
+    // Open donate form from prompt
+    event.on(openForm, 'click', function(e){
+      e.preventDefault ? e.preventDefault() : e.returnValue = false;
+      dom.removeClass(modalPrompt, 'is-active');
+      toggle(modal, {toggle: 'is-active'});
+      toggle(step1, {toggle: 'is-active'});
+      // toggle(step2, {toggle: 'is-active'});
+    });
+
+    // close donate modal
+    event.on(modalClose, 'click', function(e){
+      e.preventDefault ? e.preventDefault() : e.returnValue = false;
+      dom.removeClass(overlay, 'is-active');
+      dom.removeClass(modal, 'is-active');
+      dom.removeClass(modalPrompt, 'is-active');
+    });
+
+    // custom donation amount setup
+    var customAmountField = document.querySelectorAll('.bb-input_other-amount');
+    var customAmountRadio = document.querySelector('.bb-input[data-radio-custom]');
+
+    // select correct radio button when custom amount is clicked
+    event.on(customAmountField, 'click', function(e){
+      customAmountRadio.checked = true;
+    });
+
+    // format value in custom amount field
+    event.on(customAmountField, 'change', function(e) {
+      var amount = document.querySelector('input[name=amount_other]');
+      formatAmount(amount);
+
+    // set radio value to formatted value
+      customAmountRadio.value = formatAmount(amount);
+    });
+
+
+    // proceed to next steps
+
+    // step 1
+    event.on(nextFrame1, 'click', function(e) {
+
+      // grab donation amount from checked radio
+      var donationRadios = document.getElementsByName('amount');
+
+      for (var i = 0; i < donationRadios.length; i++) {
+          if (donationRadios[i].checked) {
+              var donationValue = donationRadios[i].value;
+
+              // update donation amount in messages
+              var donationUpdate = document.querySelectorAll('.js-val-donation');
+              for (var i = 0; i < donationUpdate.length; i++) {
+                donationUpdate[i].innerHTML = '$' + donationValue;
+              }
+              break;
+          }
+      }
+
+      var errors = [];
+      var $form = document.querySelector('#bb-transaction-form');
+      var $amountOther = document.querySelector('.bb-input_other-amount');
+      var fieldNames = ['first_name', 'last_name', 'address', 'city', 'state', 'zipcode'];
+
+      dom.removeClass($amountOther, 'bb-input_error');
+      if ($form.elements['amount'].value === 'custom') {
+        fieldNames.push('amount_other')
+      }
+
+      errors = errors.concat(validateRequired($form, fieldNames));
+
+      var $errContainer = $form.querySelector('.bb-modal-form-step-1 .bb-error-message');
+      dom.empty($errContainer);
+      if (errors.length > 0) {
+        displayErrors($errContainer, errors);
+      } else {
+        dom.hide($errContainer);
+        toggle(step1, {toggle: 'is-active'});
+        toggle(step2, {toggle: 'is-active'});
+      }
+
+    });
+
+    // step 2
+    event.on(nextFrame2, 'click', function(e) {
+      // grab email address to populate message
+      var emailAddress = document.querySelector('.bb-input[data-input-email]').value;
+      document.querySelector('.js-val-email').innerHTML = emailAddress.toString();
+
+      var $form = document.querySelector('#bb-transaction-form');
+      //var propertyId = bar.getAttribute('data-' + namespace() + '-property-id');
+      if (propertyId) {
+        var $elem = document.createElement('input');
+        $elem.type = 'hidden';
+        $elem.name = 'source';
+        $elem.value = propertyId;
+        $form.appendChild($elem);
+      }
+
+      var errors = [];
+      errors = errors.concat(validateRequired($form, ['email']));
+      errors = errors.concat(validateRequired($form, ['number', 'exp-month', 'exp-year', 'cvc'], 'data-stripe'));
+
+      var $errContainer = $form.querySelector('.bb-modal-form-step-2 .bb-error-message');
+      dom.empty($errContainer);
+      if (errors.length > 0) {
+        displayErrors($errContainer, errors);
+      } else {
+        dom.hide($errContainer);
+        Stripe.card.createToken($form, stripeResponseHandler);
+      }
+
+    });
+
+    event.on(prevFrame2, 'click', function(e) {
+      toggle(step2, {toggle: 'is-active'});
+      toggle(step1, {toggle: 'is-active'});
+    });
+
+    var triggerAdditionalFields = document.querySelectorAll('.js-trigger-note');
+    var additionalFields = document.querySelector('.bb-form-additional-fields');
+
+    event.on(triggerAdditionalFields, 'change', function() {
+        toggle(additionalFields, {toggle: 'is-active'});
+    });
+}
+
+// open donate modal
+function showModal() {
+  dom.addClass(overlay, 'is-active');
+  dom.addClass(modal, 'is-active');
+  dom.addClass(step1, 'is-active');
+}
+
+// open donate modal with a prompt
+function showModalPrompt() {
+  dom.addClass(overlay, 'is-active');
+  dom.addClass(modalPrompt, 'is-active');
+}
+
+// intialize on document ready
+function initialize() {
+  
+  // Load donation bar
+  var url = 'https://sunlightfoundation.com/engage/brandingbar/config/';
+  ajax.get(url, function(err, content) {
+    if (content && content !== '') {
+        var data = JSON.parse(content);
+        loadDonationBar(data.stripe.key);
+        parent.postMessage('donation:ready', '*');
+      }
+  });
 
   window.addEventListener('message', receiveMessage, false);
 
-  if (isNewToCampaign(CURRENT_CAMPAIGN)) {
-    newDonation();
-  }
-}
-
-/**
- * Checks whether the visitor is new to the specified campaign.
- * If yes, then this also sets the campaign property so that the next time
- * the user visits, this function will return false.
- */
-function isNewToCampaign(campaign, markVisited) {
-  if (supportsLocalStorage()) {
-    var userState = localStorage.getItem('CAMPAIGN_PROPERTY');
-    
-    if (userState !== campaign) {
-      if (markVisited) {
-        localStorage.setItem('CAMPAIGN_PROPERTY', campaign);
-      }
-      
-      return true;
-    }
+  var closeBtns = document.getElementsByClassName('js-modal-close');
+  for (var i = 0; i < closeBtns.length; i++) {
+    closeBtns[i].onclick = removeIframe;
   }
 
-  return false;
+  function removeIframe() {  
+      parent.postMessage('donation:remove', '*');
+  }
+
+  // parent.postMessage('donation:ready', '*');
 }
 
 function receiveMessage(event) {
-    // if (event.origin !== "http://localhost:4000") {
-    if (event.origin !== "https://sunlight-cdn.s3.amazonaws.com") {
-      return false;
-    }
-
-    var modal = document.querySelector('.bb-donation-modal');
-
-    console.warn(event.data);
-
-    if (event.data === 'donation:ready' && isNewToCampaign(CURRENT_CAMPAIGN, true)) {
-      modal.contentWindow.postMessage('donation:newVisitor', '*');
-      postPropertyId();
-    } else if (event.data === 'donation:ready') {
-      modal.contentWindow.postMessage('donation:open', '*');
-      postPropertyId();
-    } else if (event.data === 'donation:remove') {
-      window.setTimeout(function () {
-        modal.parentNode.removeChild(modal);
-      }, 300);
-    }
-}
-
-function postPropertyId() {
-  var bar = document.querySelector('[data-' + namespace() + '-brandingbar]'),
-      propertyId = bar.getAttribute('data-' + namespace() + '-property-id'),
-      modal = document.querySelector('.bb-donation-modal');
-
-  modal.contentWindow.postMessage('donation:propertyId:' + propertyId, '*');
-}
-
-// test for local storage support
-function supportsLocalStorage() {
-  var test = 'test';
-  try {
-    localStorage.setItem(test, test);
-    localStorage.removeItem(test);
-    return true;
-  } catch(e) {
-    return false;
+  if (event.data === 'donation:newVisitor') {
+    showModalPrompt();
+  } else if (event.data === 'donation:open') {
+    showModal();
+  } else if (/^donation:propertyId:.+/.test(event.data)) {
+    propertyId = event.data.replace('donation:propertyId:', '');
   }
 }
 
-function loadBar() {
-  // var url = 'https://sunlightfoundation.com/engage/brandingbar/config/';
-  // ajax.get(url, function(err, content) {
-  //   if (content && content !== '') {
-  //     var data = JSON.parse(content);
-  //     if (data.type === 'donation') {
-  //       loadDonationBar();
-  //     } else {
-  //       loadBrandingBar();
-  //     }
-  //   } else {
-  //     loadBrandingBar();
-  //   }
-  // });
+ready(initialize);
 
-  if(location.hostname == "congress.sunlightfoundation.com"){
-    loadDonationBar();
-  } else {
-    loadBrandingBar();
-  }
-}
-
-loadBar();
-
-// Uncomment to clear local storage for testing
-// localStorage.removeItem('CAMPAIGN_PROPERTY');
-},{"./template/bar":3,"./template/barDonate":4,"./template/modalDonate":5,"./template/panel":6,"./util/ajax":7,"./util/dom":8,"./util/event":9,"es5-shim":2}],2:[function(require,module,exports){
+},{"./util/ajax":3,"./util/dom":4,"./util/event":5,"es5-shim":2}],2:[function(require,module,exports){
 /*!
  * https://github.com/es-shims/es5-shim
  * @license es5-shim Copyright 2009-2014 by contributors, MIT License
@@ -1756,368 +1800,6 @@ if (parseInt(ws + '08') !== 8 || parseInt(ws + '0x16') !== 22) {
 },{}],3:[function(require,module,exports){
 'use strict';
 
-// Default branding bar template
-var template = '' +
-'  <div class="branding-bar_container">' +
-'    <div class="branding-bar_links">' +
-'      <a class="social" href="https://www.facebook.com/sunlightfoundation"><span class="sficon-facebook"></span></a>' +
-'      <a class="social" href="https://twitter.com/sunfoundation"><span class="sficon-twitter"></span></a>' +
-'      <a class="social" href="https://plus.google.com/+sunlightfoundation"><span class="sficon-google-plus"></span></a>' +
-'      <a class="branding-bar_trigger" data-bb-toggle=".bb_wrapper" href="https://sunlightfoundation.com/about/">About Sunlight Foundation</a>' +
-'    </div>' +
-'    <div class="branding-bar_logo">' +
-'      <span class="branding-bar_productof">a product of </span>' +
-'      <a class="branding-bar_sunlight-logo" href="https://www.sunlightfoundation.com">Sunlight Foundation</a>' +
-'    </div>' +
-'  </div>' +
-'';
-
-module.exports = template;
-},{}],4:[function(require,module,exports){
-'use strict';
-
-// Donation bar template
-var template = '' +
-'<div class="bb-donation-bar_container">' +
-'   <div class="bb-donation-message">' +
-'        <span class="bb-donation-message_text">' +
-'            <strong class="bb-strong">It\'s #GivingTuesday!</strong>' +
-'            This year, give a little sunlight.' +
-'        </span>' +
-'        <button class="bb-button_cta--donate js-modal-open">' +
-'           Donate Today' +
-'           <svg class="bb-chevron_pulse" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8"><path d="M1.5 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z" transform="translate(1)" /></svg>' +
-'        </button>' +
-'        <img class="bb-sunlight-rings" src="https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.4/img/sunlight-rings.svg">' +
-'    </div>' +
-'   <div class="bb-donation-bar_logo">' +
-'       <a class="bb-donation-bar_sunlight-logo" href="https://www.sunlightfoundation.com">Sunlight Foundation</a>' +
-'   </div>' +
-'</div>' +
-'';
-
-module.exports = template;
-
-},{}],5:[function(require,module,exports){
-'use strict';
-
-// Donation modal template
-var template = '' +
-'<div class="bb-overlay"></div>' +
-'' +
-'<div class="bb-modal_donation" style="visibility:hidden;">' +
-'    <div class="bb-modal_donation--header">' +
-'        <div class="bb-modal-form-step-1">' +
-'            <div class="bb-modal--action js-modal-close">' +
-'                <span class="bb-modal--action-icon"><svg class="bb-icon_close" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8"><path d="M1.41 0l-1.41 1.41.72.72 1.78 1.81-1.78 1.78-.72.69 1.41 1.44.72-.72 1.81-1.81 1.78 1.81.69.72 1.44-1.44-.72-.69-1.81-1.78 1.81-1.81.72-.72-1.44-1.41-.69.72-1.78 1.78-1.81-1.78-.72-.72z" /></svg></span>' +
-'            </div>' +
-'            <span class="bb-modal--title">This year, give a little sunlight.</span>' +
-'            <p class="bb-modal--description">For #GivingTuesday, help us put the <em>giving</em> back into the giving season by supporting Sunlight Foundation!</p>' +
-'        </div>' +
-'' +
-'        <div class="bb-modal-form-step-2">' +
-'            <div class="bb-modal--action js-prev-frame">' +
-'                <span class="bb-modal--action-icon"><svg class="bb-icon_chevron-left" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8"><path d="M4 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z" transform="translate(1)" /></svg></span>' +
-'            </div>' +
-'            <span class="bb-modal--title">You\'re donating <span class="js-val-donation"></span> to Sunlight Foundation</span>' +
-'        </div>' +
-'' +
-'        <div class="bb-modal-form-step-3">' +
-'            <div class="bb-modal--action js-modal-close">' +
-'                <span class="bb-modal--action-icon"><svg class="bb-icon_close" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8"><path d="M1.41 0l-1.41 1.41.72.72 1.78 1.81-1.78 1.78-.72.69 1.41 1.44.72-.72 1.81-1.81 1.78 1.81.69.72 1.44-1.44-.72-.69-1.81-1.78 1.81-1.81.72-.72-1.44-1.41-.69.72-1.78 1.78-1.81-1.78-.72-.72z" /></svg></span>' +
-'            </div>' +
-'            <span class="bb-modal--title">Thank you for your <span class="js-val-donation"></span> donation!</span>' +
-'        </div>' +
-'' +
-'    </div>' +
-'    ' +
-'    <div class="bb-modal--content">' +
-'' +
-'        <form action="https://sunlightfoundation.com/engage/brandingbar/remote/" method="post" id="bb-transaction-form">' +
-'        <div class="bb-modal-form-step-1">' +
-'' +
-'            <div class="bb-form-fieldset_donation">' +
-'                <label class="bb-label_radio"><input class="bb-input" type="radio" name="amount" value="10.00" required>$10</input></label>' +
-'                <label class="bb-label_radio"><input class="bb-input" type="radio" name="amount" value="25.00" required checked>$25</input></label>' +
-'                <label class="bb-label_radio"><input class="bb-input" type="radio" name="amount" value="50.00" required>$50</input></label>' +
-'                <label class="bb-label_radio"><input class="bb-input" type="radio" name="amount" value="100.00" required>$100</input></label>' +
-'                <label class="bb-label_radio_custom">' +
-'                    <input class="bb-input" type="radio" name="amount" value="custom" required data-radio-custom>' +
-'                </label>' +
-'                <label class="bb-label_radio_custom">' +
-'                    <span class="bb-other-amount-prefix">$</span>' +
-'                    <input class="bb-input bb-input_other-amount" type="text" name="amount_other" placeholder="Other Amount"></input>' +
-'                </label>' +
-'            </div>' +
-'            <hr class="bb-divider">' +
-'            <div class="bb-form-fieldset">' +
-'                <div class="bb-form-group fg-5">' +
-'                    <label class="bb-label">' +
-'                        <span>First Name</span>' +
-'                        <input class="bb-input" name="first_name" required></input>' +
-'                    </label>' +
-'                </div>' +
-'' +
-'                <div class="bb-form-group fg-5">            ' +
-'                    <label class="bb-label">' +
-'                        <span>Last Name</span>' +
-'                        <input class="bb-input bb-input_no-border-left" name="last_name" required></input>' +
-'                    </label>' +
-'                </div>' +
-'            </div>' +
-'' +
-'            <div class="bb-form-fieldset">' +
-'                <div class="bb-form-group fg-8">' +
-'' +
-'                    <label class="bb-label">' +
-'                        <span>Street Address</span>' +
-'                        <input class="bb-input" name="address" required></input>' +
-'                    </label>' +
-'                </div>' +
-'' +
-'                <div class="bb-form-group fg-2">' +
-'                    <label class="bb-label">' +
-'                        <span>Apt/Suite</span>' +
-'                        <input class="bb-input bb-input_no-border-left" name="unit"></input>' +
-'                    </label>' +
-'                </div>' +
-'            </div>' +
-'            ' +
-'            <div class="bb-form-fieldset">' +
-'                <div class="bb-form-group fg-4">' +
-'                    <label class="bb-label">' +
-'                        <span>City</span>' +
-'                        <input class="bb-input" name="city" required></input>' +
-'                    </label>' +
-'                </div>' +
-'' +
-'                <div class="bb-form-group fg-4">' +
-'                    <label class="bb-label">' +
-'                        <span>State</span>' +
-'                        <input class="bb-input bb-input_no-border-left" name="state" required></input>' +
-'                    </label>' +
-'                </div>' +
-'' +
-'                <div class="bb-form-group fg-2">' +
-'                    <label class="bb-label">' +
-'                        <span>Zipcode</span>' +
-'                        <input class="bb-input bb-input_no-border-left" name="zipcode" required></input>' +
-'                    </label>' +
-'                </div>' +
-'            </div>' +
-'' +
-'            <div class="bb-form-fieldset_btns">' +
-'                <div class="bb-error-message">Error Message</div>' +
-'                <a class="bb-modal--link-alt js-modal-close" href="">Cancel</a>' +
-'                <button class="bb-button_cta--next js-next-frame" type="button">' +
-'                   Next' +
-'                   <svg class="bb-chevron" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8"><path d="M1.5 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z" transform="translate(1)" /></svg>' +
-'                </button>' +
-'            </div>' +
-'' +
-'        </div> <!-- step1 -->' +
-'' +
-'        <div class="bb-modal-form-step-2">' +
-'' +
-'            <div class="bb-form-fieldset">' +
-'                <div class="bb-form-group fg-10">' +
-'                    <label class="bb-label">' +
-'                        <span>Email Address</span>' +
-'                        <input class="bb-input" name="email" type="email" required data-input-email></input>' +
-'                    </label>' +
-'                </div>' +
-'            </div>' +
-'' +
-'            <div class="bb-form-fieldset">' +
-'                <div class="bb-form-group fg-6">' +
-'                    <label class="bb-label">' +
-'                        <span>Card Number</span>' +
-'                        <input class="bb-input" data-stripe="number"></input>' +
-'                    </label>' +
-'                </div>' +
-'' +
-'                <div class="bb-form-group fg-1">' +
-'                    <label class="bb-label">' +
-'                        <span>Expires</span>' +
-'                        <input class="bb-input bb-input_no-border-left" placeholder="MM" data-stripe="exp-month"></input>' +
-'                    </label>' +
-'                </div>' +
-'' +
-'                <div class="bb-form-group fg-1">' +
-'                    <label class="bb-label">' +
-'                        <span>&nbsp;</span>' +
-'                        <input class="bb-input bb-input_no-border-left" placeholder="YY" data-stripe="exp-year"></input>' +
-'                    </label>' +
-'                </div>' +
-'' +
-'                <div class="bb-form-group fg-2">' +
-'                    <label class="bb-label">' +
-'                        <span>CVC</span>' +
-'                        <input class="bb-input bb-input_no-border-left" data-stripe="cvc"></input>' +
-'                    </label>' +
-'                </div>' +
-'            </div>' +
-'' +
-'            <div class="bb-form-fieldset_checkmark">' +
-'                <label class="bb-label">' +
-'                    <input class="bb-input" type="checkbox" name="signup">I would like email updates from the Sunlight Foundation</input>' +
-'                </label>' +
-'            </div>' +
-'' +
-'' +
-'            <div class="bb-form-fieldset_checkmark">' +
-'                <label class="bb-label">' +
-'                    <input class="bb-input js-trigger-note" type="checkbox">Leave a note and other info with my donation</input>' +
-'                </label>' +
-'            </div>' +
-'' +
-'            <div class="bb-form-additional-fields">' +
-'' +
-'                <hr class="bb-divider">' +
-'' +
-'                <div class="bb-form-fieldset">' +
-'                    <div class="bb-form-group fg-10">' +
-'                        <label class="bb-label">' +
-'                            <span>Note (optional)</span>' +
-'                            <textarea class="bb-input bb-input_note bb-modal--link" placeholder="Write a note" name="note"></textarea>' +
-'                        </label>' +
-'                    </div>' +
-'                </div>' +
-'' +
-'                <div class="bb-form-fieldset">' +
-'                    <div class="bb-form-group fg-5">' +
-'                        <label class="bb-label">' +
-'                            <span>Phone Number (optional)</span>' +
-'                            <input class="bb-input" name="phone"></input>' +
-'                        </label>' +
-'                    </div>' +
-'                    <div class="bb-form-group fg-5">' +
-'                        <label class="bb-label">' +
-'                            <span>Occupation (optional)</span>' +
-'                            <input class="bb-input bb-input_no-border-left" name="occupation"></input>' +
-'                        </label>' +
-'                    </div>' +
-'                </div>' +
-'            </div>' +
-'' +
-'            <div class="bb-form-fieldset_btns">' +
-'                <div class="bb-error-message">Error Message</div>' +
-'                <a class="bb-modal--link-alt js-prev-frame" href="#">Go Back</a>' +
-'                <button class="bb-button_cta--next js-next-frame" type="button">' +
-'                    Complete Donation' +
-'                    <svg class="bb-chevron" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8"><path d="M1.5 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z" transform="translate(1)" /></svg>' +
-'                </button>' +
-'            </div>' +
-'            ' +
-'        </div> <!-- end step 2 -->' +
-'' +
-'        </form>' +
-'        <div class="bb-modal-form-step-3">' +
-'           <div class="bb-modal-message-progress">' +
-'                <svg class="bb-progress_icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 8 8"><path d="M4 0c-2.2 0-4 1.8-4 4s1.8 4 4 4c1.1 0 2.12-.43 2.84-1.16l-.72-.72c-.54.54-1.29.88-2.13.88-1.66 0-3-1.34-3-3s1.34-3 3-3c.83 0 1.55.36 2.09.91l-1.09 1.09h3v-3l-1.19 1.19c-.72-.72-1.71-1.19-2.81-1.19z"></path></svg>' +
-'                <p class="bb-progress_text">Processing your donation&hellip;</p>' +
-'           </div>' +
-'' +
-'            <div class="bb-modal-message-thankyou">' +
-'                <p class="bb-thankyou-thankyou_text">Thank you for choosing to support the Sunlight Foundation and participating in the #GivingTuesday movement.</p>' +
-'                <p>We\'ve sent an email confirmation and receipt to <strong class="bb-strong"><span class="js-val-email">your email address</span></strong> that you can keep for your records. </p>' +
-'                <hr class="bb-divider">' +
-'                <p>If you have any questions about your donation, feel free give us a call at <br>(202)742-1520, or email us at <a href="mailto:donors@sunlightfoundation.com" class="bb-modal--link">donors@sunlightfoundation.com</a></p>' +
-'            </div>' +
-'        </div>' +
-'' +
-'    </div>' +
-'' +
-'' +
-'    <div class="bb-modal--footer">' +
-'        <p>The Sunlight Foundation is a 501(c)(3) nonprofit, transpartisan organization. All contributions are tax deductible. Please review our <a href="http://sunlightfoundation.com/legal/gifts/" target="_blank" class="bb-modal--link">gift acceptance policy</a> for contributions over $250.</p>' +
-'    </div>' +
-'' +
-'</div>' +
-'';
-
-module.exports = template;
-
-},{}],6:[function(require,module,exports){
-'use strict';
-
-// Default panel template
-var template = '' +
-'  <button id="{{ namespace }}_close-panel" type="button" data-{{ namespace }}-toggle=".{{ namespace }}_wrapper">&times;</button>' +
-'  <div class="{{ namespace }}_panel-container">' +
-'    <div class="{{ namespace }}_about">' +
-'      <span class="{{ namespace }}_heading">About Sunlight Foundation</span>' +
-'      <p class="{{ namespace }}_description">The <a class="{{ namespace }}_link" href="https://sunlightfoundation.com">Sunlight Foundation</a> is a nonpartisan nonprofit that advocates for open government globally and uses technology to make government more accountable to all.</p>' +
-'' +
-'      <div class="{{ namespace }}_email">' +
-'        <span class="{{ namespace }}_heading">Stay informed about our work</span>' +
-'        <form class="{{ namespace }}_email-form" action="https://sunlightfoundation.com/join/" method="post">' +
-'          <input class="{{ namespace }}_input" type="email" placeholder="email address" name="email">' +
-'          <input class="{{ namespace }}_input {{ namespace }}_input-zip" type="text" placeholder="zip code" name="zipcode">' +
-'          <button class="{{ namespace }}_submit" type="submit">Submit</button>' +
-'          <span class="{{ namespace }}_email-form-fail">Oops, there was an error :(</span>' +
-'        </form>' +
-'        <div class="bb_email-form-success"> Thanks for subscribing to our updates! <a class="bb_link bb_email-sucess-url" href="">Tell us more about you &raquo;</a></div>' +
-'      </div>' +
-'    </div>' +
-'' +
-'    <div class="{{ namespace }}_tools">' +
-'      <span class="{{ namespace }}_heading">' +
-'        <span class="{{ namespace }}_tools-heading" id="{{ namespace }}_featured-tools-heading" data-{{ namespace }}-toggle="#{{ namespace }}_featured-tools">Related Tools</span>' +
-'        <span class="{{ namespace }}_tools-heading is-inactive" id="{{ namespace }}_more-tools-heading" data-{{ namespace }}-toggle="#{{ namespace }}_more-tools">All Tools</span>' +
-'      </span>' +
-'' +
-'      <div id="{{ namespace }}_featured-tools" class="{{ namespace }}_tools-details">' +
-'        <ul class="{{ namespace }}_tools-featured">' +
-'          <li>' +
-'            <a class="{{ namespace }}_tools-logo" href="https://www.opencongress.org">' +
-'            <img src="https://sunlight-cdn.s3.amazonaws.com/brandingbar/{{ s3Version }}/img/logo_opencongress.png" alt="Open Congress"/>' +
-'            </a>' +
-'            <p class="{{ namespace }}_description">' +
-'              <a class="{{ namespace }}_link" href="https://www.opencongress.org">OpenCongress</a> allows anyone to follow legislation in Congress, from bill introduction to floor votes. Learn more about the issues you care about.' +
-'            </p>' +
-'          </li>' +
-'          <li>' +
-'            <a class="{{ namespace }}_tools-logo" href="https://scout.sunlightfoundation.com">' +
-'              <img src="https://sunlight-cdn.s3.amazonaws.com/brandingbar/{{ s3Version }}/img/logo_scout.png" alt="Scout"/>' +
-'            </a>' +
-'            <p class="{{ namespace }}_description">' +
-'              <a class="{{ namespace }}_link" href="https://scout.sunlightfoundation.com">Scout</a> is a rapid notification service that allows anyone to create customized email or text alerts on actions Congress takes on an issue or a specific bill.' +
-'            </p>' +
-'          </li>' +
-'        </ul>' +
-'      </div>' +
-'      <div id="{{ namespace }}_more-tools" class="{{ namespace }}_tools-details is-hidden">' +
-'        <ul class="{{ namespace }}_tools-list">' +
-'          <li><a class="{{ namespace }}_link" href="https://www.opencongress.org">OpenCongress</a></li>' +
-'          <li><a class="{{ namespace }}_link" href="http://influenceexplorer.com">Influence Explorer</a></li>' +
-'          <li><a class="{{ namespace }}_link" href="http://openstates.org">Open States</a></li>' +
-'          <li><a class="{{ namespace }}_link" href="https://scout.sunlightfoundation.com">Scout</a></li>' +
-'        </ul>' +
-'' +
-'        <ul class="{{ namespace }}_tools-list">' +
-'          <li><a class="{{ namespace }}_link" href="http://churnalism.sunlightfoundation.com">Churnalism</a></li>' +
-'          <li><a class="{{ namespace }}_link" href="http://capitolwords.org">Capitol Words</a></li>' +
-'          <li><a class="{{ namespace }}_link" href="http://politwoops.sunlightfoundation.com">Politwoops</a></li>' +
-'          <li><a class="{{ namespace }}_link" href="http://adhawk.sunlightfoundation.com">Ad Hawk</a></li>' +
-'        </ul>' +
-'' +
-'        <ul class="{{ namespace }}_tools-list">' +
-'          <li><a class="{{ namespace }}_link" href="http://politicalpartytime.org">Party Time</a></li>' +
-'          <li><a class="{{ namespace }}_link" href="https://scout.sunlightfoundation.com">Scout</a></li>' +
-'          <li><a class="{{ namespace }}_link" href="http://docketwrench.sunlightfoundation.com">Docket Wrench</a></li>' +
-'          <li><a class="{{ namespace }}_link" href="http://politicaladsleuth.com">Political Ad Sleuth</a></li>' +
-'        </ul>' +
-'      </div>' +
-'    </div>' +
-'  </div>' +
-'';
-
-module.exports = template;
-
-},{}],7:[function(require,module,exports){
-'use strict';
-
 function xhr(method, url, data, callback) {
   var request = new XMLHttpRequest();
   request.open(method, url, true);
@@ -2227,7 +1909,7 @@ module.exports = {
   conditionalGet: conditionalGet
 };
 
-},{}],8:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 'use strict';
 
 function toggleClass(el, className) {
@@ -2330,7 +2012,7 @@ module.exports = {
   hide: hide
 };
 
-},{}],9:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 'use strict';
 
 // Binds a single event.

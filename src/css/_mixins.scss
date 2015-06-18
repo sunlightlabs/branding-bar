@@ -1,0 +1,6 @@
+@mixin background-rgba($rgba) {
+    background: transparent;
+    background: $rgba;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str($rgba)}', endColorstr='#{ie-hex-str($rgba)}');
+    zoom: 1;
+}
