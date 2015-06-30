@@ -21,7 +21,7 @@ function namespace() {
 }
 
 function version() {
-  return '0.4.0';
+  return '0.4.1';
 }
 
 function s3Version() {
@@ -178,7 +178,6 @@ function loadBrandingBar() {
 var CURRENT_CAMPAIGN = 'state-sunshineWeek2015';
 
 function loadDonationBar() {
-
   var bar = document.querySelector('[data-' + namespace() + '-brandingbar]');
   var body = document.querySelector('body');
   if (bar) {
@@ -199,7 +198,8 @@ function loadDonationBar() {
 
       iframe.setAttribute('class', 'bb-donation-modal');
       // iframe.setAttribute('src', 'http://localhost:4000/modal/modal.html');
-      iframe.setAttribute('src', 'https://s3.amazonaws.com/sunlight-cdn/brandingbar/' + s3Version() + '/donation/modal.html');
+      // iframe.setAttribute('src', 'https://sunlight-cdn.s3.amazonaws.com/brandingbar/' + s3Version() + '/donation/modal.html');
+      iframe.setAttribute('src', 'https://sunlightfoundation.com/engage/brandingbar/modal/');
       iframe.setAttribute("style", "z-index: 9999; display: block; border: 0px none transparent; overflow-x: hidden; overflow-y: auto; visibility: visible; margin: 0px; padding: 0px; -webkit-tap-highlight-color: transparent; position: fixed; left: 0px; top: 0px; width: 100%; height: 100%;");
       iframe.allowtransparency = true;
       iframe.frameBorder = 0;
@@ -249,20 +249,20 @@ function isNewToCampaign(campaign, markVisited) {
 
 function receiveMessage(event) {
     // if (event.origin !== "http://localhost:4000") {
-    if (event.origin !== "https://sunlight-cdn.s3.amazonaws.com") {
+    // if (event.origin !== 'https://sunlight-cdn.s3.amazonaws.com') {
+    if (event.origin !== 'https://sunlightfoundation.com') {
       return false;
     }
 
     var modal = document.querySelector('.bb-donation-modal');
 
-    console.warn(event.data);
-
-    if (event.data === 'donation:ready' && isNewToCampaign(CURRENT_CAMPAIGN, true)) {
-      modal.contentWindow.postMessage('donation:newVisitor', '*');
+    if (event.data === 'donation:configure') {
       postPropertyId();
+      postStripeKey();
+    } else if (event.data === 'donation:ready' && isNewToCampaign(CURRENT_CAMPAIGN, true)) {
+      modal.contentWindow.postMessage('donation:newVisitor', '*');
     } else if (event.data === 'donation:ready') {
       modal.contentWindow.postMessage('donation:open', '*');
-      postPropertyId();
     } else if (event.data === 'donation:remove') {
       window.setTimeout(function () {
         modal.parentNode.removeChild(modal);
@@ -278,6 +278,18 @@ function postPropertyId() {
   modal.contentWindow.postMessage('donation:propertyId:' + propertyId, '*');
 }
 
+function postStripeKey() {
+  var url = 'https://sunlightfoundation.com/engage/brandingbar/config/',
+      modal = document.querySelector('.bb-donation-modal');
+
+  ajax.get(url, function(err, content) {
+    if (content && content !== '') {
+        var data = JSON.parse(content);
+        modal.contentWindow.postMessage('donation:stripeKey:' + data.stripe.key, '*');
+      }
+  });
+}
+
 // test for local storage support
 function supportsLocalStorage() {
   var test = 'test';
@@ -291,25 +303,26 @@ function supportsLocalStorage() {
 }
 
 function loadBar() {
-  // var url = 'https://sunlightfoundation.com/engage/brandingbar/config/';
-  // ajax.get(url, function(err, content) {
-  //   if (content && content !== '') {
-  //     var data = JSON.parse(content);
-  //     if (data.type === 'donation') {
-  //       loadDonationBar();
-  //     } else {
-  //       loadBrandingBar();
-  //     }
-  //   } else {
-  //     loadBrandingBar();
-  //   }
-  // });
+  var url = 'https://sunlightfoundation.com/engage/brandingbar/config/';
+  ajax.get(url, function(err, content) {
+    if (content && content !== '') {
+      var data = JSON.parse(content);
+      if (data.type === 'donation') {
+        loadDonationBar();
+      } else {
+        loadBrandingBar();
+      }
+    } else {
+      loadBrandingBar();
+    }
+  });
 
-  if(location.hostname == "congress.sunlightfoundation.com"){
-    loadDonationBar();
-  } else {
-    loadBrandingBar();
-  }
+  // Test on congress.sf only
+  // if(location.hostname == "congress.sunlightfoundation.com"){
+  //   loadDonationBar();
+  // } else {
+  //   loadBrandingBar();
+  // }
 }
 
 loadBar();
@@ -1781,8 +1794,8 @@ var template = '' +
 '<div class="bb-donation-bar_container">' +
 '   <div class="bb-donation-message">' +
 '        <span class="bb-donation-message_text">' +
-'            <strong class="bb-strong">It\'s #GivingTuesday!</strong>' +
-'            This year, give a little sunlight.' +
+'            <strong class="bb-strong">It\'s Sunshine Week!</strong>' +
+'            Help celebrate OpenGov!' +
 '        </span>' +
 '        <button class="bb-button_cta--donate js-modal-open">' +
 '           Donate Today' +
