@@ -5,8 +5,8 @@ var template = '' +
 '<div class="bb-donation-bar_container">' +
 '   <div class="bb-donation-message">' +
 '        <span class="bb-donation-message_text">' +
-'            <strong class="bb-strong">It\'s #GivingTuesday!</strong>' +
-'            This year, give a little sunlight.' +
+'            <strong class="bb-strong">It\'s Sunshine Week!</strong>' +
+'            Help celebrate OpenGov!' +
 '        </span>' +
 '        <button class="bb-button_cta--donate js-modal-open">' +
 '           Donate Today' +
