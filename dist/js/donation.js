@@ -322,6 +322,7 @@ function showModalPrompt() {
 
 // intialize on document ready
 function initialize() {
+
   window.addEventListener('message', receiveMessage, false);
 
   var closeBtns = document.getElementsByClassName('js-modal-close');
@@ -332,8 +333,6 @@ function initialize() {
   function removeIframe() {  
       parent.postMessage('donation:remove', '*');
   }
-
-  // Wait for configuration values
   window.parent.postMessage('donation:configure', '*');
 }
 
