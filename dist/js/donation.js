@@ -189,7 +189,6 @@ function loadDonationBar(stripeKey) {
       dom.removeClass(modalPrompt, 'is-active');
       toggle(modal, {toggle: 'is-active'});
       toggle(step1, {toggle: 'is-active'});
-      // toggle(step2, {toggle: 'is-active'});
     });
 
     // close donate modal
@@ -323,17 +322,6 @@ function showModalPrompt() {
 
 // intialize on document ready
 function initialize() {
-  
-  // Load donation bar
-  var url = 'https://sunlightfoundation.com/engage/brandingbar/config/';
-  ajax.get(url, function(err, content) {
-    if (content && content !== '') {
-        var data = JSON.parse(content);
-        loadDonationBar(data.stripe.key);
-        parent.postMessage('donation:ready', '*');
-      }
-  });
-
   window.addEventListener('message', receiveMessage, false);
 
   var closeBtns = document.getElementsByClassName('js-modal-close');
@@ -345,7 +333,8 @@ function initialize() {
       parent.postMessage('donation:remove', '*');
   }
 
-  // parent.postMessage('donation:ready', '*');
+  // Wait for configuration values
+  window.parent.postMessage('donation:configure', '*');
 }
 
 function receiveMessage(event) {
@@ -355,6 +344,9 @@ function receiveMessage(event) {
     showModal();
   } else if (/^donation:propertyId:.+/.test(event.data)) {
     propertyId = event.data.replace('donation:propertyId:', '');
+  } else if (/^donation:stripeKey:.+/.test(event.data)) {
+    loadDonationBar(event.data.replace('donation:stripeKey:', ''));
+    parent.postMessage('donation:ready', '*');
   }
 }
 
