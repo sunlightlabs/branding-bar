@@ -175,7 +175,7 @@ function loadBrandingBar() {
   }
 }
 
-var CURRENT_CAMPAIGN = 'state-sunshineWeek2015';
+var CURRENT_CAMPAIGN = 'fourth-of-july';
 
 function loadDonationBar() {
   var bar = document.querySelector('[data-' + namespace() + '-brandingbar]');
