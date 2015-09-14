@@ -6,7 +6,6 @@ var template = '' +
 '    <div class="branding-bar_links">' +
 '      <a class="social" href="https://www.facebook.com/sunlightfoundation"><span class="sficon-facebook"></span></a>' +
 '      <a class="social" href="https://twitter.com/sunfoundation"><span class="sficon-twitter"></span></a>' +
-'      <a class="social" href="https://plus.google.com/+sunlightfoundation"><span class="sficon-google-plus"></span></a>' +
 '      <a class="branding-bar_trigger" data-bb-toggle=".bb_wrapper" href="https://sunlightfoundation.com/about/">About Sunlight Foundation</a>' +
 '    </div>' +
 '    <div class="branding-bar_logo">' +
