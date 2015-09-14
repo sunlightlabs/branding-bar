@@ -6,7 +6,6 @@ require('es5-shim');
 var event = require('./util/event'),
     dom = require('./util/dom'),
     ajax = require('./util/ajax'),
-    panelTemplate = require('./template/panel'),
     barTemplate = require('./template/bar'),
     donationTemplate = require('./template/barDonate'),
     modalTemplate = require('./template/modalDonate');
@@ -38,139 +37,20 @@ function render(tmpl, ctx) {
   });
 }
 
-function join(url, email, zipcode) {
-  var data = {
-    response: 'json',
-    email: email,
-    zipcode: zipcode
-  };
-  ajax.post('https://sunlightfoundation.com/join/', data, function(err, resp) {
-    if (err) {
-      // resp is a string of err message
-      var emailFormError = document.querySelector('.' + namespace() + '_email-form-fail');
-      toggle(emailFormError, {
-        add: 'is-true'
-      });
-    } else {
-      var respData = JSON.parse(resp);
-      var url = 'https://sunlightfoundation.com' + respData.redirect;
-
-      var emailForm = document.querySelector('.' + namespace() + '_email-form');
-      toggle(emailForm, {
-        add: 'is-hidden'
-      });
-
-      var emailFormError = document.querySelector('.' + namespace() + '_email-form-fail');
-      toggle(emailFormError, {
-        remove: 'is-true'
-      });
-
-      var emailFormSuccess = document.querySelector('.' + namespace() + '_email-form-success');
-      toggle(emailFormSuccess, {
-        add: 'is-true'
-      });
-
-      var emailSucceessUrl = document.querySelector('.bb_email-sucess-url');
-      emailSucceessUrl.href = url;
-    }
-  });
-}
-
-var toggle = function (els, opts) {
-  if (typeof opts.toggle === 'string'){ opts.toggle = [opts.toggle]; }
-  if (typeof opts.add === 'string'){ opts.add = [opts.add]; }
-  if (typeof opts.remove === 'string'){ opts.remove = [opts.remove]; }
-  if (typeof els.length === 'undefined') { els = [els]; }
-  var i, j;
-  for(i=0; i<els.length; i++){
-    if (opts.toggle) {
-      for (j=0; j<opts.toggle.length; j++){
-        dom.toggleClass(els[i], opts.toggle[j]);
-      }
-    }
-    opts.add && dom.addClass(els[i], opts.add.join(' '));
-    if (opts.remove) {
-      for (j=0; j<opts.remove.length; j++){
-        dom.removeClass(els[i], opts.remove[j]);
-      }
-    }
-  }
-};
-
-
 function loadBrandingBar() {
 
   var bar = document.querySelector('[data-' + namespace() + '-brandingbar]');
   if (bar) {
-    var panel = document.querySelector('#' + namespace() + '_panel');
-    var url = 'https://sunlightfoundation.com/brandingbar/';
-    // var propertyId = bar.getAttribute('data-' + namespace() + '-property-id');
-    var loadingStylesheet = ajax.conditionalGet('link', 'https://s3.amazonaws.com/sunlight-cdn/brandingbar/' + s3Version() + '/css/brandingbar.min.css.gz', ['brandingbar.css', 'brandingbar.min.css', 'brandingbar.min.css.gz']);
-    var loadingDefaultStylesheet = false;
+    // var url = 'https://sunlightfoundation.com/brandingbar/';
+    // var loadingStylesheet = ajax.conditionalGet('link', 'https://s3.amazonaws.com/sunlight-cdn/brandingbar/' + s3Version() + '/css/brandingbar.min.css.gz', ['brandingbar.css', 'brandingbar.min.css', 'brandingbar.min.css.gz']);
+    // var loadingDefaultStylesheet = false;
     // // comment this line in to load the twitter widgets platform
     // var loadingTwitter = ajax.conditionalGet('script', 'https://platform.twitter.com/widgets.js', 'platform.twitter.com/widgets.js');
 
     // Set up bar
     if(!bar.innerHTML) {
       bar.innerHTML = render(barTemplate);
-      loadingDefaultStylesheet = ajax.conditionalGet('link', 'https://s3.amazonaws.com/sunlight-cdn/brandingbar/' + s3Version() + '/css/brandingbar-default.min.css.gz', ['brandingbar-default.css', 'brandingbar-default.min.css', 'brandingbar-default.min.css.gz']);
-    }
-    // Set up panel
-    if (!panel) {
-      panel = document.createElement('div');
-      if (loadingStylesheet) {
-        panel.style.display = "none";
-        setTimeout(function(){
-          panel.style.display = "";
-        }, 750);
-      }
-      panel.id = namespace() + '_panel';
-      bar.parentElement.insertBefore(panel, bar);
-    }
-    if (!panel.innerHTML) {
-      panel.innerHTML = render(panelTemplate);
-    }
-
-    var brandingPane = document.querySelector('.' + namespace() + '_wrapper');
-    var brandingBarTriggers = document.querySelectorAll('[data-' + namespace() + '-toggle="' + '.' + namespace() + '_wrapper"]');
-    var panelTriggers = panel.querySelectorAll('.' + namespace() + '_tools-heading');
-    var panels = panel.querySelectorAll('.' + namespace() + '_tools-details');
-
-    // Bind events to show/hide the top panel
-    event.on(brandingBarTriggers, 'click', function(ev){
-      ev.preventDefault();
-      toggle(brandingPane, {toggle: 'is-active'});
-    });
-
-    // Bind events to show/hide the tools panels
-    event.on(panelTriggers, 'click', function(ev){
-      var panelToShow = document.querySelector(this.getAttribute('data-' + namespace() + '-toggle'));
-      ev.preventDefault();
-      if (typeof panelToShow === 'undefined') { return; }
-
-      toggle(panelTriggers, {
-        toggle: 'is-inactive'
-      });
-      toggle(panels, {
-        add: 'is-hidden',
-        remove: namespace() + '_fade-animation'
-      });
-      toggle(panelToShow, {
-        add: namespace() + '_fade-animation',
-        remove: 'is-hidden'
-      });
-    });
-
-    // Ajax the signup form if cors support was detected
-    if (ajax.supportsCORS()) {
-      var form = document.querySelector('.' + namespace() + '_email-form');
-      event.addEventListener(form, 'submit', function(ev) {
-        ev.preventDefault();
-        var email = form.querySelector('input[name=email]').value;
-        var zipcode = form.querySelector('input[name=zipcode]').value;
-        window.console && console.log(email + " " + zipcode);
-        join('https://sunlightfoundation.com/subscribe/', email, zipcode);
-      });
+      // loadingDefaultStylesheet = ajax.conditionalGet('link', 'https://s3.amazonaws.com/sunlight-cdn/brandingbar/' + s3Version() + '/css/brandingbar-default.min.css.gz', ['brandingbar-default.css', 'brandingbar-default.min.css', 'brandingbar-default.min.css.gz']);
     }
   }
 }
@@ -329,7 +209,7 @@ loadBar();
 
 // Uncomment to clear local storage for testing
 // localStorage.removeItem('CAMPAIGN_PROPERTY');
-},{"./template/bar":3,"./template/barDonate":4,"./template/modalDonate":5,"./template/panel":6,"./util/ajax":7,"./util/dom":8,"./util/event":9,"es5-shim":2}],2:[function(require,module,exports){
+},{"./template/bar":3,"./template/barDonate":4,"./template/modalDonate":5,"./util/ajax":6,"./util/dom":7,"./util/event":8,"es5-shim":2}],2:[function(require,module,exports){
 /*!
  * https://github.com/es-shims/es5-shim
  * @license es5-shim Copyright 2009-2014 by contributors, MIT License
@@ -2051,83 +1931,6 @@ module.exports = template;
 },{}],6:[function(require,module,exports){
 'use strict';
 
-// Default panel template
-var template = '' +
-'  <button id="{{ namespace }}_close-panel" type="button" data-{{ namespace }}-toggle=".{{ namespace }}_wrapper">&times;</button>' +
-'  <div class="{{ namespace }}_panel-container">' +
-'    <div class="{{ namespace }}_about">' +
-'      <span class="{{ namespace }}_heading">About Sunlight Foundation</span>' +
-'      <p class="{{ namespace }}_description">The <a class="{{ namespace }}_link" href="https://sunlightfoundation.com">Sunlight Foundation</a> is a nonpartisan nonprofit that advocates for open government globally and uses technology to make government more accountable to all.</p>' +
-'' +
-'      <div class="{{ namespace }}_email">' +
-'        <span class="{{ namespace }}_heading">Stay informed about our work</span>' +
-'        <form class="{{ namespace }}_email-form" action="https://sunlightfoundation.com/join/" method="post">' +
-'          <input class="{{ namespace }}_input" type="email" placeholder="email address" name="email">' +
-'          <input class="{{ namespace }}_input {{ namespace }}_input-zip" type="text" placeholder="zip code" name="zipcode">' +
-'          <button class="{{ namespace }}_submit" type="submit">Submit</button>' +
-'          <span class="{{ namespace }}_email-form-fail">Oops, there was an error :(</span>' +
-'        </form>' +
-'        <div class="bb_email-form-success"> Thanks for subscribing to our updates! <a class="bb_link bb_email-sucess-url" href="">Tell us more about you &raquo;</a></div>' +
-'      </div>' +
-'    </div>' +
-'' +
-'    <div class="{{ namespace }}_tools">' +
-'      <span class="{{ namespace }}_heading">' +
-'        <span class="{{ namespace }}_tools-heading" id="{{ namespace }}_featured-tools-heading" data-{{ namespace }}-toggle="#{{ namespace }}_featured-tools">Related Tools</span>' +
-'        <span class="{{ namespace }}_tools-heading is-inactive" id="{{ namespace }}_more-tools-heading" data-{{ namespace }}-toggle="#{{ namespace }}_more-tools">All Tools</span>' +
-'      </span>' +
-'' +
-'      <div id="{{ namespace }}_featured-tools" class="{{ namespace }}_tools-details">' +
-'        <ul class="{{ namespace }}_tools-featured">' +
-'          <li>' +
-'            <a class="{{ namespace }}_tools-logo" href="https://www.opencongress.org">' +
-'            <img src="https://sunlight-cdn.s3.amazonaws.com/brandingbar/{{ s3Version }}/img/logo_opencongress.png" alt="Open Congress"/>' +
-'            </a>' +
-'            <p class="{{ namespace }}_description">' +
-'              <a class="{{ namespace }}_link" href="https://www.opencongress.org">OpenCongress</a> allows anyone to follow legislation in Congress, from bill introduction to floor votes. Learn more about the issues you care about.' +
-'            </p>' +
-'          </li>' +
-'          <li>' +
-'            <a class="{{ namespace }}_tools-logo" href="https://scout.sunlightfoundation.com">' +
-'              <img src="https://sunlight-cdn.s3.amazonaws.com/brandingbar/{{ s3Version }}/img/logo_scout.png" alt="Scout"/>' +
-'            </a>' +
-'            <p class="{{ namespace }}_description">' +
-'              <a class="{{ namespace }}_link" href="https://scout.sunlightfoundation.com">Scout</a> is a rapid notification service that allows anyone to create customized email or text alerts on actions Congress takes on an issue or a specific bill.' +
-'            </p>' +
-'          </li>' +
-'        </ul>' +
-'      </div>' +
-'      <div id="{{ namespace }}_more-tools" class="{{ namespace }}_tools-details is-hidden">' +
-'        <ul class="{{ namespace }}_tools-list">' +
-'          <li><a class="{{ namespace }}_link" href="https://www.opencongress.org">OpenCongress</a></li>' +
-'          <li><a class="{{ namespace }}_link" href="http://influenceexplorer.com">Influence Explorer</a></li>' +
-'          <li><a class="{{ namespace }}_link" href="http://openstates.org">Open States</a></li>' +
-'          <li><a class="{{ namespace }}_link" href="https://scout.sunlightfoundation.com">Scout</a></li>' +
-'        </ul>' +
-'' +
-'        <ul class="{{ namespace }}_tools-list">' +
-'          <li><a class="{{ namespace }}_link" href="http://churnalism.sunlightfoundation.com">Churnalism</a></li>' +
-'          <li><a class="{{ namespace }}_link" href="http://capitolwords.org">Capitol Words</a></li>' +
-'          <li><a class="{{ namespace }}_link" href="http://politwoops.sunlightfoundation.com">Politwoops</a></li>' +
-'          <li><a class="{{ namespace }}_link" href="http://adhawk.sunlightfoundation.com">Ad Hawk</a></li>' +
-'        </ul>' +
-'' +
-'        <ul class="{{ namespace }}_tools-list">' +
-'          <li><a class="{{ namespace }}_link" href="http://politicalpartytime.org">Party Time</a></li>' +
-'          <li><a class="{{ namespace }}_link" href="https://scout.sunlightfoundation.com">Scout</a></li>' +
-'          <li><a class="{{ namespace }}_link" href="http://docketwrench.sunlightfoundation.com">Docket Wrench</a></li>' +
-'          <li><a class="{{ namespace }}_link" href="http://politicaladsleuth.com">Political Ad Sleuth</a></li>' +
-'        </ul>' +
-'      </div>' +
-'    </div>' +
-'  </div>' +
-'';
-
-module.exports = template;
-
-},{}],7:[function(require,module,exports){
-'use strict';
-
 function xhr(method, url, data, callback) {
   var request = new XMLHttpRequest();
   request.open(method, url, true);
@@ -2237,7 +2040,7 @@ module.exports = {
   conditionalGet: conditionalGet
 };
 
-},{}],8:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 'use strict';
 
 function toggleClass(el, className) {
@@ -2340,7 +2143,7 @@ module.exports = {
   hide: hide
 };
 
-},{}],9:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 'use strict';
 
 // Binds a single event.

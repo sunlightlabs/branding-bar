@@ -17,26 +17,12 @@
     .sficon-facebook:hover{ color: #3b5998; }
 
     .sficon-twitter:hover{ color: #00aced; }
-
-    .sficon-google-plus:hover{ color: #dd4b39; }
   }
 }
 
 .branding-bar_links {
   float: left;
   line-height: 45px;
-}
-
-a.branding-bar_trigger {
-  color: #666;
-  cursor: pointer;
-  font-family: 'franklin-gothic-urw', helvetica, arial, sans-serif;
-  font-size: 13px;
-  text-decoration: none;
-
-  &:hover {
-    color: #000;
-  }
 }
 
 .branding-bar_logo {
