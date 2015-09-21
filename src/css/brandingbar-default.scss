@@ -1,8 +1,8 @@
 // Branding Bar Defaults
-
 .branding-bar {
   background: #E6EDE5;
   height: 45px;
+
 
   a.social {
     text-decoration: none;
@@ -19,7 +19,15 @@
     .sficon-twitter:hover{ color: #00aced; }
   }
 }
+.branding-bar_container{
+  max-width:960px;
+  margin-left:auto;
+  margin-right:auto;
+  padding-left:.5em;
+  padding-right:.5em;
 
+
+}
 .branding-bar_links {
   float: left;
   line-height: 45px;
@@ -54,4 +62,13 @@
 .branding-bar.sflogo-light .branding-bar_sunlight-logo {
   background: url('https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.3/img/sunlight-logo-light.png') no-repeat 50% 50%;
   background: rgba(0,0,0,0) url('https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.3/img/sunlight-logo-light.svg') no-repeat 50% 50%;
+}
+
+
+@media screen and (max-width: 480px) {
+  .branding-bar{}
+  .branding-bar_container{text-align:center; width:100%}
+  .branding-bar_links,.branding-bar_logo,.branding-bar_links a{float:none}
+  .branding-bar_links{display:none}
+  .branding-bar_logo{width:100%}
 }
