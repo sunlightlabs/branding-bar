@@ -5,6 +5,7 @@
   transition: margin-top 200ms ease-out; }
   .bb_wrapper.is-active {
     margin-top: 250px; }
+
 .branding-bar {
   background: #E6EDE5;
   height: 45px; }

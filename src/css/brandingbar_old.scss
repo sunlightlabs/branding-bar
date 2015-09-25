@@ -1,0 +1,23 @@
+$namespace: 'bb';
+
+// Branding Bar Wrapper
+
+.#{$namespace}_wrapper {
+  position: relative;
+  margin-top: 0;
+
+  -webkit-transition: margin-top 200ms ease-out;
+  -moz-transition: margin-top 200ms ease-out;
+  -ms-transition: margin-top 0.3s ease-out;
+  -o-transition: margin-top 0.3s ease-out;
+  transition: margin-top 200ms ease-out;
+
+  &.is-active { margin-top: 250px; }
+
+}
+
+// not sure if animation is used anywhere else, so commenting out instead of deleting
+// @keyframes #{$namespace}_fade {
+//  0% { opacity: .25; }
+//  100% { opacity: 1; }
+// }

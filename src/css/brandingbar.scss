@@ -16,8 +16,82 @@ $namespace: 'bb';
 
 }
 
-// not sure if animation is used anywhere else, so commenting out instead of deleting
-// @keyframes #{$namespace}_fade {
-//  0% { opacity: .25; }
-//  100% { opacity: 1; }
-// }
+
+// Branding Bar Defaults
+.branding-bar {
+  background: #E6EDE5;
+  height: 45px;
+
+
+  a.social {
+    text-decoration: none;
+
+    [class^="sficon-"], [class*=" sficon-"] {
+      color: #aaa;
+      font-size: 16px;
+      margin-right: 10px;
+      transition: color 200ms ease-out;
+    }
+
+    .sficon-facebook:hover{ color: #3b5998; }
+
+    .sficon-twitter:hover{ color: #00aced; }
+  }
+}
+.branding-bar_container{
+  max-width:960px;
+  margin-left:auto;
+  margin-right:auto;
+  padding-left:.5em;
+  padding-right:.5em;
+
+
+}
+.branding-bar_links {
+  float: left;
+  line-height: 45px;
+}
+
+.branding-bar_logo {
+  float: right;
+  line-height: 45px;
+}
+.branding-bar_links,.branding-bar_logo {
+  padding:0;
+}
+
+
+.branding-bar_productof {
+  color: #888;
+  font-family: 'Georgia';
+  font-size: 11px;
+  font-style: italic;
+  margin-right: 2px;
+  text-rendering: optimizeLegibility;
+}
+
+.branding-bar_sunlight-logo {
+  background: url('https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.3/img/sunlight-logo.png') no-repeat 50% 50%;
+  background: rgba(0,0,0,0) url('https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.3/img/sunlight-logo.svg') no-repeat 50% 50%;
+  background-size: 100% 100%;
+  color: transparent;
+  display: inline-block;
+  font-size: 0;
+  height: 30px;
+  width: 160px;
+  vertical-align: middle;
+}
+
+.branding-bar.sflogo-light .branding-bar_sunlight-logo {
+  background: url('https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.3/img/sunlight-logo-light.png') no-repeat 50% 50%;
+  background: rgba(0,0,0,0) url('https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.3/img/sunlight-logo-light.svg') no-repeat 50% 50%;
+}
+
+
+@media screen and (max-width: 480px) {
+  .branding-bar{}
+  .branding-bar_container{text-align:center; width:100%}
+  .branding-bar_links,.branding-bar_logo,.branding-bar_links a{float:none}
+  .branding-bar_links{display:none}
+  .branding-bar_logo{width:100%}
+}
