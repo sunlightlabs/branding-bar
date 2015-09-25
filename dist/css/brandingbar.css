@@ -37,6 +37,9 @@
   float: right;
   line-height: 45px; }
 
+.branding-bar_links, .branding-bar_logo {
+  padding: 0; }
+
 .branding-bar_productof {
   color: #888;
   font-family: 'Georgia';
