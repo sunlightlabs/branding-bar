@@ -20,7 +20,7 @@ function namespace() {
 }
 
 function version() {
-  return '0.4.1';
+  return '0.4.2';
 }
 
 function s3Version() {

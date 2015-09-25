@@ -63,6 +63,3 @@
     display: none; }
   .branding-bar_logo {
     width: 100%; } }
-
-/** iPhone (portrait) **/
-@media screen and (max-width: 320px) { }
