@@ -5,7 +5,7 @@ var template = '' +
 '<div class="bb-donation-bar_container">' +
 '   <div class="bb-donation-message">' +
 '        <span class="bb-donation-message_text">' +
-'            <strong class="bb-strong">Help us celebrate Independence Day!</strong>' +
+'            <strong class="bb-strong">This year, give a little sunlight.</strong>' +
 '        </span>' +
 '        <button class="bb-button_cta--donate js-modal-open">' +
 '           Donate Today' +

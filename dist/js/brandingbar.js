@@ -55,7 +55,7 @@ function loadBrandingBar() {
   }
 }
 
-var CURRENT_CAMPAIGN = 'fourth-of-july';
+var CURRENT_CAMPAIGN = 'giving-tuesday';
 
 function loadDonationBar() {
   var bar = document.querySelector('[data-' + namespace() + '-brandingbar]');
@@ -1672,7 +1672,7 @@ var template = '' +
 '<div class="bb-donation-bar_container">' +
 '   <div class="bb-donation-message">' +
 '        <span class="bb-donation-message_text">' +
-'            <strong class="bb-strong">Help us celebrate Independence Day!</strong>' +
+'            <strong class="bb-strong">This year, give a little sunlight.</strong>' +
 '        </span>' +
 '        <button class="bb-button_cta--donate js-modal-open">' +
 '           Donate Today' +
@@ -1702,7 +1702,7 @@ var template = '' +
 '                <span class="bb-modal--action-icon"><svg class="bb-icon_close" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8"><path d="M1.41 0l-1.41 1.41.72.72 1.78 1.81-1.78 1.78-.72.69 1.41 1.44.72-.72 1.81-1.81 1.78 1.81.69.72 1.44-1.44-.72-.69-1.81-1.78 1.81-1.81.72-.72-1.44-1.41-.69.72-1.78 1.78-1.81-1.78-.72-.72z" /></svg></span>' +
 '            </div>' +
 '            <span class="bb-modal--title">This year, give a little sunlight.</span>' +
-'            <p class="bb-modal--description">For #GivingTuesday, help us put the <em>giving</em> back into the giving season by supporting Sunlight Foundation!</p>' +
+'            <p class="bb-modal--description">#GivingTuesday is about inspiring people to give back. At Sunlight, we help people become more informed participants in our democracy, but we rely on your support to realize our vision of open government!</p>' +
 '        </div>' +
 '' +
 '        <div class="bb-modal-form-step-2">' +
@@ -1716,7 +1716,7 @@ var template = '' +
 '            <div class="bb-modal--action js-modal-close">' +
 '                <span class="bb-modal--action-icon"><svg class="bb-icon_close" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8"><path d="M1.41 0l-1.41 1.41.72.72 1.78 1.81-1.78 1.78-.72.69 1.41 1.44.72-.72 1.81-1.81 1.78 1.81.69.72 1.44-1.44-.72-.69-1.81-1.78 1.81-1.81.72-.72-1.44-1.41-.69.72-1.78 1.78-1.81-1.78-.72-.72z" /></svg></span>' +
 '            </div>' +
-'            <span class="bb-modal--title">Thank you for your <span class="js-val-donation"></span> donation!</span>' +
+'            <span class="bb-modal--title">Thank you for your <span class="js-val-donation"></span> donation! Your contribution helps us continue to strive for the government we deserve!</span>' +
 '        </div>' +
 '' +
 '    </div>' +

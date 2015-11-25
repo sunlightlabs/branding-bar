@@ -54,7 +54,7 @@ function loadBrandingBar() {
   }
 }
 
-var CURRENT_CAMPAIGN = 'fourth-of-july';
+var CURRENT_CAMPAIGN = 'giving-tuesday';
 
 function loadDonationBar() {
   var bar = document.querySelector('[data-' + namespace() + '-brandingbar]');
