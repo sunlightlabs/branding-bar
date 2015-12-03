@@ -10,7 +10,7 @@ var template = '' +
 '            <div class="bb-modal--action js-modal-close">' +
 '                <span class="bb-modal--action-icon"><svg class="bb-icon_close" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8"><path d="M1.41 0l-1.41 1.41.72.72 1.78 1.81-1.78 1.78-.72.69 1.41 1.44.72-.72 1.81-1.81 1.78 1.81.69.72 1.44-1.44-.72-.69-1.81-1.78 1.81-1.81.72-.72-1.44-1.41-.69.72-1.78 1.78-1.81-1.78-.72-.72z" /></svg></span>' +
 '            </div>' +
-'            <span class="bb-modal--title">This year, give a little sunlight.</span>' +
+'            <span class="bb-modal--title">Give a little sunlight this holiday season!</span>' +
 '            <p class="bb-modal--description">#GivingTuesday is about inspiring people to give back. At Sunlight, we help people become more informed participants in our democracy, but we rely on your support to realize our vision of open government!</p>' +
 '        </div>' +
 '' +

@@ -54,7 +54,7 @@ function loadBrandingBar() {
   }
 }
 
-var CURRENT_CAMPAIGN = 'giving-tuesday';
+var CURRENT_CAMPAIGN = 'holiday-season';
 
 function loadDonationBar() {
   var bar = document.querySelector('[data-' + namespace() + '-brandingbar]');
